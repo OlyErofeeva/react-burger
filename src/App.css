@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  /* TODO: remove useless styles; set content max-width to 1920px */
 }
 
 .App-logo {

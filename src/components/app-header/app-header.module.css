@@ -1,0 +1,30 @@
+.appHeader {
+  max-width: 1920px; /* TODO: max width -> page content */
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerContent {
+  position: relative;
+  max-width: 1280px;
+  width: 100%;
+}
+
+.navList {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+
+.logoContainer {
+  position: absolute;
+  top: 4px;
+  left: calc(50% - 290px/2);
+}
+
