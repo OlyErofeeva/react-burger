@@ -1,9 +1,9 @@
 .appHeader {
-  max-width: 1920px; /* TODO: max width -> page content */
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #1c1c21;
 }
 
 .headerContent {
