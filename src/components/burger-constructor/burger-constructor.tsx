@@ -12,8 +12,8 @@ const BurgerConstructor = () => {
   const bottomElement = data[data.length - 1]
 
   return (
-    <div className={`pl-4 pr-4 pt-25 ${styles.burgerConstructor}`}>
-      <ul className={styles.constructorIngredientList}>
+    <div className={`pt-25 ${styles.burgerConstructor}`}>
+      <ul className={styles.addedIngredients}>
         <BurgerConstructorIngredient
           key={topElement._id}
           imgSrc={topElement.image}

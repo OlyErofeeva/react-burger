@@ -9,6 +9,7 @@ const BurgerIngredients = () => (
     <h1 className={`text text_type_main-large pt-10 pb-5 ${styles.mainTitle}`}>Соберите бургер</h1>
     <ul className={`mb-10 ${styles.tabList}`}>
       {/* TODO: add active prop logic, onClick */}
+      {/* TODO: make arr [{ type: 'bun'; name: 'Булки' }, {..}, {..}] */}
       <li>
         <Tab value="bun" active={true} onClick={() => console.log('TODO')}>
           Булки
@@ -27,67 +28,54 @@ const BurgerIngredients = () => (
     </ul>
 
     {/* TODO: make arr [{ type: 'bun'; name: 'Булки' }, {..}, {..}] */}
-    <section>
-      <h2 className={`text text_type_main-medium ${styles.sectionTitle}`}>Булки</h2>
-      <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientList}`}>
-        {data
-          .filter(ingredient => ingredient.type === 'bun')
-          .map(ingredient => {
-            return (
-              <li>
-                <BurgerIngredientCard
-                  key={ingredient._id}
-                  imgSrc={ingredient.image}
-                  name={ingredient.name}
-                  price={ingredient.price}
-                />
-              </li>
-            )
-          })}
-      </ul>
-    </section>
+    <div className={styles.allIngredients}>
+      <section>
+        <h2 className={`text text_type_main-medium ${styles.groupTitle}`}>Булки</h2>
+        <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
+          {data
+            .filter(ingredient => ingredient.type === 'bun')
+            .map(ingredient => {
+              return (
+                <li key={ingredient._id}>
+                  <BurgerIngredientCard imgSrc={ingredient.image} name={ingredient.name} price={ingredient.price} />
+                </li>
+              )
+            })}
+        </ul>
+      </section>
 
-    {/* TODO: IngredientSection-2 */}
-    <section>
-      <h2 className={`text text_type_main-medium ${styles.sectionTitle}`}>Соусы</h2>
-      <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientList}`}>
-        {data
-          .filter(ingredient => ingredient.type === 'sauce')
-          .map(ingredient => {
-            return (
-              <li>
-                <BurgerIngredientCard
-                  key={ingredient._id}
-                  imgSrc={ingredient.image}
-                  name={ingredient.name}
-                  price={ingredient.price}
-                />
-              </li>
-            )
-          })}
-      </ul>
-    </section>
+      {/* TODO: IngredientSection-2 */}
+      <section>
+        <h2 className={`text text_type_main-medium ${styles.sectionTitle}`}>Соусы</h2>
+        <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
+          {data
+            .filter(ingredient => ingredient.type === 'sauce')
+            .map(ingredient => {
+              return (
+                <li key={ingredient._id}>
+                  <BurgerIngredientCard imgSrc={ingredient.image} name={ingredient.name} price={ingredient.price} />
+                </li>
+              )
+            })}
+        </ul>
+      </section>
 
-    {/* TODO: IngredientSection-3 */}
-    <section>
-      <h2 className={`text text_type_main-medium ${styles.sectionTitle}`}>Начинки</h2>
-      <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientList}`}>
-        {data
-          .filter(ingredient => ingredient.type === 'main')
-          .map(ingredient => {
-            return (
-              <li>
-                <BurgerIngredientCard
-                  key={ingredient._id}
-                  imgSrc={ingredient.image}
-                  name={ingredient.name}
-                  price={ingredient.price}
-                />
-              </li>
-            )
-          })}
-      </ul>
-    </section>
+      {/* TODO: IngredientSection-3 */}
+      <section>
+        <h2 className={`text text_type_main-medium ${styles.sectionTitle}`}>Начинки</h2>
+        <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
+          {data
+            .filter(ingredient => ingredient.type === 'main')
+            .map(ingredient => {
+              return (
+                <li key={ingredient._id}>
+                  <BurgerIngredientCard imgSrc={ingredient.image} name={ingredient.name} price={ingredient.price} />
+                </li>
+              )
+            })}
+        </ul>
+      </section>
+    </div>
   </div>
 )
 
