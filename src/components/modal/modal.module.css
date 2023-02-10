@@ -1,0 +1,41 @@
+.modal {
+  box-sizing: border-box;
+  min-width: 720px;
+  margin: auto;
+  position: relative;
+  border: 1px solid rgba(76, 76, 255, 0.2);
+  border-radius: 40px;
+  background-color: #1c1c21;
+}
+
+.modalTitle {
+  min-height: 64px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 0;
+}
+
+/* TODO: children */
+.orderModalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.orderId {
+  text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+}
+
+.successIconContainer {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
