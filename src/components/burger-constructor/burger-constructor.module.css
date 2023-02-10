@@ -1,0 +1,24 @@
+.burgerConstructor {
+  max-width: 600px;
+}
+
+.constructorIngredientList {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+}
+
+.constructorTotal {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.innerIngredients {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

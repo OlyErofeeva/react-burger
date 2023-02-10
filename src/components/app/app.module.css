@@ -2,3 +2,8 @@
   text-align: center;
   /* TODO: set content max-width to 1920px */
 }
+
+.main {
+  display: flex;
+  gap: 40px;
+}
