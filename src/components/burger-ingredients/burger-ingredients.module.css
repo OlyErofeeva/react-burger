@@ -1,0 +1,26 @@
+.burgerIngredients {
+  max-width: 600px;
+}
+
+.mainTitle {
+  text-align: start;
+}
+
+.tabList {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+}
+
+.sectionTitle {
+  text-align: start;
+}
+
+.ingredientList {
+  margin: 0;
+  display: grid;
+  gap: 32px 24px;
+  grid-template-columns: repeat(2, 1fr);
+  list-style: none;
+}
