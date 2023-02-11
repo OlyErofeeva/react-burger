@@ -26,7 +26,14 @@ const BurgerConstructorIngredient: React.FC<Props> = ({ imgSrc, price, text, typ
   return (
     <li className={`pl-4 pr-4 ${styles.constructorIngredient}`}>
       {!calculateIsLocked() && <DragIcon type="primary" />}
-      <ConstructorElement type={type} isLocked={calculateIsLocked()} text={text} price={price} thumbnail={imgSrc} extraClass={constructorElementClassName} />
+      <ConstructorElement
+        type={type}
+        isLocked={calculateIsLocked()}
+        text={text}
+        price={price}
+        thumbnail={imgSrc}
+        extraClass={constructorElementClassName}
+      />
     </li>
   )
 }

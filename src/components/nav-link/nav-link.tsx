@@ -3,9 +3,9 @@ import React from 'react'
 import styles from './nav-link.module.css'
 
 type Props = {
-  caption: string;
-  isActive: boolean;
-  children?: JSX.Element;
+  caption: string
+  isActive: boolean
+  children?: JSX.Element
 }
 
 const NavLink: React.FC<Props> = ({ isActive, caption, children }) => {
