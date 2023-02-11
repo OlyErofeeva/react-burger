@@ -6,6 +6,8 @@ import BurgerConstructor from '../burger-constructor/burger-constructor'
 import OrderDetails from '../order-details/order-details'
 import { Ingredient } from '../../utils/types'
 
+const GET_INGREDIENTS_URL = 'https://norma.nomoreparties.space/api/ingredients'
+
 const App = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([])
   const [isLoading, setLoading] = useState(true)
@@ -24,7 +26,7 @@ const App = () => {
   }
 
   const fetchIngredients = () => {
-    fetch('https://norma.nomoreparties.space/api/ingredients')
+    fetch(GET_INGREDIENTS_URL)
       .then(res => res.json())
       .then(res => {
         setIngredients(res.data)
