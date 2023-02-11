@@ -19,7 +19,7 @@ const Modal: React.FC<Props> = ({ children, onClose, title }) => {
 
   return ReactDOM.createPortal(
     <div className={styles.portalWrapper}>
-      <ModalOverlay />
+      <ModalOverlay onClick={onClose}/>
       <div className={`pt-10 pb-15 pl-10 pr-10 ${styles.modal}`}>
         <h2 className={`text text_type_main-large ${styles.modalTitle}`}>{title}</h2>
         {/* TODO: button positioning */}
