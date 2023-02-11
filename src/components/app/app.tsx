@@ -5,6 +5,7 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import OrderDetails from '../order-details/order-details'
 import { Ingredient } from '../../utils/types'
+import IngredientDetails from '../ingredient-details/ingredient-details'
 
 const GET_INGREDIENTS_URL = 'https://norma.nomoreparties.space/api/ingredients'
 
@@ -12,11 +13,20 @@ const App = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([])
   const [isLoading, setLoading] = useState(true)
   const [isOrderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false)
+  const [isIngredientModalOpen, setIngredientModalOpen] = useState(false)
+  const [activeModalIngredient, setActiveModalIngredient] = useState<Ingredient | null>(null)
   const handlePlaceOrderClick = () => {
     setOrderDetailsModalOpen(true)
   }
   const handleAllModalClose = () => {
     setOrderDetailsModalOpen(false)
+    setIngredientModalOpen(false)
+    setActiveModalIngredient(null)
+  }
+
+  const handleBurgerIngredientClick = (ingredient: Ingredient) => {
+    setActiveModalIngredient(ingredient)
+    setIngredientModalOpen(true)
   }
 
   const closeModalOnEsc = (event: KeyboardEvent) => {
@@ -47,11 +57,14 @@ const App = () => {
       <AppHeader />
       {!isLoading && (
         <main className={styles.main}>
-          <BurgerIngredients ingredients={ingredients} />
+          <BurgerIngredients ingredients={ingredients} onIngredientClick={handleBurgerIngredientClick} />
           <BurgerConstructor ingredients={ingredients} onPlaceOrderClick={handlePlaceOrderClick} />
         </main>
       )}
       {isOrderDetailsModalOpen && <OrderDetails onClose={handleAllModalClose} />}
+      {isIngredientModalOpen && activeModalIngredient && (
+        <IngredientDetails ingredient={activeModalIngredient} onClose={handleAllModalClose} />
+      )}
     </div>
   )
 }

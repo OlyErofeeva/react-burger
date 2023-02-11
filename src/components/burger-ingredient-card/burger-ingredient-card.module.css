@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+.ingredientCard:hover {
+  cursor: pointer;
+}
+
 .counter {
   position: absolute;
   top: 0;

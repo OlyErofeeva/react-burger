@@ -21,9 +21,10 @@ const ingredientTypes = [
 
 type Props = {
   ingredients: Ingredient[]
+  onIngredientClick: (ingredient: Ingredient) => void
 }
 
-const BurgerIngredients: React.FC<Props> = ({ ingredients }) => {
+const BurgerIngredients: React.FC<Props> = ({ ingredients, onIngredientClick }) => {
   const [activeTab, setActiveTab] = useState(IngredientType.BUN)
 
   const handleTabClick = (itemType: IngredientType) => {
@@ -37,7 +38,7 @@ const BurgerIngredients: React.FC<Props> = ({ ingredients }) => {
       <ul className={`mb-10 ${styles.tabList}`}>
         {ingredientTypes.map(ingredientType => {
           return (
-            <li>
+            <li key={ingredientType.type}>
               <Tab
                 value={ingredientType.type}
                 active={activeTab === ingredientType.type}
@@ -60,7 +61,7 @@ const BurgerIngredients: React.FC<Props> = ({ ingredients }) => {
                   .filter(ingredient => ingredient.type === ingredientType.type)
                   .map(ingredient => {
                     return (
-                      <li key={ingredient._id}>
+                      <li key={ingredient._id} onClick={() => onIngredientClick(ingredient)}>
                         <BurgerIngredientCard
                           imgSrc={ingredient.image}
                           name={ingredient.name}
