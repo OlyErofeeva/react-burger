@@ -2,9 +2,13 @@ import React from 'react'
 import styles from './burger-ingredients.module.css'
 import BurgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { data } from '../../utils/data'
+import { Ingredient } from '../../utils/types'
 
-const BurgerIngredients = () => (
+type Props = {
+  ingredients: Ingredient[]
+}
+
+const BurgerIngredients: React.FC<Props> = ({ ingredients }) => (
   <div className={styles.burgerIngredients}>
     <h1 className={`text text_type_main-large pt-10 pb-5 ${styles.mainTitle}`}>Соберите бургер</h1>
     <ul className={`mb-10 ${styles.tabList}`}>
@@ -32,7 +36,7 @@ const BurgerIngredients = () => (
       <section>
         <h2 className={`text text_type_main-medium ${styles.groupTitle}`}>Булки</h2>
         <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
-          {data
+          {ingredients
             .filter(ingredient => ingredient.type === 'bun')
             .map(ingredient => {
               return (
@@ -46,9 +50,9 @@ const BurgerIngredients = () => (
 
       {/* TODO: IngredientSection-2 */}
       <section>
-        <h2 className={`text text_type_main-medium ${styles.sectionTitle}`}>Соусы</h2>
+        <h2 className={`text text_type_main-medium ${styles.groupTitle}`}>Соусы</h2>
         <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
-          {data
+          {ingredients
             .filter(ingredient => ingredient.type === 'sauce')
             .map(ingredient => {
               return (
@@ -62,9 +66,9 @@ const BurgerIngredients = () => (
 
       {/* TODO: IngredientSection-3 */}
       <section>
-        <h2 className={`text text_type_main-medium ${styles.sectionTitle}`}>Начинки</h2>
+        <h2 className={`text text_type_main-medium ${styles.groupTitle}`}>Начинки</h2>
         <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
-          {data
+          {ingredients
             .filter(ingredient => ingredient.type === 'main')
             .map(ingredient => {
               return (

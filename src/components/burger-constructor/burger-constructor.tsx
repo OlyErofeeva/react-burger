@@ -1,15 +1,20 @@
 import React from 'react'
 import styles from './burger-constructor.module.css'
-import { data } from '../../utils/data'
 import BurgerConstructorIngredient from '../burger-constructor-ingredient/burger-constructor-ingredient'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Ingredient } from '../../utils/types'
 
-const BurgerConstructor = () => {
-  const calcTotal = () => data.reduce((acc, item) => acc + item.price, 0)
+type Props = {
+  ingredients: Ingredient[]
+  onPlaceOrderClick: () => void
+}
+
+const BurgerConstructor: React.FC<Props> = ({ ingredients, onPlaceOrderClick }) => {
+  const calcTotal = () => ingredients.reduce((acc, item) => acc + item.price, 0)
 
   // TODO check data length, remove hardcode
-  const topElement = data[0]
-  const bottomElement = data[data.length - 1]
+  const topElement = ingredients[0]
+  const bottomElement = ingredients[ingredients.length - 1]
 
   return (
     <div className={`pt-25 ${styles.burgerConstructor}`}>
@@ -23,7 +28,7 @@ const BurgerConstructor = () => {
         />
 
         <div className={styles.innerIngredients}>
-          {data.slice(1, data.length - 1).map((ingredient, idx) => {
+          {ingredients.slice(1, ingredients.length - 1).map((ingredient, idx) => {
             return (
               <BurgerConstructorIngredient
                 key={ingredient._id}
@@ -47,7 +52,7 @@ const BurgerConstructor = () => {
       <div className={`mt-10 ${styles.constructorTotal}`}>
         <span className="mr-2 text text_type_digits-medium">{calcTotal()}</span>
         <CurrencyIcon type="primary" />
-        <Button htmlType="submit" type="primary" size="large" extraClass="ml-10">
+        <Button onClick={onPlaceOrderClick} htmlType="submit" type="primary" size="large" extraClass="ml-10">
           Оформить заказ
         </Button>
       </div>
