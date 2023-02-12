@@ -6,8 +6,7 @@ import BurgerConstructor from '../burger-constructor/burger-constructor'
 import OrderDetails from '../order-details/order-details'
 import { Ingredient } from '../../utils/types'
 import IngredientDetails from '../ingredient-details/ingredient-details'
-
-const GET_INGREDIENTS_URL = 'https://norma.nomoreparties.space/api/ingredients'
+import { GET_INGREDIENTS_URL } from '../../configs/apiSettings'
 
 const App = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([])
