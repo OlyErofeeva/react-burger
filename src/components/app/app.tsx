@@ -12,20 +12,19 @@ const App = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([])
   const [isLoading, setLoading] = useState(true)
   const [isOrderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false)
-  const [isIngredientModalOpen, setIngredientModalOpen] = useState(false)
+  // Hint: there are no such state as [isIngredientModalOpen, setIngredientModalOpen],
+  // because [activeModalIngredient, setActiveModalIngredient] does the same job
   const [activeModalIngredient, setActiveModalIngredient] = useState<Ingredient | null>(null)
   const handlePlaceOrderClick = () => {
     setOrderDetailsModalOpen(true)
   }
   const handleAllModalClose = () => {
     setOrderDetailsModalOpen(false)
-    setIngredientModalOpen(false)
     setActiveModalIngredient(null)
   }
 
   const handleBurgerIngredientClick = (ingredient: Ingredient) => {
     setActiveModalIngredient(ingredient)
-    setIngredientModalOpen(true)
   }
 
   const closeModalOnEsc = (event: KeyboardEvent) => {
@@ -61,9 +60,7 @@ const App = () => {
         </main>
       )}
       {isOrderDetailsModalOpen && <OrderDetails onClose={handleAllModalClose} />}
-      {isIngredientModalOpen && activeModalIngredient && (
-        <IngredientDetails ingredient={activeModalIngredient} onClose={handleAllModalClose} />
-      )}
+      {activeModalIngredient && <IngredientDetails ingredient={activeModalIngredient} onClose={handleAllModalClose} />}
     </div>
   )
 }
