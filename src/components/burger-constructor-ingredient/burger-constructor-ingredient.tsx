@@ -11,12 +11,7 @@ type Props = {
 }
 
 const BurgerConstructorIngredient: React.FC<Props> = ({ imgSrc, price, text, type }) => {
-  const calculateIsLocked = () => {
-    if (type === 'top' || type === 'bottom') {
-      return true
-    }
-    return false
-  }
+  const calculateIsLocked = () => type === 'top' || type === 'bottom'
 
   const constructorElementClassName = classNames({
     'ml-8': calculateIsLocked(),
