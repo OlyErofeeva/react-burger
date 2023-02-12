@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styles from './burger-ingredients.module.css'
 import BurgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card'
+import IngredientDetails from '../ingredient-details/ingredient-details'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Ingredient, IngredientType } from '../../utils/types'
 
@@ -21,11 +22,21 @@ const ingredientTypes = [
 
 type Props = {
   ingredients: Ingredient[]
-  onIngredientClick: (ingredient: Ingredient) => void
 }
 
-const BurgerIngredients: React.FC<Props> = ({ ingredients, onIngredientClick }) => {
+const BurgerIngredients: React.FC<Props> = ({ ingredients }) => {
+  // Hint: there are no such state as [isIngredientModalOpen, setIngredientModalOpen],
+  // because [activeModalIngredient, setActiveModalIngredient] does the same job
+  const [activeModalIngredient, setActiveModalIngredient] = useState<Ingredient | null>(null)
   const [activeTab, setActiveTab] = useState(IngredientType.BUN)
+
+  const handleBurgerIngredientClick = (ingredient: Ingredient) => {
+    setActiveModalIngredient(ingredient)
+  }
+
+  const handleIngredientDetailsClose = () => {
+    setActiveModalIngredient(null)
+  }
 
   const handleTabClick = (itemType: IngredientType) => {
     // TODO: add scroll logic
@@ -61,7 +72,7 @@ const BurgerIngredients: React.FC<Props> = ({ ingredients, onIngredientClick }) 
                   .filter(ingredient => ingredient.type === ingredientType.type)
                   .map(ingredient => {
                     return (
-                      <li key={ingredient._id} onClick={() => onIngredientClick(ingredient)}>
+                      <li key={ingredient._id} onClick={() => handleBurgerIngredientClick(ingredient)}>
                         <BurgerIngredientCard
                           imgSrc={ingredient.image}
                           name={ingredient.name}
@@ -75,6 +86,7 @@ const BurgerIngredients: React.FC<Props> = ({ ingredients, onIngredientClick }) 
           )
         })}
       </div>
+      {activeModalIngredient && <IngredientDetails ingredient={activeModalIngredient} onClose={handleIngredientDetailsClose} />}
     </div>
   )
 }

@@ -5,26 +5,17 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import OrderDetails from '../order-details/order-details'
 import { Ingredient } from '../../utils/types'
-import IngredientDetails from '../ingredient-details/ingredient-details'
 import { GET_INGREDIENTS_URL } from '../../configs/apiSettings'
 
 const App = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([])
   const [isLoading, setLoading] = useState(true)
   const [isOrderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false)
-  // Hint: there are no such state as [isIngredientModalOpen, setIngredientModalOpen],
-  // because [activeModalIngredient, setActiveModalIngredient] does the same job
-  const [activeModalIngredient, setActiveModalIngredient] = useState<Ingredient | null>(null)
   const handlePlaceOrderClick = () => {
     setOrderDetailsModalOpen(true)
   }
   const handleAllModalClose = () => {
     setOrderDetailsModalOpen(false)
-    setActiveModalIngredient(null)
-  }
-
-  const handleBurgerIngredientClick = (ingredient: Ingredient) => {
-    setActiveModalIngredient(ingredient)
   }
 
   const closeModalOnEsc = (event: KeyboardEvent) => {
@@ -55,12 +46,11 @@ const App = () => {
       <AppHeader />
       {!isLoading && (
         <main className={styles.main}>
-          <BurgerIngredients ingredients={ingredients} onIngredientClick={handleBurgerIngredientClick} />
+          <BurgerIngredients ingredients={ingredients} />
           <BurgerConstructor ingredients={ingredients} onPlaceOrderClick={handlePlaceOrderClick} />
         </main>
       )}
       {isOrderDetailsModalOpen && <OrderDetails onClose={handleAllModalClose} />}
-      {activeModalIngredient && <IngredientDetails ingredient={activeModalIngredient} onClose={handleAllModalClose} />}
     </div>
   )
 }
