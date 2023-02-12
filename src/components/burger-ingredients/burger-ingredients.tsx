@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import styles from './burger-ingredients.module.css'
 import BurgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card'
 import IngredientDetails from '../ingredient-details/ingredient-details'
@@ -43,6 +43,19 @@ const BurgerIngredients: React.FC<Props> = ({ ingredients }) => {
     setActiveTab(itemType)
   }
 
+  const groupIngredientsByType = useMemo(() => {
+    const map = new Map<IngredientType, Ingredient[]>()
+    ingredients.forEach(ingredient => {
+      if (map.has(ingredient.type)) {
+        map.get(ingredient.type)?.push(ingredient)
+      } else {
+        map.set(ingredient.type, [ingredient])
+      }
+    })
+    // should result in a map like {'bun' => Array(2), 'main' => Array(9), 'sauce' => Array(4)}
+    return map
+  }, [ingredients])
+
   return (
     <div className={styles.burgerIngredients}>
       <h1 className={`text text_type_main-large pt-10 pb-5 ${styles.mainTitle}`}>Соберите бургер</h1>
@@ -68,8 +81,7 @@ const BurgerIngredients: React.FC<Props> = ({ ingredients }) => {
             <section>
               <h2 className={`text text_type_main-medium ${styles.groupTitle}`}>{ingredientType.title}</h2>
               <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
-                {ingredients
-                  .filter(ingredient => ingredient.type === ingredientType.type)
+                {(groupIngredientsByType.get(ingredientType.type) || [])
                   .map(ingredient => {
                     return (
                       <li key={ingredient._id} onClick={() => handleBurgerIngredientClick(ingredient)}>
