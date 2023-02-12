@@ -5,7 +5,7 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import OrderDetails from '../order-details/order-details'
 import { Ingredient } from '../../utils/types'
-import { GET_INGREDIENTS_URL } from '../../configs/apiSettings'
+import { fetchIngredients } from '../../utils/apiCall'
 
 const App = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([])
@@ -24,18 +24,12 @@ const App = () => {
     }
   }
 
-  const fetchIngredients = () => {
-    fetch(GET_INGREDIENTS_URL)
-      .then(res => res.json())
-      .then(res => {
-        setIngredients(res.data)
-        setLoading(false)
-      })
-      .catch(err => console.log(err))
-  }
-
   useEffect(() => {
-    fetchIngredients()
+    fetchIngredients().then(res => {
+      setIngredients(res.data)
+      setLoading(false)
+    })
+    .catch(err => console.log(err.message))
     document.addEventListener('keydown', closeModalOnEsc)
     return () => document.removeEventListener('keydown', closeModalOnEsc)
     // eslint-disable-next-line react-hooks/exhaustive-deps
