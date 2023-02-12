@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styles from './burger-constructor.module.css'
 import BurgerConstructorIngredient from '../burger-constructor-ingredient/burger-constructor-ingredient'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -10,7 +10,9 @@ type Props = {
 }
 
 const BurgerConstructor: React.FC<Props> = ({ ingredients, onPlaceOrderClick }) => {
-  const calcTotal = () => ingredients.reduce((acc, item) => acc + item.price, 0)
+  const calcTotal = useMemo(() => {
+    return ingredients.reduce((acc, item) => acc + item.price, 0)
+  }, [ingredients])
 
   // TODO check data length, remove hardcode
   const topElement = ingredients[0]
@@ -50,7 +52,7 @@ const BurgerConstructor: React.FC<Props> = ({ ingredients, onPlaceOrderClick }) 
       </ul>
 
       <div className={`mt-10 ${styles.constructorTotal}`}>
-        <span className="mr-2 text text_type_digits-medium">{calcTotal()}</span>
+        <span className="mr-2 text text_type_digits-medium">{calcTotal}</span>
         <CurrencyIcon type="primary" />
         <Button onClick={onPlaceOrderClick} htmlType="submit" type="primary" size="large" extraClass="ml-10">
           Оформить заказ
