@@ -14,14 +14,8 @@ const App = () => {
   const handlePlaceOrderClick = () => {
     setOrderDetailsModalOpen(true)
   }
-  const handleAllModalClose = () => {
+  const handleOrderDetailsClose = () => {
     setOrderDetailsModalOpen(false)
-  }
-
-  const closeModalOnEsc = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      handleAllModalClose()
-    }
   }
 
   useEffect(() => {
@@ -30,9 +24,6 @@ const App = () => {
       setLoading(false)
     })
     .catch(err => console.log(err.message))
-    document.addEventListener('keydown', closeModalOnEsc)
-    return () => document.removeEventListener('keydown', closeModalOnEsc)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -44,7 +35,7 @@ const App = () => {
           <BurgerConstructor ingredients={ingredients} onPlaceOrderClick={handlePlaceOrderClick} />
         </main>
       )}
-      {isOrderDetailsModalOpen && <OrderDetails onClose={handleAllModalClose} />}
+      {isOrderDetailsModalOpen && <OrderDetails onClose={handleOrderDetailsClose} />}
     </div>
   )
 }

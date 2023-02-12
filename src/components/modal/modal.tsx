@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import styles from './modal.module.css'
 
@@ -13,6 +13,19 @@ type Props = {
 
 const Modal: React.FC<Props> = ({ children, onClose, title }) => {
   const portalElement = document.getElementById('modal-portal')
+
+  const closeModalOnEsc = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      onClose()
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('keydown', closeModalOnEsc)
+    return () => document.removeEventListener('keydown', closeModalOnEsc)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   if (!portalElement) {
     return null
   }
