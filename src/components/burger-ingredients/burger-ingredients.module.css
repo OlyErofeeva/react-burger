@@ -1,0 +1,44 @@
+.burgerIngredients {
+  max-width: 600px;
+  max-height: 100%;
+}
+
+.mainTitle {
+  text-align: start;
+}
+
+.tabList {
+  margin-top: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+}
+
+.allIngredients {
+  max-height: calc(100vh - 336px);
+  overflow-y: overlay;
+}
+
+.allIngredients::-webkit-scrollbar {
+  width: 8px;
+}
+
+.allIngredients::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.allIngredients::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.groupTitle {
+  text-align: start;
+}
+
+.ingredientGroupedList {
+  margin: 0;
+  display: grid;
+  gap: 32px 24px;
+  grid-template-columns: repeat(2, 1fr);
+  list-style: none;
+}

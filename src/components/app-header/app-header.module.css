@@ -1,0 +1,29 @@
+.appHeader {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1c1c21;
+}
+
+.headerContent {
+  position: relative;
+  max-width: 1280px;
+  width: 100%;
+}
+
+.navList {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+
+.logoContainer {
+  position: absolute;
+  top: 4px;
+  left: calc(50% - 290px/2);
+}

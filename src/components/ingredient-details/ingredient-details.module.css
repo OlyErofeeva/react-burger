@@ -1,0 +1,17 @@
+.ingredientModalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  min-height: 240px;
+}
+
+.nutrientsTable {
+  display: grid;
+  gap: 8px 20px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  justify-items: center;
+}
