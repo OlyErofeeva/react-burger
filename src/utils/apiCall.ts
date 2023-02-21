@@ -1,4 +1,5 @@
-import { GET_INGREDIENTS_URL } from '../configs/apiSettings'
+import { INGREDIENTS_URL, ORDER_URL } from '../configs/apiSettings'
+import { Ingredient } from './types'
 
 const handleResponse = (res: Response) => {
   if (res.ok) {
@@ -10,6 +11,18 @@ const handleResponse = (res: Response) => {
 }
 
 export const fetchIngredients = () => {
-  return fetch(GET_INGREDIENTS_URL)
+  return fetch(INGREDIENTS_URL)
     .then(res => handleResponse(res))
+}
+
+export const placeOrder = (orderIngredients: Ingredient["_id"][]) => {
+  return fetch(ORDER_URL, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      ingredients: orderIngredients
+    })
+  }).then(res => handleResponse(res))
 }
