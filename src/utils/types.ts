@@ -18,3 +18,41 @@ export enum IngredientType {
   SAUCE = 'sauce',
   MAIN = 'main',
 }
+
+export type GlobalState = {
+  ingredients: IngredientState
+  constructor: ConstructorState
+  activeModalIngredient: ActiveModalIngredientState
+  order: OrderState
+}
+
+export enum Progress {
+  IDLE = 'IDLE',
+  WORK = 'WORK',
+  SUCCESS = 'SUCCESS',
+  ERROR = 'ERROR',
+}
+
+export type IngredientState = {
+  items: Ingredient[]
+  listFetchProgress: Progress
+}
+
+export type ConstructorState = {
+  items: Ingredient[]
+}
+
+export type ActiveModalIngredientState = {
+  item: Ingredient | null
+}
+
+export type Order = {
+  name: string
+  number: number
+  ingredients: Ingredient[]
+}
+
+export type OrderState = {
+  item: Order | null
+  itemAddProgress: Progress
+}
