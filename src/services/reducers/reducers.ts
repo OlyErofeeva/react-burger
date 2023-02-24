@@ -1,5 +1,12 @@
-import { AnyAction, combineReducers, Reducer } from 'redux'
-import { GlobalState, Progress } from '../../utils/types'
+import { combineReducers, Reducer } from 'redux'
+import {
+  ActiveModalIngredientAction,
+  ConstructorAction,
+  GlobalState,
+  IngredientAction,
+  OrderAction,
+  Progress,
+} from '../../utils/types'
 import { ActionType } from '../action-types/action-types'
 
 export const initialState: GlobalState = {
@@ -19,10 +26,9 @@ export const initialState: GlobalState = {
   },
 }
 
-// TODO fix type for action parameter
 const ingredientsReducer = (
   state: GlobalState['ingredients'] = initialState.ingredients,
-  action: AnyAction,
+  action: IngredientAction,
 ): GlobalState['ingredients'] => {
   switch (action.type) {
     case ActionType.IngredientsFetchRequest:
@@ -48,7 +54,7 @@ const ingredientsReducer = (
 
 const constructorReducer = (
   state: GlobalState['constructor'] = initialState.constructor,
-  action: AnyAction,
+  action: ConstructorAction,
 ): GlobalState['constructor'] => {
   switch (action.type) {
     case ActionType.SetConstructorIngredients:
@@ -63,7 +69,7 @@ const constructorReducer = (
 
 const activeModalIngredientReducer = (
   state: GlobalState['activeModalIngredient'] = initialState.activeModalIngredient,
-  action: AnyAction,
+  action: ActiveModalIngredientAction,
 ): GlobalState['activeModalIngredient'] => {
   switch (action.type) {
     case ActionType.SetActiveModalIngredient:
@@ -81,7 +87,7 @@ const activeModalIngredientReducer = (
   }
 }
 
-const orderReducer = (state: GlobalState['order'] = initialState.order, action: AnyAction): GlobalState['order'] => {
+const orderReducer = (state: GlobalState['order'] = initialState.order, action: OrderAction): GlobalState['order'] => {
   switch (action.type) {
     case ActionType.PlaceOrderRequest:
       return {

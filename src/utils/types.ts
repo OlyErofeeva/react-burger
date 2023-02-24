@@ -1,3 +1,5 @@
+import { ActionType } from '../services/action-types/action-types'
+
 export type Ingredient = {
   _id: string
   name: string
@@ -55,3 +57,41 @@ export type OrderState = {
   item: Order | null
   itemAddProgress: Progress
 }
+
+export type IngredientAction =
+  | {
+      type: ActionType.IngredientsFetchRequest
+    }
+  | {
+      type: ActionType.IngredientsFetchSuccess
+      payload: Ingredient[]
+    }
+  | {
+      type: ActionType.IngredientsFetchError
+    }
+
+export type ConstructorAction = {
+  type: ActionType.SetConstructorIngredients
+  payload: Ingredient[]
+}
+
+export type ActiveModalIngredientAction =
+  | {
+      type: ActionType.SetActiveModalIngredient
+      payload: Ingredient
+    }
+  | {
+      type: ActionType.ClearActiveModalIngredient
+    }
+
+export type OrderAction =
+  | {
+      type: ActionType.PlaceOrderRequest
+    }
+  | {
+      type: ActionType.PlaceOrderSuccess
+      payload: Order
+    }
+  | {
+      type: ActionType.PlaceOrderError
+    }
