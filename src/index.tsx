@@ -1,15 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { compose, createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import './index.css'
 import App from './components/app/app'
 import reportWebVitals from './reportWebVitals'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
 import { initialState, rootReducer } from './services/reducers/reducers'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
-const store = createStore(rootReducer, initialState, undefined)
+const composeEnhancers = typeof window === 'object' && composeWithDevTools ? composeWithDevTools({}) : compose
+
+const store = createStore(rootReducer, initialState, composeEnhancers())
 root.render(
   <React.StrictMode>
     <Provider store={store}>
