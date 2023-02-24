@@ -6,9 +6,9 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import OrderDetails from '../order-details/order-details'
 import { Ingredient, Progress } from '../../utils/types'
-import { fetchIngredients, placeOrder } from '../../utils/apiCall'
-import { actionCreators } from '../../services/action-creators/action-creators'
 import { ingredientsFetchProgressSelector } from '../../services/selectors/selectors'
+import { fetchIngredientsMiddleware } from '../../services/thunks/fetchIngredientsMiddleware'
+import { placeOrderMiddleware } from '../../services/thunks/placeOrderMiddleware'
 
 const App = () => {
   const [isOrderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false)
@@ -17,15 +17,9 @@ const App = () => {
 
   const handlePlaceOrderClick = (ingredientsIds: Ingredient['_id'][]) => {
     setOrderDetailsModalOpen(true)
-    dispatch(actionCreators.placeOrderRequest())
-    placeOrder(ingredientsIds)
-      .then(res => {
-        dispatch(actionCreators.placeOrderSuccess({ name: res.name as string, number: res.order.number as number }))
-      })
-      .catch(err => {
-        console.log(err.message)
-        dispatch(actionCreators.placeOrderError())
-      })
+    // TODO fix ts-ignore
+    // @ts-ignore
+    dispatch(placeOrderMiddleware(ingredientsIds))
   }
 
   const handleOrderDetailsClose = () => {
@@ -33,17 +27,9 @@ const App = () => {
   }
 
   useEffect(() => {
-    dispatch(actionCreators.ingredientsFetchRequest())
-    fetchIngredients()
-      .then(res => {
-        dispatch(actionCreators.ingredientsFetchSuccess(res.data))
-        // TODO remove it when dnd's ready
-        dispatch(actionCreators.setConstructorIngredients(res.data))
-      })
-      .catch(err => {
-        console.log(err.message)
-        dispatch(actionCreators.ingredientsFetchError())
-      })
+    // TODO fix ts-ignore
+    // @ts-ignore
+    dispatch(fetchIngredientsMiddleware)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { compose, createStore } from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
 import './index.css'
 import App from './components/app/app'
 import reportWebVitals from './reportWebVitals'
@@ -10,9 +11,12 @@ import { initialState, rootReducer } from './services/reducers/reducers'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
-const composeEnhancers = typeof window === 'object' && composeWithDevTools ? composeWithDevTools({}) : compose
+const store = createStore(
+  rootReducer,
+  initialState,
+  typeof window === 'object' && composeWithDevTools ? composeWithDevTools(applyMiddleware(thunk)) : compose,
+)
 
-const store = createStore(rootReducer, initialState, composeEnhancers())
 root.render(
   <React.StrictMode>
     <Provider store={store}>
