@@ -2,16 +2,27 @@ import React from 'react'
 import styles from './order-details.module.css'
 import OrderSuccessIcon from '../order-success-icon/order-success-icon'
 import Modal from '../modal/modal'
+import { useSelector } from 'react-redux'
+import { orderProgressSelector, orderSelector } from '../../services/selectors/selectors'
+import { Progress } from '../../utils/types'
 
 type Props = {
   onClose: () => void
 }
 
 const OrderDetails: React.FC<Props> = ({ onClose }) => {
+  const order = useSelector(orderSelector)
+  const orderProgress = useSelector(orderProgressSelector)
+
+  // TODO fix with a better loader
+  if (orderProgress !== Progress.SUCCESS) {
+    return <div>Loading...</div>
+  }
+
   return (
     <Modal onClose={onClose}>
       <div className={styles.orderModalContent}>
-        <span className={`mt-4 text text_type_digits-large ${styles.orderId}`}>034536</span>
+        <span className={`mt-4 text text_type_digits-large ${styles.orderId}`}>{order?.number}</span>
         <span className="mt-8 text text_type_main-medium">идентификатор заказа</span>
         <div className={`mt-15 mb-15 ${styles.successIconContainer}`}>
           <OrderSuccessIcon />

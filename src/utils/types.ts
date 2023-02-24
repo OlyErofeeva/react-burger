@@ -49,7 +49,6 @@ export type ActiveModalIngredientState = {
 export type Order = {
   name: string
   number: number
-  ingredients: Ingredient[]
 }
 
 export type OrderState = {

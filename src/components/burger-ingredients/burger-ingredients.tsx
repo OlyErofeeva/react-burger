@@ -1,9 +1,16 @@
 import React, { useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styles from './burger-ingredients.module.css'
 import BurgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Ingredient, IngredientType } from '../../utils/types'
+import { Ingredient, IngredientType, Progress } from '../../utils/types'
+import {
+  activeModalIngredientSelector,
+  allIngredientsSelector,
+  ingredientsFetchProgressSelector,
+} from '../../services/selectors/selectors'
+import { actionCreators } from '../../services/action-creators/action-creators'
 
 const ingredientTypes = [
   {
@@ -20,22 +27,19 @@ const ingredientTypes = [
   },
 ]
 
-type Props = {
-  ingredients: Ingredient[]
-}
-
-const BurgerIngredients: React.FC<Props> = ({ ingredients }) => {
-  // Hint: there are no such state as [isIngredientModalOpen, setIngredientModalOpen],
-  // because [activeModalIngredient, setActiveModalIngredient] does the same job
-  const [activeModalIngredient, setActiveModalIngredient] = useState<Ingredient | null>(null)
+const BurgerIngredients: React.FC = () => {
+  const dispatch = useDispatch()
+  const allIngredients = useSelector(allIngredientsSelector)
+  const ingredientsFetchProgress = useSelector(ingredientsFetchProgressSelector)
+  const activeModalIngredient = useSelector(activeModalIngredientSelector)
   const [activeTab, setActiveTab] = useState(IngredientType.BUN)
 
   const handleBurgerIngredientClick = (ingredient: Ingredient) => {
-    setActiveModalIngredient(ingredient)
+    dispatch(actionCreators.setActiveModalIngredient(ingredient))
   }
 
   const handleIngredientDetailsClose = () => {
-    setActiveModalIngredient(null)
+    dispatch(actionCreators.clearActiveModalIngredient())
   }
 
   const handleTabClick = (itemType: IngredientType) => {
@@ -45,7 +49,7 @@ const BurgerIngredients: React.FC<Props> = ({ ingredients }) => {
 
   const groupIngredientsByType = useMemo(() => {
     const map = new Map<IngredientType, Ingredient[]>()
-    ingredients.forEach(ingredient => {
+    allIngredients.forEach(ingredient => {
       if (map.has(ingredient.type)) {
         map.get(ingredient.type)?.push(ingredient)
       } else {
@@ -54,7 +58,11 @@ const BurgerIngredients: React.FC<Props> = ({ ingredients }) => {
     })
     // should result in a map like {'bun' => Array(2), 'main' => Array(9), 'sauce' => Array(4)}
     return map
-  }, [ingredients])
+  }, [allIngredients])
+
+  if (ingredientsFetchProgress !== Progress.SUCCESS) {
+    return null
+  }
 
   return (
     <div className={styles.burgerIngredients}>
@@ -81,18 +89,13 @@ const BurgerIngredients: React.FC<Props> = ({ ingredients }) => {
             <section>
               <h2 className={`text text_type_main-medium ${styles.groupTitle}`}>{ingredientType.title}</h2>
               <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
-                {(groupIngredientsByType.get(ingredientType.type) || [])
-                  .map(ingredient => {
-                    return (
-                      <li key={ingredient._id} onClick={() => handleBurgerIngredientClick(ingredient)}>
-                        <BurgerIngredientCard
-                          imgSrc={ingredient.image}
-                          name={ingredient.name}
-                          price={ingredient.price}
-                        />
-                      </li>
-                    )
-                  })}
+                {(groupIngredientsByType.get(ingredientType.type) || []).map(ingredient => {
+                  return (
+                    <li key={ingredient._id} onClick={() => handleBurgerIngredientClick(ingredient)}>
+                      <BurgerIngredientCard imgSrc={ingredient.image} name={ingredient.name} price={ingredient.price} />
+                    </li>
+                  )
+                })}
               </ul>
             </section>
           )

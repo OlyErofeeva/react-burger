@@ -2,21 +2,26 @@ import React, { useMemo } from 'react'
 import styles from './burger-constructor.module.css'
 import BurgerConstructorIngredient from '../burger-constructor-ingredient/burger-constructor-ingredient'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useSelector } from 'react-redux'
+import { constructorIngredientsSelector } from '../../services/selectors/selectors'
 import { Ingredient } from '../../utils/types'
 
 type Props = {
-  ingredients: Ingredient[]
-  onPlaceOrderClick: () => void
+  onPlaceOrderClick: (ingredientsIds: Ingredient['_id'][]) => void
 }
 
-const BurgerConstructor: React.FC<Props> = ({ ingredients, onPlaceOrderClick }) => {
+const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
+  const constructorIngredients = useSelector(constructorIngredientsSelector)
+  const ingredientsIds = constructorIngredients.map((ingredient) => {
+    return ingredient._id
+  })
   const calcTotal = useMemo(() => {
-    return ingredients.reduce((acc, item) => acc + item.price, 0)
-  }, [ingredients])
+    return constructorIngredients.reduce((acc, item) => acc + item.price, 0)
+  }, [constructorIngredients])
 
   // TODO check data length, remove hardcode
-  const topElement = ingredients[0]
-  const bottomElement = ingredients[ingredients.length - 1]
+  const topElement = constructorIngredients[0]
+  const bottomElement = constructorIngredients[constructorIngredients.length - 1]
 
   return (
     <div className={`pt-25 ${styles.burgerConstructor}`}>
@@ -30,7 +35,7 @@ const BurgerConstructor: React.FC<Props> = ({ ingredients, onPlaceOrderClick }) 
         />
 
         <div className={styles.innerIngredients}>
-          {ingredients.slice(1, ingredients.length - 1).map((ingredient, idx) => {
+          {constructorIngredients.slice(1, constructorIngredients.length - 1).map((ingredient, idx) => {
             return (
               <BurgerConstructorIngredient
                 key={ingredient._id}
@@ -54,7 +59,7 @@ const BurgerConstructor: React.FC<Props> = ({ ingredients, onPlaceOrderClick }) 
       <div className={`mt-10 ${styles.constructorTotal}`}>
         <span className="mr-2 text text_type_digits-medium">{calcTotal}</span>
         <CurrencyIcon type="primary" />
-        <Button onClick={onPlaceOrderClick} htmlType="submit" type="primary" size="large" extraClass="ml-10">
+        <Button onClick={() => onPlaceOrderClick(ingredientsIds)} htmlType="submit" type="primary" size="large" extraClass="ml-10">
           Оформить заказ
         </Button>
       </div>
