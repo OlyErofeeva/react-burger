@@ -8,6 +8,7 @@ import { Ingredient, IngredientType, Progress } from '../../utils/types'
 import {
   activeModalIngredientSelector,
   allIngredientsSelector,
+  constructorIngredientsSelector,
   ingredientsFetchProgressSelector,
 } from '../../services/selectors/selectors'
 import { actionCreators } from '../../services/action-creators/action-creators'
@@ -32,6 +33,7 @@ const BurgerIngredients: React.FC = () => {
   const allIngredients = useSelector(allIngredientsSelector)
   const ingredientsFetchProgress = useSelector(ingredientsFetchProgressSelector)
   const activeModalIngredient = useSelector(activeModalIngredientSelector)
+  const constructorIngredients = useSelector(constructorIngredientsSelector)
   const [activeTab, setActiveTab] = useState(IngredientType.BUN)
 
   const handleBurgerIngredientClick = (ingredient: Ingredient) => {
@@ -59,6 +61,16 @@ const BurgerIngredients: React.FC = () => {
     // should result in a map like {'bun' => Array(2), 'main' => Array(9), 'sauce' => Array(4)}
     return map
   }, [allIngredients])
+
+  const mapWithAddedIngredients = useMemo(() => {
+    // should result in a map like {'60666c42cc7b410027a1a9b7' => 1, '60666c42cc7b410027a1a9b6' => 3, etc.}
+    const map = new Map<Ingredient['_id'], number>()
+    constructorIngredients.forEach(item => {
+      const currentAmount = map.get(item._id) || 0
+      map.set(item._id, currentAmount + 1)
+    })
+    return map
+  }, [constructorIngredients])
 
   if (ingredientsFetchProgress !== Progress.SUCCESS) {
     return null
@@ -92,7 +104,10 @@ const BurgerIngredients: React.FC = () => {
                 {(groupIngredientsByType.get(ingredientType.type) || []).map(ingredient => {
                   return (
                     <li key={ingredient._id} onClick={() => handleBurgerIngredientClick(ingredient)}>
-                      <BurgerIngredientCard ingredient={ingredient} />
+                      <BurgerIngredientCard
+                        ingredient={ingredient}
+                        counter={mapWithAddedIngredients.get(ingredient._id)}
+                      />
                     </li>
                   )
                 })}
@@ -101,7 +116,9 @@ const BurgerIngredients: React.FC = () => {
           )
         })}
       </div>
-      {activeModalIngredient && <IngredientDetails ingredient={activeModalIngredient} onClose={handleIngredientDetailsClose} />}
+      {activeModalIngredient && (
+        <IngredientDetails ingredient={activeModalIngredient} onClose={handleIngredientDetailsClose} />
+      )}
     </div>
   )
 }
