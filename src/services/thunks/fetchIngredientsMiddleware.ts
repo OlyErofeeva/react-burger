@@ -8,8 +8,6 @@ export const fetchIngredientsMiddleware = dispatch => {
   fetchIngredients()
     .then(res => {
       dispatch(actionCreators.ingredientsFetchSuccess(res.data))
-      // TODO remove it when dnd's ready
-      dispatch(actionCreators.setConstructorIngredients(res.data))
     })
     .catch(err => {
       console.log(err.message)

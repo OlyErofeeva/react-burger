@@ -1,4 +1,4 @@
-import { Ingredient, Order } from '../../utils/types'
+import { ConstructorIngredient, Ingredient, Order } from '../../utils/types'
 import { ActionType } from '../action-types/action-types'
 
 export const actionCreators = {
@@ -15,7 +15,7 @@ export const actionCreators = {
   }),
 
   // constructor
-  setConstructorIngredients: (payload: Ingredient[]) => ({
+  setConstructorIngredients: (payload: ConstructorIngredient[]) => ({
     type: ActionType.SetConstructorIngredients,
     payload: payload,
   }),

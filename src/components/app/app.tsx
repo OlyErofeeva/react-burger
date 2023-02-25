@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import styles from './app.module.css'
 import AppHeader from '../app-header/app-header'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
@@ -38,8 +40,10 @@ const App = () => {
       <AppHeader />
       {ingredientsFetchProgress === Progress.SUCCESS && (
         <main className={styles.main}>
-          <BurgerIngredients />
-          <BurgerConstructor onPlaceOrderClick={handlePlaceOrderClick} />
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor onPlaceOrderClick={handlePlaceOrderClick} />
+          </DndProvider>
         </main>
       )}
       {isOrderDetailsModalOpen && <OrderDetails onClose={handleOrderDetailsClose} />}

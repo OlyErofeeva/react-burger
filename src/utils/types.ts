@@ -15,6 +15,10 @@ export type Ingredient = {
   __v: number
 }
 
+export type ConstructorIngredient = Ingredient & {
+  constructorId: string
+}
+
 export enum IngredientType {
   BUN = 'bun',
   SAUCE = 'sauce',
@@ -41,7 +45,7 @@ export type IngredientState = {
 }
 
 export type ConstructorState = {
-  items: Ingredient[]
+  items: ConstructorIngredient[]
 }
 
 export type ActiveModalIngredientState = {
@@ -72,7 +76,7 @@ export type IngredientAction =
 
 export type ConstructorAction = {
   type: ActionType.SetConstructorIngredients
-  payload: Ingredient[]
+  payload: ConstructorIngredient[]
 }
 
 export type ActiveModalIngredientAction =

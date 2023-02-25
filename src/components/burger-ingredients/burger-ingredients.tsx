@@ -92,7 +92,7 @@ const BurgerIngredients: React.FC = () => {
                 {(groupIngredientsByType.get(ingredientType.type) || []).map(ingredient => {
                   return (
                     <li key={ingredient._id} onClick={() => handleBurgerIngredientClick(ingredient)}>
-                      <BurgerIngredientCard imgSrc={ingredient.image} name={ingredient.name} price={ingredient.price} />
+                      <BurgerIngredientCard ingredient={ingredient} />
                     </li>
                   )
                 })}

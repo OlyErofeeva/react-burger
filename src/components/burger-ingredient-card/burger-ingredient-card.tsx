@@ -1,22 +1,30 @@
 import React from 'react'
-import styles from './burger-ingredient-card.module.css'
+import { useDrag } from 'react-dnd'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import styles from './burger-ingredient-card.module.css'
+import { Ingredient } from '../../utils/types'
 
 type Props = {
-  imgSrc: string // TODO: optional
-  name: string
-  price: number
+  ingredient: Ingredient
 }
 
-const BurgerIngredientCard: React.FC<Props> = ({ imgSrc, name, price }) => {
+const BurgerIngredientCard: React.FC<Props> = ({ ingredient }) => {
+  const [{ opacity }, dragRef] = useDrag({
+      type: 'ingredient',
+      item: { ...ingredient },
+      collect: monitor => ({
+          opacity: monitor.isDragging() ? 0.5 : 1
+      })
+  })
   return (
-    <article className={styles.ingredientCard}>
-      <img className="pl-4 pr-4" src={imgSrc} alt={`изображение ингредиента ${name}`} />
+    // TODO: add className instead of inline styles
+    <article ref = {dragRef} className={styles.ingredientCard} style = {{ opacity }}>
+      <img className="pl-4 pr-4" src={ingredient.image} alt={`изображение ингредиента ${ingredient.name}`} />
       <div className={styles.priceContainer}>
-        <span className="text text_type_digits-default">{price}</span>
+        <span className="text text_type_digits-default">{ingredient.price}</span>
         <CurrencyIcon type="primary" />
       </div>
-      <p className={`text text_type_main-default ${styles.name}`}>{name}</p>
+      <p className={`text text_type_main-default ${styles.name}`}>{ingredient.name}</p>
       {/* TODO remove hardcoded number in an order */}
       <Counter count={3} size="default" extraClass={styles.counter} />
     </article>
