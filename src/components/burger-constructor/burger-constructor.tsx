@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { v4 as uuid } from 'uuid'
@@ -66,6 +66,19 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
     return constructorIngredients.reduce((acc, item) => acc + item.price, 0)
   }, [constructorIngredients])
 
+  const moveElement = useCallback(
+    (dragIndex: number, hoverIndex: number) => {
+      const dragElement = constructorIngredients[dragIndex]
+      const newElements = [...constructorIngredients]
+      newElements.splice(dragIndex, 1)
+      newElements.splice(hoverIndex, 0, dragElement)
+
+      dispatch(actionCreators.setConstructorIngredients(newElements))
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [constructorIngredients],
+  )
+
   const topElement = constructorIngredients[0]
   const bottomElement = constructorIngredients[constructorIngredients.length - 1]
 
@@ -81,15 +94,27 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
   return (
     <div ref={dropTargerRef} className={`pt-25 ${styles.burgerConstructor}`}>
       <ul className={styles.addedIngredients}>
-        <BurgerConstructorIngredient key={topElement.constructorId} ingredient={topElement} type={'top'} />
+        <BurgerConstructorIngredient key={topElement.constructorId} ingredient={topElement} type={'top'} index={0} />
 
         <div className={styles.innerIngredients}>
           {constructorIngredients.slice(1, constructorIngredients.length - 1).map((ingredient, idx) => {
-            return <BurgerConstructorIngredient key={ingredient.constructorId} ingredient={ingredient} />
+            return (
+              <BurgerConstructorIngredient
+                key={ingredient.constructorId}
+                ingredient={ingredient}
+                moveElement={moveElement}
+                index={idx + 1}
+              />
+            )
           })}
         </div>
 
-        <BurgerConstructorIngredient key={bottomElement.constructorId} ingredient={bottomElement} type={'bottom'} />
+        <BurgerConstructorIngredient
+          key={bottomElement.constructorId}
+          ingredient={bottomElement}
+          type={'bottom'}
+          index={constructorIngredients.length - 1}
+        />
       </ul>
 
       <div className={`mt-10 ${styles.constructorTotal}`}>
