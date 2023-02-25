@@ -75,7 +75,9 @@ const BurgerIngredients: React.FC = () => {
   const handleScroll = (e: UIEvent<HTMLDivElement>) => {
     const ingredientSections = Array.from((e.target as HTMLDivElement).children)
     const startingPoint = (e.target as HTMLDivElement).getBoundingClientRect().top
-    const unscrolledSections = ingredientSections.filter(item => item.getBoundingClientRect().bottom - startingPoint > 36)
+    const unscrolledSections = ingredientSections.filter(
+      item => item.getBoundingClientRect().bottom - startingPoint > 36,
+    )
     if (unscrolledSections.length > 0) {
       setActiveTab(unscrolledSections[0].id as IngredientType)
     } else {
@@ -94,13 +96,15 @@ const BurgerIngredients: React.FC = () => {
         {ingredientTypes.map(ingredientType => {
           return (
             <li key={ingredientType.type}>
-              <Tab
-                value={ingredientType.type}
-                active={activeTab === ingredientType.type}
-                onClick={() => handleTabClick(ingredientType.type)}
-              >
-                {ingredientType.title}
-              </Tab>
+              <a href={`#${ingredientType.type}`} className={styles.anchorTab}>
+                <Tab
+                  value={ingredientType.type}
+                  active={activeTab === ingredientType.type}
+                  onClick={() => handleTabClick(ingredientType.type)}
+                >
+                  {ingredientType.title}
+                </Tab>
+              </a>
             </li>
           )
         })}
@@ -109,7 +113,7 @@ const BurgerIngredients: React.FC = () => {
       <div className={styles.allIngredients} onScroll={handleScroll}>
         {ingredientTypes.map(ingredientType => {
           return (
-            <section id={ingredientType.type} key={ingredientType.type} >
+            <section id={ingredientType.type} key={ingredientType.type}>
               <h2 className={`text text_type_main-medium ${styles.groupTitle}`}>{ingredientType.title}</h2>
               <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
                 {(groupIngredientsByType.get(ingredientType.type) || []).map(ingredient => {
