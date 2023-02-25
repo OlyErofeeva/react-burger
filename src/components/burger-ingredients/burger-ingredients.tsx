@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { UIEvent, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './burger-ingredients.module.css'
 import BurgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card'
@@ -72,6 +72,17 @@ const BurgerIngredients: React.FC = () => {
     return map
   }, [constructorIngredients])
 
+  const handleScroll = (e: UIEvent<HTMLDivElement>) => {
+    const ingredientSections = Array.from((e.target as HTMLDivElement).children)
+    const startingPoint = (e.target as HTMLDivElement).getBoundingClientRect().top
+    const unscrolledSections = ingredientSections.filter(item => item.getBoundingClientRect().bottom - startingPoint > 36)
+    if (unscrolledSections.length > 0) {
+      setActiveTab(unscrolledSections[0].id as IngredientType)
+    } else {
+      setActiveTab(ingredientSections[ingredientSections.length - 1].id as IngredientType)
+    }
+  }
+
   if (ingredientsFetchProgress !== Progress.SUCCESS) {
     return null
   }
@@ -95,10 +106,10 @@ const BurgerIngredients: React.FC = () => {
         })}
       </ul>
 
-      <div className={styles.allIngredients}>
+      <div className={styles.allIngredients} onScroll={handleScroll}>
         {ingredientTypes.map(ingredientType => {
           return (
-            <section>
+            <section id={ingredientType.type} key={ingredientType.type} >
               <h2 className={`text text_type_main-medium ${styles.groupTitle}`}>{ingredientType.title}</h2>
               <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
                 {(groupIngredientsByType.get(ingredientType.type) || []).map(ingredient => {
