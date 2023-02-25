@@ -62,6 +62,12 @@ const constructorReducer = (
         ...state,
         items: action.payload,
       }
+    case ActionType.RemoveConstructorIngredient:
+      const filteredItems = state.items.filter(item => item.constructorId !== action.payload)
+      return {
+        ...state,
+        items: filteredItems,
+      }
     default:
       return state
   }

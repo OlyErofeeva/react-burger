@@ -19,6 +19,10 @@ export const actionCreators = {
     type: ActionType.SetConstructorIngredients,
     payload: payload,
   }),
+  removeConstructorIngredient: (payload: ConstructorIngredient['constructorId']) => ({
+    type: ActionType.RemoveConstructorIngredient,
+    payload: payload,
+  }),
 
   // activeModalIngredient
   setActiveModalIngredient: (payload: Ingredient) => ({

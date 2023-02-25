@@ -74,10 +74,15 @@ export type IngredientAction =
       type: ActionType.IngredientsFetchError
     }
 
-export type ConstructorAction = {
-  type: ActionType.SetConstructorIngredients
-  payload: ConstructorIngredient[]
-}
+export type ConstructorAction =
+  | {
+      type: ActionType.SetConstructorIngredients
+      payload: ConstructorIngredient[]
+    }
+  | {
+      type: ActionType.RemoveConstructorIngredient
+      payload: ConstructorIngredient['constructorId']
+    }
 
 export type ActiveModalIngredientAction =
   | {

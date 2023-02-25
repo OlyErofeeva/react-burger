@@ -4,6 +4,7 @@ export enum ActionType {
   IngredientsFetchError = 'INGREDIENTS_FETCH_ERROR',
 
   SetConstructorIngredients = 'SET_CONSTRUCTOR_INGREDIENTS',
+  RemoveConstructorIngredient = 'REMOVE_CONSTRUCTOR_INGREDIENT',
 
   SetActiveModalIngredient = 'SET_ACTIVE_MODAL_INGREDIENT',
   ClearActiveModalIngredient = 'CLEAR_ACTIVE_MODAL_INGREDIENT',

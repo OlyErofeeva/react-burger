@@ -1,22 +1,28 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import classNames from 'classnames'
 import styles from './burger-constructor-ingredient.module.css'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { actionCreators } from '../../services/action-creators/action-creators'
+import { ConstructorIngredient } from '../../utils/types'
 
 type Props = {
-  imgSrc: string
-  price: number
-  text: string
+  ingredient: ConstructorIngredient
   type?: 'top' | 'bottom'
 }
 
-const BurgerConstructorIngredient: React.FC<Props> = ({ imgSrc, price, text, type }) => {
+const BurgerConstructorIngredient: React.FC<Props> = ({ ingredient, type }) => {
   const calculateIsLocked = () => type === 'top' || type === 'bottom'
+  const dispatch = useDispatch()
 
   const constructorElementClassName = classNames({
     'ml-8': calculateIsLocked(),
     'ml-2': !calculateIsLocked(),
   })
+
+  const handleRemoveIngredient = () => {
+    dispatch(actionCreators.removeConstructorIngredient(ingredient.constructorId))
+  }
 
   return (
     <li className={`pl-4 pr-4 ${styles.constructorIngredient}`}>
@@ -24,10 +30,11 @@ const BurgerConstructorIngredient: React.FC<Props> = ({ imgSrc, price, text, typ
       <ConstructorElement
         type={type}
         isLocked={calculateIsLocked()}
-        text={text}
-        price={price}
-        thumbnail={imgSrc}
+        text={ingredient.name}
+        price={ingredient.price}
+        thumbnail={ingredient.image}
         extraClass={constructorElementClassName}
+        handleClose={handleRemoveIngredient}
       />
     </li>
   )

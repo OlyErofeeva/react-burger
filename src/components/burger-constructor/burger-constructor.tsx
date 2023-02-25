@@ -81,34 +81,15 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
   return (
     <div ref={dropTargerRef} className={`pt-25 ${styles.burgerConstructor}`}>
       <ul className={styles.addedIngredients}>
-        <BurgerConstructorIngredient
-          key={topElement.constructorId}
-          imgSrc={topElement.image}
-          price={topElement.price}
-          text={topElement.name}
-          type={'top'}
-        />
+        <BurgerConstructorIngredient key={topElement.constructorId} ingredient={topElement} type={'top'} />
 
         <div className={styles.innerIngredients}>
           {constructorIngredients.slice(1, constructorIngredients.length - 1).map((ingredient, idx) => {
-            return (
-              <BurgerConstructorIngredient
-                key={ingredient.constructorId}
-                imgSrc={ingredient.image}
-                price={ingredient.price}
-                text={ingredient.name}
-              />
-            )
+            return <BurgerConstructorIngredient key={ingredient.constructorId} ingredient={ingredient} />
           })}
         </div>
 
-        <BurgerConstructorIngredient
-          key={bottomElement.constructorId}
-          imgSrc={bottomElement.image}
-          price={bottomElement.price}
-          text={bottomElement.name}
-          type={'bottom'}
-        />
+        <BurgerConstructorIngredient key={bottomElement.constructorId} ingredient={bottomElement} type={'bottom'} />
       </ul>
 
       <div className={`mt-10 ${styles.constructorTotal}`}>
