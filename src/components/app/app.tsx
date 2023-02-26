@@ -9,8 +9,8 @@ import BurgerConstructor from '../burger-constructor/burger-constructor'
 import OrderDetails from '../order-details/order-details'
 import { Ingredient, Progress } from '../../utils/types'
 import { ingredientsFetchProgressSelector } from '../../services/selectors/selectors'
-import { fetchIngredientsMiddleware } from '../../services/thunks/fetchIngredientsMiddleware'
-import { placeOrderMiddleware } from '../../services/thunks/placeOrderMiddleware'
+import { fetchIngredientsMiddleware } from '../../services/thunks/fetch-ingredients-middleware'
+import { placeOrderMiddleware } from '../../services/thunks/place-order-middleware'
 
 const App = () => {
   const [isOrderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false)

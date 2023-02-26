@@ -1,4 +1,4 @@
-import { placeOrder } from '../../utils/apiCall'
+import { placeOrder } from '../../utils/api-call'
 import { Ingredient } from '../../utils/types'
 import { orderActionCreator } from '../action-creators'
 

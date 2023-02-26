@@ -1,4 +1,4 @@
-import { fetchIngredients } from '../../utils/apiCall'
+import { fetchIngredients } from '../../utils/api-call'
 import { ingredientsActionCreator } from '../action-creators'
 
 // TODO fix ts-ignore

@@ -1,4 +1,4 @@
-import { INGREDIENTS_URL, ORDER_URL } from '../configs/apiSettings'
+import { INGREDIENTS_URL, ORDER_URL } from '../configs/api-settings'
 import { Ingredient } from './types'
 
 const handleResponse = (res: Response) => {
