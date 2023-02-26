@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 import './index.css'
 import App from './components/app/app'
 import reportWebVitals from './reportWebVitals'
-import { initialState, rootReducer } from './services/reducers/reducers'
+import { initialState, rootReducer } from './services/reducers/root'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
