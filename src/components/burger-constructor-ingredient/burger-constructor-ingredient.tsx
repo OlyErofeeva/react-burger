@@ -4,8 +4,8 @@ import classNames from 'classnames'
 import { useDrag, useDrop } from 'react-dnd'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-constructor-ingredient.module.css'
-import { actionCreators } from '../../services/action-creators/action-creators'
 import { ConstructorIngredient, IngredientType } from '../../utils/types'
+import { constructorActionCreator } from '../../services/action-creators'
 
 type Props = {
   ingredient: ConstructorIngredient
@@ -25,7 +25,7 @@ const BurgerConstructorIngredient: React.FC<Props> = ({ ingredient, type, moveEl
   })
 
   const handleRemoveIngredient = () => {
-    dispatch(actionCreators.removeConstructorIngredient(ingredient.constructorId))
+    dispatch(constructorActionCreator.removeIngredient(ingredient.constructorId))
   }
 
   const [{ isDragging }, drag] = useDrag({

@@ -11,7 +11,7 @@ import {
   constructorIngredientsSelector,
   ingredientsFetchProgressSelector,
 } from '../../services/selectors/selectors'
-import { actionCreators } from '../../services/action-creators/action-creators'
+import { activeModalIngredientActionCreator } from '../../services/action-creators'
 
 const ingredientTypes = [
   {
@@ -37,11 +37,11 @@ const BurgerIngredients: React.FC = () => {
   const [activeTab, setActiveTab] = useState(IngredientType.BUN)
 
   const handleBurgerIngredientClick = (ingredient: Ingredient) => {
-    dispatch(actionCreators.setActiveModalIngredient(ingredient))
+    dispatch(activeModalIngredientActionCreator.set(ingredient))
   }
 
   const handleIngredientDetailsClose = () => {
-    dispatch(actionCreators.clearActiveModalIngredient())
+    dispatch(activeModalIngredientActionCreator.clear())
   }
 
   const handleTabClick = (itemType: IngredientType) => {

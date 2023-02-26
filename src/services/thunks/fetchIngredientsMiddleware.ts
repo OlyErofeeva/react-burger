@@ -1,16 +1,16 @@
 import { fetchIngredients } from '../../utils/apiCall'
-import { actionCreators } from '../action-creators/action-creators'
+import { ingredientsActionCreator } from '../action-creators'
 
 // TODO fix ts-ignore
 // @ts-ignore
 export const fetchIngredientsMiddleware = dispatch => {
-  dispatch(actionCreators.ingredientsFetchRequest())
+  dispatch(ingredientsActionCreator.fetchRequest())
   fetchIngredients()
     .then(res => {
-      dispatch(actionCreators.ingredientsFetchSuccess(res.data))
+      dispatch(ingredientsActionCreator.fetchSuccess(res.data))
     })
     .catch(err => {
       console.log(err.message)
-      dispatch(actionCreators.ingredientsFetchError())
+      dispatch(ingredientsActionCreator.fetchError())
     })
 }

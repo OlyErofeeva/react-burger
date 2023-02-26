@@ -7,8 +7,8 @@ import styles from './burger-constructor.module.css'
 import BurgerConstructorIngredient from '../burger-constructor-ingredient/burger-constructor-ingredient'
 import { constructorIngredientsSelector } from '../../services/selectors/selectors'
 import { Ingredient } from '../../utils/types'
-import { actionCreators } from '../../services/action-creators/action-creators'
 import { IngredientType } from '../../utils/types'
+import { constructorActionCreator } from '../../services/action-creators'
 
 type Props = {
   onPlaceOrderClick: (ingredientsIds: Ingredient['_id'][]) => void
@@ -35,12 +35,12 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
           constructorId: uuid(),
         }
         if (constructorIngredients.length < 2) {
-          dispatch(actionCreators.setConstructorIngredients([constructorItem, duplicatedItem]))
+          dispatch(constructorActionCreator.setIngredients([constructorItem, duplicatedItem]))
         } else {
           const arr = [...constructorIngredients]
           arr[0] = constructorItem
           arr[constructorIngredients.length - 1] = duplicatedItem
-          dispatch(actionCreators.setConstructorIngredients(arr))
+          dispatch(constructorActionCreator.setIngredients(arr))
         }
       } else {
         if (constructorIngredients.length < 2) {
@@ -54,7 +54,7 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
           ...notBuns,
           constructorIngredients[constructorIngredients.length - 1],
         ]
-        dispatch(actionCreators.setConstructorIngredients(newArr))
+        dispatch(constructorActionCreator.setIngredients(newArr))
       }
     },
   })
@@ -73,7 +73,7 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
       newElements.splice(dragIndex, 1)
       newElements.splice(hoverIndex, 0, dragElement)
 
-      dispatch(actionCreators.setConstructorIngredients(newElements))
+      dispatch(constructorActionCreator.setIngredients(newElements))
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [constructorIngredients],
