@@ -21,7 +21,7 @@ export const orderReducer = (state = initialState, action: OrderAction): GlobalS
       }
     case ActionType.PlaceOrderError:
       return {
-        ...state,
+        ...initialState,
         itemAddProgress: Progress.ERROR,
       }
     default:

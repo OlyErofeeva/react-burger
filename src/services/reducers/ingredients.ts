@@ -21,7 +21,7 @@ export const ingredientsReducer = (state = initialState, action: IngredientActio
       }
     case ActionType.IngredientsFetchError:
       return {
-        ...state,
+        ...initialState,
         listFetchProgress: Progress.ERROR,
       }
     default:

@@ -15,8 +15,12 @@ const OrderDetails: React.FC<Props> = ({ onClose }) => {
   const orderProgress = useSelector(orderProgressSelector)
 
   // TODO fix with a better loader
-  if (orderProgress !== Progress.SUCCESS) {
-    return <div>Loading...</div>
+  if (orderProgress === Progress.WORK) {
+    return <div>Отправляем заказ...</div>
+  }
+  // TODO make better styles for an error message
+  if (orderProgress === Progress.ERROR) {
+    return <div>{`Что-то пошло не так... :( Попробуйте снова.`}</div>
   }
 
   return (

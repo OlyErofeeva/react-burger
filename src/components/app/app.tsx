@@ -38,6 +38,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
+      {/* TODO: loader & fetch error cases */}
       {ingredientsFetchProgress === Progress.SUCCESS && (
         <main className={styles.main}>
           <DndProvider backend={HTML5Backend}>

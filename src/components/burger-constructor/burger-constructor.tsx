@@ -44,7 +44,7 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
         }
       } else {
         if (constructorIngredients.length < 2) {
-          // TODO add error meessage about 'BUNS FIRST'
+          // TODO add error message about 'BUNS FIRST'
           return
         }
         const notBuns = constructorIngredients.slice(1, constructorIngredients.length - 1)

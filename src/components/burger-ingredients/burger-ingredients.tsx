@@ -45,7 +45,6 @@ const BurgerIngredients: React.FC = () => {
   }
 
   const handleTabClick = (itemType: IngredientType) => {
-    // TODO: add scroll logic
     setActiveTab(itemType)
   }
 
