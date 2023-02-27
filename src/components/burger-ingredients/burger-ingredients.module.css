@@ -14,9 +14,14 @@
   list-style: none;
 }
 
+.anchorTab {
+  text-decoration: none;
+}
+
 .allIngredients {
   max-height: calc(100vh - 336px);
   overflow-y: overlay;
+  scroll-behavior: smooth;
 }
 
 .allIngredients::-webkit-scrollbar {
