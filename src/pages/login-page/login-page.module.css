@@ -1,0 +1,16 @@
+.hint {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--colors-interface-accent);
+  transition: var(--common-transition);
+}
+
+.link:hover {
+  color: var(--text-primary-color);
+  opacity: 0.9;
+}
