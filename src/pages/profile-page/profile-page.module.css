@@ -1,0 +1,43 @@
+.pageContent {
+  display: flex;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sidebarContainer {
+  width: 320px;
+  text-align: left;
+}
+
+.tabList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tabLink {
+  display: block;
+  text-decoration: none;
+  transition: var(--common-transition);
+}
+
+.tabLink:hover {
+  opacity: 0.9;
+  color: var(--text-primary-color);
+}
+
+.tabLinkActive {
+  color: var(--text-primary-color);
+}
+
+.profileInfo {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttonsWrapper {
+  margin-left: auto;
+}
