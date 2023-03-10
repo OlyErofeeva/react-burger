@@ -1,5 +1,5 @@
-import { INGREDIENTS_URL, LOGIN_URL, ORDER_URL, REGISTER_URL } from '../configs/api-settings'
-import { Ingredient, UserLoginRequest, UserRegisterRequest } from './types'
+import { FORGOT_PASSWORD_URL, INGREDIENTS_URL, LOGIN_URL, ORDER_URL, REGISTER_URL } from '../configs/api-settings'
+import { ForgotPasswordRequest, Ingredient, UserLoginRequest, UserRegisterRequest } from './types'
 
 const handleResponse = (res: Response) => {
   if (res.ok) {
@@ -49,6 +49,18 @@ export const loginUser = (user: UserLoginRequest) => {
     body: JSON.stringify({
       email: user.email,
       password: user.password,
+    }),
+  }).then(res => handleResponse(res))
+}
+
+export const forgotPassword = (userData: ForgotPasswordRequest) => {
+  return fetch(FORGOT_PASSWORD_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email: userData.email,
     }),
   }).then(res => handleResponse(res))
 }

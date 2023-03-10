@@ -127,3 +127,12 @@ export type UserLoginRequest = {
 }
 
 export type UserLoginResponse = UserRegisterResponse
+
+export type ForgotPasswordRequest = {
+  email: string
+}
+
+export type ForgotPasswordResponse = {
+  success: boolean
+  message?: string
+}

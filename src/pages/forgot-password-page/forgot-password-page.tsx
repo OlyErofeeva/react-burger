@@ -1,14 +1,34 @@
+import React, { useState } from 'react'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './forgot-password-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
+import { ForgotPasswordRequest, ForgotPasswordResponse } from '../../utils/types'
+import { forgotPassword } from '../../utils/api-call'
 
 const ForgotPasswordPage = () => {
+  const [inputValues, setInputValues] = useState<ForgotPasswordRequest>({ email: '' })
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValues({ ...inputValues, [e.target.name]: e.target.value })
+  }
+
+  const handleRegister = (e: React.SyntheticEvent, userData: ForgotPasswordRequest) => {
+    e.preventDefault()
+    // TODO-3 handle response
+    forgotPassword(userData).then((res: ForgotPasswordResponse) => console.log(res))
+  }
   return (
     <>
       <FormLayout title="Восстановление пароля">
-        {/* TODO-3 fix input props */}
-        <Input placeholder="Укажите e-mail" value="" onChange={() => console.log('email input')} />
-        <Button htmlType="submit" type="primary" size="medium">
+        <Input
+          autoFocus
+          required
+          name="email"
+          placeholder="Укажите e-mail"
+          value={inputValues.email}
+          onChange={handleInputChange}
+        />
+        <Button htmlType="submit" type="primary" size="medium" onClick={e => handleRegister(e, inputValues)}>
           Восстановить
         </Button>
       </FormLayout>
