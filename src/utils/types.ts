@@ -120,3 +120,10 @@ export type UserRegisterResponse = {
   accessToken: string
   refreshToken: string
 }
+
+export type UserLoginRequest = {
+  email: string
+  password: string
+}
+
+export type UserLoginResponse = UserRegisterResponse
