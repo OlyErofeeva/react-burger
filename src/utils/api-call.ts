@@ -1,5 +1,12 @@
-import { FORGOT_PASSWORD_URL, INGREDIENTS_URL, LOGIN_URL, ORDER_URL, REGISTER_URL } from '../configs/api-settings'
-import { ForgotPasswordRequest, Ingredient, UserLoginRequest, UserRegisterRequest } from './types'
+import {
+  FORGOT_PASSWORD_URL,
+  INGREDIENTS_URL,
+  LOGIN_URL,
+  ORDER_URL,
+  REGISTER_URL,
+  RESET_PASSWORD_URL,
+} from '../configs/api-settings'
+import { ForgotPasswordRequest, Ingredient, ResetPasswordRequest, UserLoginRequest, UserRegisterRequest } from './types'
 
 const handleResponse = (res: Response) => {
   if (res.ok) {
@@ -61,6 +68,19 @@ export const forgotPassword = (userData: ForgotPasswordRequest) => {
     },
     body: JSON.stringify({
       email: userData.email,
+    }),
+  }).then(res => handleResponse(res))
+}
+
+export const resetPassword = (userData: ResetPasswordRequest) => {
+  return fetch(RESET_PASSWORD_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      password: userData.password,
+      token: userData.token,
     }),
   }).then(res => handleResponse(res))
 }

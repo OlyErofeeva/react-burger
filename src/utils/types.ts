@@ -136,3 +136,10 @@ export type ForgotPasswordResponse = {
   success: boolean
   message?: string
 }
+
+export type ResetPasswordRequest = {
+  password: string
+  token: string
+}
+
+export type ResetPasswordResponse = ForgotPasswordResponse
