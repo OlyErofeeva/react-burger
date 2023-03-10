@@ -104,3 +104,19 @@ export type OrderAction =
   | {
       type: ActionType.PlaceOrderError
     }
+
+export type UserRegisterRequest = {
+  name: string
+  email: string
+  password: string
+}
+
+export type UserRegisterResponse = {
+  success: boolean
+  user: {
+    email: string
+    name: string
+  }
+  accessToken: string
+  refreshToken: string
+}

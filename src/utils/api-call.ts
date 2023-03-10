@@ -1,5 +1,5 @@
-import { INGREDIENTS_URL, ORDER_URL } from '../configs/api-settings'
-import { Ingredient } from './types'
+import { INGREDIENTS_URL, ORDER_URL, REGISTER_URL } from '../configs/api-settings'
+import { Ingredient, UserRegisterRequest } from './types'
 
 const handleResponse = (res: Response) => {
   if (res.ok) {
@@ -11,18 +11,31 @@ const handleResponse = (res: Response) => {
 }
 
 export const fetchIngredients = () => {
-  return fetch(INGREDIENTS_URL)
-    .then(res => handleResponse(res))
+  return fetch(INGREDIENTS_URL).then(res => handleResponse(res))
 }
 
-export const placeOrder = (orderIngredients: Ingredient["_id"][]) => {
+export const placeOrder = (orderIngredients: Ingredient['_id'][]) => {
   return fetch(ORDER_URL, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      ingredients: orderIngredients
-    })
+      ingredients: orderIngredients,
+    }),
+  }).then(res => handleResponse(res))
+}
+
+export const registerUser = (user: UserRegisterRequest) => {
+  return fetch(REGISTER_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email: user.email,
+      password: user.password,
+      name: user.name,
+    }),
   }).then(res => handleResponse(res))
 }

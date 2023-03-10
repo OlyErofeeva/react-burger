@@ -1,16 +1,29 @@
+import React, { useState } from 'react'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './register-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
+import { registerUser } from '../../utils/api-call'
+import { UserRegisterRequest, UserRegisterResponse } from '../../utils/types'
 
 const RegisterPage = () => {
+  const [inputValues, setInputValues] = useState<UserRegisterRequest>({ name: '', email: '', password: '' })
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValues({ ...inputValues, [e.target.name]: e.target.value })
+  }
+
+  const handleRegister = (e: React.SyntheticEvent, user: UserRegisterRequest) => {
+    e.preventDefault()
+    // TODO-3 handle response
+    registerUser(user).then((res: UserRegisterResponse) => console.log(res))
+  }
   return (
     <>
       <FormLayout title="Регистрация">
-        {/* TODO-3 fix input props */}
-        <Input placeholder="Имя" value="" onChange={() => console.log('name input')} />
-        <Input placeholder="E-mail" value="" onChange={() => console.log('email input')} />
-        <PasswordInput value="" onChange={() => console.log('password input')} />
-        <Button htmlType="submit" type="primary" size="medium">
+        <Input autoFocus required name="name" placeholder="Имя" value={inputValues.name} onChange={handleInputChange} />
+        <Input required name="email" placeholder="E-mail" value={inputValues.email} onChange={handleInputChange} />
+        <PasswordInput required name="password" value={inputValues.password} onChange={handleInputChange} />
+        <Button htmlType="submit" type="primary" size="medium" onClick={e => handleRegister(e, inputValues)}>
           Зарегистрироваться
         </Button>
       </FormLayout>
