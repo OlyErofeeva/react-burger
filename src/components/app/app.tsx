@@ -1,32 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import styles from './app.module.css'
 import AppHeader from '../app-header/app-header'
-import BurgerIngredients from '../burger-ingredients/burger-ingredients'
-import BurgerConstructor from '../burger-constructor/burger-constructor'
-import OrderDetails from '../order-details/order-details'
-import { Ingredient, Progress } from '../../utils/types'
-import { ingredientsFetchProgressSelector } from '../../services/selectors/selectors'
 import { fetchIngredientsMiddleware } from '../../services/thunks/fetch-ingredients-middleware'
-import { placeOrderMiddleware } from '../../services/thunks/place-order-middleware'
+import IngredientPage from '../../pages/ingredient-page/ingredient-page'
+import LoginPage from '../../pages/login-page/login-page'
+import RegisterPage from '../../pages/register-page/register-page'
+import ForgotPasswordPage from '../../pages/forgot-password-page/forgot-password-page'
+import ResetPasswordPage from '../../pages/reset-password-page/reset-password-page'
+import ProfilePage from '../../pages/profile-page/profile-page'
+import MainPage from '../../pages/main-page/main-page'
+import NotFoundPage from '../../pages/not-found-page/not-found-page'
 
 const App = () => {
-  const [isOrderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false)
   const dispatch = useDispatch()
-  const ingredientsFetchProgress = useSelector(ingredientsFetchProgressSelector)
-
-  const handlePlaceOrderClick = (ingredientsIds: Ingredient['_id'][]) => {
-    setOrderDetailsModalOpen(true)
-    // TODO fix ts-ignore
-    // @ts-ignore
-    dispatch(placeOrderMiddleware(ingredientsIds))
-  }
-
-  const handleOrderDetailsClose = () => {
-    setOrderDetailsModalOpen(false)
-  }
 
   useEffect(() => {
     // TODO fix ts-ignore
@@ -38,16 +26,18 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
-      {/* TODO: loader & fetch error cases */}
-      {ingredientsFetchProgress === Progress.SUCCESS && (
-        <main className={styles.main}>
-          <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients />
-            <BurgerConstructor onPlaceOrderClick={handlePlaceOrderClick} />
-          </DndProvider>
-        </main>
-      )}
-      {isOrderDetailsModalOpen && <OrderDetails onClose={handleOrderDetailsClose} />}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/ingredients/:id" element={<IngredientPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }
