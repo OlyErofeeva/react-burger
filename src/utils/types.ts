@@ -143,3 +143,9 @@ export type ResetPasswordRequest = {
 }
 
 export type ResetPasswordResponse = ForgotPasswordResponse
+
+export type UserLogoutRequest = {
+  token: string
+}
+
+export type UserLogoutResponse = ForgotPasswordResponse

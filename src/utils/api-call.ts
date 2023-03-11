@@ -2,11 +2,19 @@ import {
   FORGOT_PASSWORD_URL,
   INGREDIENTS_URL,
   LOGIN_URL,
+  LOGOUT_URL,
   ORDER_URL,
   REGISTER_URL,
   RESET_PASSWORD_URL,
 } from '../configs/api-settings'
-import { ForgotPasswordRequest, Ingredient, ResetPasswordRequest, UserLoginRequest, UserRegisterRequest } from './types'
+import {
+  ForgotPasswordRequest,
+  Ingredient,
+  ResetPasswordRequest,
+  UserLoginRequest,
+  UserLogoutRequest,
+  UserRegisterRequest,
+} from './types'
 
 const handleResponse = (res: Response) => {
   if (res.ok) {
@@ -80,6 +88,18 @@ export const resetPassword = (userData: ResetPasswordRequest) => {
     },
     body: JSON.stringify({
       password: userData.password,
+      token: userData.token,
+    }),
+  }).then(res => handleResponse(res))
+}
+
+export const logoutUser = (userData: UserLogoutRequest) => {
+  return fetch(LOGOUT_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
       token: userData.token,
     }),
   }).then(res => handleResponse(res))
