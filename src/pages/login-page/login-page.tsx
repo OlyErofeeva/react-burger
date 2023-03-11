@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './login-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
@@ -36,16 +37,15 @@ const LoginPage = () => {
       <div className={`mt-20 ${styles.hint}`}>
         <span className="text text_type_main-default text_color_inactive">
           Вы — новый пользователь?
-          {/* TODO-3 fix links */}
-          <a className={`ml-2 ${styles.link}`} href="/">
+          <Link className={`ml-2 ${styles.link}`} to="/register">
             Зарегистрироваться
-          </a>
+          </Link>
         </span>
         <span className="text text_type_main-default text_color_inactive">
           Забыли пароль?
-          <a className={`ml-2 ${styles.link}`} href="/">
+          <Link className={`ml-2 ${styles.link}`} to="/forgot-password">
             Восстановить пароль
-          </a>
+          </Link>
         </span>
       </div>
     </>
