@@ -4,12 +4,14 @@ import {
   LOGIN_URL,
   LOGOUT_URL,
   ORDER_URL,
+  REFRESH_TOKEN_URL,
   REGISTER_URL,
   RESET_PASSWORD_URL,
 } from '../configs/api-settings'
 import {
   ForgotPasswordRequest,
   Ingredient,
+  RefreshTokenRequest,
   ResetPasswordRequest,
   UserLoginRequest,
   UserLogoutRequest,
@@ -101,6 +103,18 @@ export const logoutUser = (userData: UserLogoutRequest) => {
     },
     body: JSON.stringify({
       token: userData.token,
+    }),
+  }).then(res => handleResponse(res))
+}
+
+export const refreshToken = (authData: RefreshTokenRequest) => {
+  return fetch(REFRESH_TOKEN_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      token: authData.token,
     }),
   }).then(res => handleResponse(res))
 }

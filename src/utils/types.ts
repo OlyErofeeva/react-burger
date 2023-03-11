@@ -149,3 +149,13 @@ export type UserLogoutRequest = {
 }
 
 export type UserLogoutResponse = ForgotPasswordResponse
+
+export type RefreshTokenRequest = {
+  token: string
+}
+
+export type RefreshTokenResponse = {
+  success: boolean
+  accessToken: string
+  refreshToken: string
+}
