@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './forgot-password-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
-import { ForgotPasswordRequest } from '../../utils/types'
+import { ForgotPasswordRequest, Progress } from '../../utils/types'
 import { forgotPasswordMiddleware } from '../../services/thunks/forgot-password-middleware'
+import { forgotPasswordProgressSelector } from '../../services/selectors/selectors'
 
 const ForgotPasswordPage = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [inputValues, setInputValues] = useState<ForgotPasswordRequest>({ email: '' })
+  const forgotPasswordProgress = useSelector(forgotPasswordProgressSelector)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value })
@@ -21,6 +24,13 @@ const ForgotPasswordPage = () => {
     // @ts-ignore
     dispatch(forgotPasswordMiddleware(userData))
   }
+
+  useEffect(() => {
+    if (forgotPasswordProgress === Progress.SUCCESS) {
+      navigate('/reset-password')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [forgotPasswordProgress])
 
   return (
     <>
