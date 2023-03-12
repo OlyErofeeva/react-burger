@@ -7,9 +7,11 @@ import {
   REFRESH_TOKEN_URL,
   REGISTER_URL,
   RESET_PASSWORD_URL,
+  USER_PROFILE_URL,
 } from '../configs/api-settings'
 import {
   ForgotPasswordRequest,
+  GetUserResponse,
   Ingredient,
   RefreshTokenRequest,
   ResetPasswordRequest,
@@ -118,5 +120,13 @@ export const refreshToken = (authData: RefreshTokenRequest) => {
     body: JSON.stringify({
       token: authData.token,
     }),
+  }).then(res => handleResponse(res))
+}
+
+export const getUser = (accessToken: string): Promise<GetUserResponse> => {
+  return fetch(USER_PROFILE_URL, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
   }).then(res => handleResponse(res))
 }

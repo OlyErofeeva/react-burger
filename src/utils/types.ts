@@ -76,6 +76,7 @@ export type UserState = {
   resetPasswordProgress: Progress
   refreshTokenProgress: Progress
   logoutProgress: Progress
+  getProfileProgress: Progress
 }
 
 export type IngredientAction =
@@ -140,6 +141,9 @@ export type UserAction =
   | { type: ActionType.UserLogoutRequest }
   | { type: ActionType.UserLogoutSuccess }
   | { type: ActionType.UserLogoutError }
+  | { type: ActionType.UserGetProfileRequest }
+  | { type: ActionType.UserGetProfileSuccess; payload: User }
+  | { type: ActionType.UserGetProfileError }
 
 export type UserRegisterRequest = {
   name: string
@@ -194,4 +198,12 @@ export type RefreshTokenResponse = {
   success: boolean
   accessToken: string
   refreshToken: string
+}
+
+export type GetUserResponse = {
+  success: boolean
+  user: {
+    email: string
+    name: string
+  }
 }

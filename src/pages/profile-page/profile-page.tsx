@@ -1,12 +1,16 @@
-import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
+import { userSelector } from '../../services/selectors/selectors'
+import { getUserMiddleware } from '../../services/thunks/get-user-middleware'
 import { logoutUserMiddleware } from '../../services/thunks/logout-user-middleware'
 import { getCookie } from '../../utils/cookie'
 import styles from './profile-page.module.css'
 
 const ProfilePage = () => {
   const dispatch = useDispatch()
+  const user = useSelector(userSelector)
 
   const handleLogout = () => {
     const refreshToken = getCookie('refreshToken')
@@ -15,6 +19,20 @@ const ProfilePage = () => {
       // @ts-ignore
       dispatch(logoutUserMiddleware({ token: refreshToken }))
     }
+  }
+
+  useEffect(() => {
+    const accessToken = getCookie('accessToken')
+    if (!user && accessToken) {
+      // TODO fix ts-ignore
+      // @ts-ignore
+      dispatch(getUserMiddleware(accessToken))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
+
+  if (!user) {
+    return null
   }
 
   return (
@@ -52,8 +70,8 @@ const ProfilePage = () => {
         </p>
       </div>
       <div className={styles.profileInfo}>
-        <Input placeholder="Имя" value="" onChange={() => console.log('name input')} icon={'EditIcon'} />
-        <Input placeholder="Логин" value="" onChange={() => console.log('login input')} icon={'EditIcon'} />
+        <Input placeholder="Имя" value={user.name} onChange={() => console.log('name input')} icon={'EditIcon'} />
+        <Input placeholder="Логин" value={user.email} onChange={() => console.log('login input')} icon={'EditIcon'} />
         <PasswordInput value="" onChange={() => console.log('password input')} icon={'EditIcon'} />
         <div className={styles.buttonsWrapper}>
           <Button htmlType="reset" type="secondary">

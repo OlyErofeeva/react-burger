@@ -36,4 +36,8 @@ export enum ActionType {
   UserLogoutRequest = 'USER_LOGOUT_REQUEST',
   UserLogoutSuccess = 'USER_LOGOUT_SUCCESS',
   UserLogoutError = 'USER_LOGOUT_ERROR',
+
+  UserGetProfileRequest = 'USER_GET_PROFILE_REQUEST',
+  UserGetProfileSuccess = 'USER_GET_PROFILE_SUCCESS',
+  UserGetProfileError = 'USER_GET_PROFILE_ERROR',
 }

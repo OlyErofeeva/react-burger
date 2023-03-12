@@ -63,4 +63,15 @@ export const userActionCreator = {
   userLogoutError: () => ({
     type: ActionType.UserLogoutError,
   }),
+
+  userGetProfileRequest: () => ({
+    type: ActionType.UserGetProfileRequest,
+  }),
+  userGetProfileSuccess: (payload: User) => ({
+    type: ActionType.UserGetProfileSuccess,
+    payload: payload,
+  }),
+  userGetProfileError: () => ({
+    type: ActionType.UserGetProfileError,
+  }),
 }
