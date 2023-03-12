@@ -1,23 +1,27 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './reset-password-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
-import { ResetPasswordRequest, ResetPasswordResponse } from '../../utils/types'
-import { resetPassword } from '../../utils/api-call'
+import { ResetPasswordRequest } from '../../utils/types'
+import { resetPasswordMiddleware } from '../../services/thunks/reset-password-middleware'
 
 const ResetPasswordPage = () => {
+  const dispatch = useDispatch()
   const [inputValues, setInputValues] = useState<ResetPasswordRequest>({ password: '', token: '' })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value })
   }
 
-  const handleReset = (e: React.SyntheticEvent, userData: ResetPasswordRequest) => {
+  const handleResetPassword = (e: React.SyntheticEvent, userData: ResetPasswordRequest) => {
     e.preventDefault()
-    // TODO-3 handle response
-    resetPassword(userData).then((res: ResetPasswordResponse) => console.log(res))
+    // TODO fix ts-ignore
+    // @ts-ignore
+    dispatch(resetPasswordMiddleware(userData))
   }
+
   return (
     <>
       <FormLayout title="Восстановление пароля">
@@ -36,7 +40,7 @@ const ResetPasswordPage = () => {
           value={inputValues.token}
           onChange={handleInputChange}
         />
-        <Button htmlType="submit" type="primary" size="medium" onClick={e => handleReset(e, inputValues)}>
+        <Button htmlType="submit" type="primary" size="medium" onClick={e => handleResetPassword(e, inputValues)}>
           Сохранить
         </Button>
       </FormLayout>

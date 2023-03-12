@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './register-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
-import { registerUser } from '../../utils/api-call'
-import { UserRegisterRequest, UserRegisterResponse } from '../../utils/types'
+import { UserRegisterRequest } from '../../utils/types'
+import { registerUserMiddleware } from '../../services/thunks/register-user-middleware'
 
 const RegisterPage = () => {
+  const dispatch = useDispatch()
   const [inputValues, setInputValues] = useState<UserRegisterRequest>({ name: '', email: '', password: '' })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,9 +17,11 @@ const RegisterPage = () => {
 
   const handleRegister = (e: React.SyntheticEvent, user: UserRegisterRequest) => {
     e.preventDefault()
-    // TODO-3 handle response
-    registerUser(user).then((res: UserRegisterResponse) => console.log(res))
+    // TODO fix ts-ignore
+    // @ts-ignore
+    dispatch(registerUserMiddleware(user))
   }
+
   return (
     <>
       <FormLayout title="Регистрация">

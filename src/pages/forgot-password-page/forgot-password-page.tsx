@@ -1,23 +1,27 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './forgot-password-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
-import { ForgotPasswordRequest, ForgotPasswordResponse } from '../../utils/types'
-import { forgotPassword } from '../../utils/api-call'
+import { ForgotPasswordRequest } from '../../utils/types'
+import { forgotPasswordMiddleware } from '../../services/thunks/forgot-password-middleware'
 
 const ForgotPasswordPage = () => {
+  const dispatch = useDispatch()
   const [inputValues, setInputValues] = useState<ForgotPasswordRequest>({ email: '' })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value })
   }
 
-  const handleRegister = (e: React.SyntheticEvent, userData: ForgotPasswordRequest) => {
+  const handleForgotPassword = (e: React.SyntheticEvent, userData: ForgotPasswordRequest) => {
     e.preventDefault()
-    // TODO-3 handle response
-    forgotPassword(userData).then((res: ForgotPasswordResponse) => console.log(res))
+    // TODO fix ts-ignore
+    // @ts-ignore
+    dispatch(forgotPasswordMiddleware(userData))
   }
+
   return (
     <>
       <FormLayout title="Восстановление пароля">
@@ -29,7 +33,7 @@ const ForgotPasswordPage = () => {
           value={inputValues.email}
           onChange={handleInputChange}
         />
-        <Button htmlType="submit" type="primary" size="medium" onClick={e => handleRegister(e, inputValues)}>
+        <Button htmlType="submit" type="primary" size="medium" onClick={e => handleForgotPassword(e, inputValues)}>
           Восстановить
         </Button>
       </FormLayout>
