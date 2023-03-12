@@ -6,3 +6,5 @@ export const activeModalIngredientSelector = (state: GlobalState) => state.activ
 export const constructorIngredientsSelector = (state: GlobalState) => state.constructor.items
 export const orderSelector = (state: GlobalState) => state.order.item
 export const orderProgressSelector = (state: GlobalState) => state.order.itemAddProgress
+export const registrationProgressSelector = (state: GlobalState) => state.user.registrationProgress
+export const loginProgressSelector = (state: GlobalState) => state.user.loginProgress

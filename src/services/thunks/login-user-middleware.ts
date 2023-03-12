@@ -1,5 +1,6 @@
 import { loginUser } from '../../utils/api-call'
-import { User, UserLoginRequest } from '../../utils/types'
+import { extractToken, setCookie } from '../../utils/cookie'
+import { UserLoginRequest } from '../../utils/types'
 import { userActionCreator } from '../action-creators/user'
 
 export function loginUserMiddleware(user: UserLoginRequest) {
@@ -9,7 +10,10 @@ export function loginUserMiddleware(user: UserLoginRequest) {
     dispatch(userActionCreator.userLoginRequest())
     loginUser(user)
       .then(res => {
-        dispatch(userActionCreator.userLoginSuccess(res.user as User))
+        dispatch(userActionCreator.userLoginSuccess(res.user))
+        const accessToken = extractToken(res.accessToken)
+        setCookie('accessToken', accessToken, { expires: 1200 })
+        setCookie('refreshToken', res.refreshToken)
       })
       .catch(err => {
         console.log(err.message)

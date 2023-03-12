@@ -14,8 +14,10 @@ import {
   RefreshTokenRequest,
   ResetPasswordRequest,
   UserLoginRequest,
+  UserLoginResponse,
   UserLogoutRequest,
   UserRegisterRequest,
+  UserRegisterResponse,
 } from './types'
 
 const handleResponse = (res: Response) => {
@@ -43,7 +45,7 @@ export const placeOrder = (orderIngredients: Ingredient['_id'][]) => {
   }).then(res => handleResponse(res))
 }
 
-export const registerUser = (user: UserRegisterRequest) => {
+export const registerUser = (user: UserRegisterRequest): Promise<UserRegisterResponse> => {
   return fetch(REGISTER_URL, {
     method: 'POST',
     headers: {
@@ -57,7 +59,7 @@ export const registerUser = (user: UserRegisterRequest) => {
   }).then(res => handleResponse(res))
 }
 
-export const loginUser = (user: UserLoginRequest) => {
+export const loginUser = (user: UserLoginRequest): Promise<UserLoginResponse> => {
   return fetch(LOGIN_URL, {
     method: 'POST',
     headers: {

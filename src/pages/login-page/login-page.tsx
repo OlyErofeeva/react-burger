@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './login-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
-import { UserLoginRequest } from '../../utils/types'
+import { Progress, UserLoginRequest } from '../../utils/types'
 import { loginUserMiddleware } from '../../services/thunks/login-user-middleware'
+import { loginProgressSelector } from '../../services/selectors/selectors'
 
 const LoginPage = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [inputValues, setInputValues] = useState<UserLoginRequest>({ email: '', password: '' })
+  const loginProgress = useSelector(loginProgressSelector)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value })
@@ -21,6 +24,13 @@ const LoginPage = () => {
     // @ts-ignore
     dispatch(loginUserMiddleware(user))
   }
+
+  useEffect(() => {
+    if (loginProgress === Progress.SUCCESS) {
+      navigate('/')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loginProgress])
 
   return (
     <>

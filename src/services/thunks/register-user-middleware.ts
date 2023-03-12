@@ -1,5 +1,6 @@
 import { registerUser } from '../../utils/api-call'
-import { User, UserRegisterRequest } from '../../utils/types'
+import { extractToken, setCookie } from '../../utils/cookie'
+import { UserRegisterRequest } from '../../utils/types'
 import { userActionCreator } from '../action-creators/user'
 
 export function registerUserMiddleware(user: UserRegisterRequest) {
@@ -9,7 +10,10 @@ export function registerUserMiddleware(user: UserRegisterRequest) {
     dispatch(userActionCreator.userRegisterRequest())
     registerUser(user)
       .then(res => {
-        dispatch(userActionCreator.userRegisterSuccess(res.user as User))
+        dispatch(userActionCreator.userRegisterSuccess(res.user))
+        const accessToken = extractToken(res.accessToken)
+        setCookie('accessToken', accessToken, { expires: 1200 })
+        setCookie('refreshToken', res.refreshToken)
       })
       .catch(err => {
         console.log(err.message)

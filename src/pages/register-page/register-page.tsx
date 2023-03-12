@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './register-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
-import { UserRegisterRequest } from '../../utils/types'
+import { Progress, UserRegisterRequest } from '../../utils/types'
 import { registerUserMiddleware } from '../../services/thunks/register-user-middleware'
+import { registrationProgressSelector } from '../../services/selectors/selectors'
 
 const RegisterPage = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [inputValues, setInputValues] = useState<UserRegisterRequest>({ name: '', email: '', password: '' })
+  const registrationProgress = useSelector(registrationProgressSelector)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value })
@@ -21,6 +24,13 @@ const RegisterPage = () => {
     // @ts-ignore
     dispatch(registerUserMiddleware(user))
   }
+
+  useEffect(() => {
+    if (registrationProgress === Progress.SUCCESS) {
+      navigate('/')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [registrationProgress])
 
   return (
     <>
