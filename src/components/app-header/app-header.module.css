@@ -22,6 +22,10 @@
   list-style: none;
 }
 
+.navItem:last-of-type {
+  margin-left: auto;
+}
+
 .logoContainer {
   position: absolute;
   top: 4px;

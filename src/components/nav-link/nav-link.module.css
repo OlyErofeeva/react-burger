@@ -1,9 +1,0 @@
-.navItem {
-  display: flex;
-  gap: 8px;
-  border-radius: 40px;
-}
-
-.navItem:last-of-type {
-  margin-left: auto;
-}

@@ -1,0 +1,10 @@
+.headerLink {
+  display: flex;
+  gap: 8px;
+  border-radius: 40px;
+  text-decoration: none;
+}
+
+.headerLink_active {
+  color: var(--text-primary-color);
+}
