@@ -1,5 +1,5 @@
 import { logoutUser } from '../../utils/api-call'
-import { deleteCookie } from '../../utils/cookie'
+import { CookieName, deleteCookie } from '../../utils/cookie'
 import { UserLogoutRequest } from '../../utils/types'
 import { userActionCreator } from '../action-creators/user'
 
@@ -11,8 +11,8 @@ export function logoutUserMiddleware(userData: UserLogoutRequest) {
     logoutUser(userData)
       .then(() => {
         dispatch(userActionCreator.userLogoutSuccess())
-        deleteCookie('accessToken')
-        deleteCookie('refreshToken')
+        deleteCookie(CookieName.AccessToken)
+        deleteCookie(CookieName.RefreshToken)
       })
       .catch(err => {
         console.log(err.message)

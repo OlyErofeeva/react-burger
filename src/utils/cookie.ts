@@ -1,3 +1,8 @@
+export enum CookieName {
+  AccessToken = 'accessToken',
+  RefreshToken = 'refreshToken',
+}
+
 export function setCookie(name: string, value: string | null, props?: any) {
   props = props || {}
   let exp = props.expires

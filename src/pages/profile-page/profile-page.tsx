@@ -5,7 +5,7 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 import { userSelector } from '../../services/selectors/selectors'
 import { getUserMiddleware } from '../../services/thunks/get-user-middleware'
 import { logoutUserMiddleware } from '../../services/thunks/logout-user-middleware'
-import { getCookie } from '../../utils/cookie'
+import { CookieName, getCookie } from '../../utils/cookie'
 import styles from './profile-page.module.css'
 
 const ProfilePage = () => {
@@ -13,7 +13,7 @@ const ProfilePage = () => {
   const user = useSelector(userSelector)
 
   const handleLogout = () => {
-    const refreshToken = getCookie('refreshToken')
+    const refreshToken = getCookie(CookieName.RefreshToken)
     if (refreshToken) {
       // TODO fix ts-ignore
       // @ts-ignore
@@ -22,7 +22,7 @@ const ProfilePage = () => {
   }
 
   useEffect(() => {
-    const accessToken = getCookie('accessToken')
+    const accessToken = getCookie(CookieName.AccessToken)
     if (!user && accessToken) {
       // TODO fix ts-ignore
       // @ts-ignore
