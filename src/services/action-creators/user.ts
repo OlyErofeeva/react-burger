@@ -74,4 +74,15 @@ export const userActionCreator = {
   userGetProfileError: () => ({
     type: ActionType.UserGetProfileError,
   }),
+
+  userEditProfileRequest: () => ({
+    type: ActionType.UserEditProfileRequest,
+  }),
+  userEditProfileSuccess: (payload: User) => ({
+    type: ActionType.UserEditProfileSuccess,
+    payload: payload,
+  }),
+  userEditProfileError: () => ({
+    type: ActionType.UserEditProfileError,
+  }),
 }

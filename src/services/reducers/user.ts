@@ -10,6 +10,7 @@ export const initialState: GlobalState['user'] = {
   refreshTokenProgress: Progress.IDLE,
   logoutProgress: Progress.IDLE,
   getProfileProgress: Progress.IDLE,
+  editProfileProgress: Progress.IDLE,
 }
 
 export const userReducer = (state = initialState, action: UserAction): GlobalState['user'] => {
@@ -125,6 +126,23 @@ export const userReducer = (state = initialState, action: UserAction): GlobalSta
         getProfileProgress: Progress.SUCCESS,
       }
     case ActionType.UserGetProfileError:
+      return {
+        ...state,
+        getProfileProgress: Progress.ERROR,
+      }
+
+    case ActionType.UserEditProfileRequest:
+      return {
+        ...state,
+        getProfileProgress: Progress.WORK,
+      }
+    case ActionType.UserEditProfileSuccess:
+      return {
+        ...state,
+        user: action.payload,
+        getProfileProgress: Progress.SUCCESS,
+      }
+    case ActionType.UserEditProfileError:
       return {
         ...state,
         getProfileProgress: Progress.ERROR,

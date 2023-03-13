@@ -40,4 +40,8 @@ export enum ActionType {
   UserGetProfileRequest = 'USER_GET_PROFILE_REQUEST',
   UserGetProfileSuccess = 'USER_GET_PROFILE_SUCCESS',
   UserGetProfileError = 'USER_GET_PROFILE_ERROR',
+
+  UserEditProfileRequest = 'USER_EDIT_PROFILE_REQUEST',
+  UserEditProfileSuccess = 'USER_EDIT_PROFILE_SUCCESS',
+  UserEditProfileError = 'USER_EDIT_PROFILE_ERROR',
 }

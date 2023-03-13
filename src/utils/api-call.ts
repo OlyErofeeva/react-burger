@@ -15,6 +15,8 @@ import {
   Ingredient,
   RefreshTokenRequest,
   ResetPasswordRequest,
+  UserEditRequest,
+  UserEditResponse,
   UserLoginRequest,
   UserLoginResponse,
   UserLogoutRequest,
@@ -128,5 +130,16 @@ export const getUser = (accessToken: string): Promise<GetUserResponse> => {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
+  }).then(res => handleResponse(res))
+}
+
+export const editUser = (user: UserEditRequest, accessToken: string): Promise<UserEditResponse> => {
+  return fetch(USER_PROFILE_URL, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(user),
   }).then(res => handleResponse(res))
 }

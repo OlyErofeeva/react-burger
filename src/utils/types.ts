@@ -77,6 +77,7 @@ export type UserState = {
   refreshTokenProgress: Progress
   logoutProgress: Progress
   getProfileProgress: Progress
+  editProfileProgress: Progress
 }
 
 export type IngredientAction =
@@ -144,6 +145,9 @@ export type UserAction =
   | { type: ActionType.UserGetProfileRequest }
   | { type: ActionType.UserGetProfileSuccess; payload: User }
   | { type: ActionType.UserGetProfileError }
+  | { type: ActionType.UserEditProfileRequest }
+  | { type: ActionType.UserEditProfileSuccess; payload: User }
+  | { type: ActionType.UserEditProfileError }
 
 export type UserRegisterRequest = {
   name: string
@@ -207,3 +211,7 @@ export type GetUserResponse = {
     name: string
   }
 }
+
+export type UserEditRequest = Partial<UserRegisterRequest>
+
+export type UserEditResponse = GetUserResponse

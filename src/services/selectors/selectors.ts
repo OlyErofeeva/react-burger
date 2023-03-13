@@ -11,3 +11,4 @@ export const registrationProgressSelector = (state: GlobalState) => state.user.r
 export const loginProgressSelector = (state: GlobalState) => state.user.loginProgress
 export const forgotPasswordProgressSelector = (state: GlobalState) => state.user.forgotPasswordProgress
 export const resetPasswordProgressSelector = (state: GlobalState) => state.user.resetPasswordProgress
+export const editProfileProgressSelector = (state: GlobalState) => state.user.editProfileProgress
