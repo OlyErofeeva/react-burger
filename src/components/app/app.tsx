@@ -12,6 +12,7 @@ import ResetPasswordPage from '../../pages/reset-password-page/reset-password-pa
 import ProfilePage from '../../pages/profile-page/profile-page'
 import MainPage from '../../pages/main-page/main-page'
 import NotFoundPage from '../../pages/not-found-page/not-found-page'
+import ProtectedRoute from '../protected-route/protected-route'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -33,7 +34,7 @@ const App = () => {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} />} />
           <Route path="/ingredients/:id" element={<IngredientPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
