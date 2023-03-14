@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './login-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
 import { Progress, UserLoginRequest } from '../../utils/types'
 import { loginUserMiddleware } from '../../services/thunks/login-user-middleware'
 import { loginProgressSelector } from '../../services/selectors/selectors'
+import { CookieName, getCookie } from '../../utils/cookie'
 
 const LoginPage = () => {
+  const accessToken = getCookie(CookieName.AccessToken)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [inputValues, setInputValues] = useState<UserLoginRequest>({ email: '', password: '' })
@@ -31,6 +33,12 @@ const LoginPage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginProgress])
+
+  if (accessToken) {
+    return (
+      <Navigate to='/' replace />
+    )
+  }
 
   return (
     <>

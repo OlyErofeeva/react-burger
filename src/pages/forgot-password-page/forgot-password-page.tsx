@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './forgot-password-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
 import { ForgotPasswordRequest, Progress } from '../../utils/types'
 import { forgotPasswordMiddleware } from '../../services/thunks/forgot-password-middleware'
 import { forgotPasswordProgressSelector } from '../../services/selectors/selectors'
+import { CookieName, getCookie } from '../../utils/cookie'
 
 const ForgotPasswordPage = () => {
+  const accessToken = getCookie(CookieName.AccessToken)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [inputValues, setInputValues] = useState<ForgotPasswordRequest>({ email: '' })
@@ -31,6 +33,12 @@ const ForgotPasswordPage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forgotPasswordProgress])
+
+  if (accessToken) {
+    return (
+      <Navigate to='/' replace />
+    )
+  }
 
   return (
     <>
