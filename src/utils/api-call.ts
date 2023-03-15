@@ -37,10 +37,11 @@ export const fetchIngredients = () => {
   return fetch(INGREDIENTS_URL).then(res => handleResponse(res))
 }
 
-export const placeOrder = (orderIngredients: Ingredient['_id'][]) => {
+export const placeOrder = (orderIngredients: Ingredient['_id'][], accessToken: string) => {
   return fetch(ORDER_URL, {
     method: 'POST',
     headers: {
+      Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
