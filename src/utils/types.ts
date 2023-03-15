@@ -130,6 +130,7 @@ export type UserAction =
   | { type: ActionType.UserLoginRequest }
   | { type: ActionType.UserLoginSuccess; payload: User }
   | { type: ActionType.UserLoginError }
+  | { type: ActionType.UserLoginClearProgress }
   | { type: ActionType.UserForgotPasswordRequest }
   | { type: ActionType.UserForgotPasswordSuccess }
   | { type: ActionType.UserForgotPasswordError }

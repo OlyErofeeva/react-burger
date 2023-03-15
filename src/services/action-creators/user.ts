@@ -23,6 +23,9 @@ export const userActionCreator = {
   userLoginError: () => ({
     type: ActionType.UserLoginError,
   }),
+  userLoginClearProgress: () => ({
+    type: ActionType.UserLoginClearProgress,
+  }),
 
   userForgotPasswordRequest: () => ({
     type: ActionType.UserForgotPasswordRequest,

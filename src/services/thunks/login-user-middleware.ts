@@ -15,6 +15,9 @@ export function loginUserMiddleware(user: UserLoginRequest) {
         setCookie(CookieName.AccessToken, accessToken, { expires: 1200 })
         setCookie(CookieName.RefreshToken, res.refreshToken)
       })
+      .then(() => {
+        dispatch(userActionCreator.userLoginClearProgress())
+      })
       .catch(err => {
         console.log(err.message)
         dispatch(userActionCreator.userLoginError())

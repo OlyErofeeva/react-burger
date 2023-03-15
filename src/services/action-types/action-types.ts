@@ -20,6 +20,7 @@ export enum ActionType {
   UserLoginRequest = 'USER_LOGIN_REQUEST',
   UserLoginSuccess = 'USER_LOGIN_SUCCESS',
   UserLoginError = 'USER_LOGIN_ERROR',
+  UserLoginClearProgress = 'USER_LOGIN_CLEAR_PROGRESS',
 
   UserForgotPasswordRequest = 'USER_FORGOT_PASSWORD_REQUEST',
   UserForgotPasswordSuccess = 'USER_FORGOT_PASSWORD_SUCCESS',

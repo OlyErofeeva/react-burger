@@ -48,6 +48,11 @@ export const userReducer = (state = initialState, action: UserAction): GlobalSta
         ...initialState,
         loginProgress: Progress.ERROR,
       }
+    case ActionType.UserLoginClearProgress:
+      return {
+        ...state,
+        loginProgress: Progress.IDLE,
+      }
 
     case ActionType.UserForgotPasswordRequest:
       return {
