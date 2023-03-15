@@ -25,10 +25,12 @@ export enum ActionType {
   UserForgotPasswordRequest = 'USER_FORGOT_PASSWORD_REQUEST',
   UserForgotPasswordSuccess = 'USER_FORGOT_PASSWORD_SUCCESS',
   UserForgotPasswordError = 'USER_FORGOT_PASSWORD_ERROR',
+  UserForgotPasswordClearProgress = 'USER_FORGOT_PASSWORD_CLEAR_PROGRESS',
 
   UserResetPasswordRequest = 'USER_RESET_PASSWORD_REQUEST',
   UserResetPasswordSuccess = 'USER_RESET_PASSWORD_SUCCESS',
   UserResetPasswordError = 'USER_RESET_PASSWORD_ERROR',
+  UserResetPasswordClearProgress = 'USER_RESET_PASSWORD_CLEAR_PROGRESS',
 
   UserRefreshTokenRequest = 'USER_REFRESH_TOKEN_REQUEST',
   UserRefreshTokenSuccess = 'USER_REFRESH_TOKEN_SUCCESS',

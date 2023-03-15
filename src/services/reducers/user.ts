@@ -69,6 +69,11 @@ export const userReducer = (state = initialState, action: UserAction): GlobalSta
         ...initialState,
         forgotPasswordProgress: Progress.ERROR,
       }
+    case ActionType.UserForgotPasswordClearProgress:
+      return {
+        ...state,
+        forgotPasswordProgress: Progress.IDLE,
+      }
 
     case ActionType.UserResetPasswordRequest:
       return {
@@ -84,6 +89,11 @@ export const userReducer = (state = initialState, action: UserAction): GlobalSta
       return {
         ...initialState,
         resetPasswordProgress: Progress.ERROR,
+      }
+    case ActionType.UserResetPasswordClearProgress:
+      return {
+        ...state,
+        resetPasswordProgress: Progress.IDLE,
       }
 
     case ActionType.UserRefreshTokenRequest:

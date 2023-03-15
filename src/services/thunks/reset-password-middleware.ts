@@ -11,6 +11,9 @@ export function resetPasswordMiddleware(userData: ResetPasswordRequest) {
       .then(res => {
         dispatch(userActionCreator.userResetPasswordSuccess())
       })
+      .then(() => {
+        dispatch(userActionCreator.userResetPasswordClearProgress())
+      })
       .catch(err => {
         console.log(err.message)
         dispatch(userActionCreator.userResetPasswordError())

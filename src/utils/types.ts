@@ -134,9 +134,11 @@ export type UserAction =
   | { type: ActionType.UserForgotPasswordRequest }
   | { type: ActionType.UserForgotPasswordSuccess }
   | { type: ActionType.UserForgotPasswordError }
+  | { type: ActionType.UserForgotPasswordClearProgress }
   | { type: ActionType.UserResetPasswordRequest }
   | { type: ActionType.UserResetPasswordSuccess }
   | { type: ActionType.UserResetPasswordError }
+  | { type: ActionType.UserResetPasswordClearProgress }
   | { type: ActionType.UserRefreshTokenRequest }
   | { type: ActionType.UserRefreshTokenSuccess }
   | { type: ActionType.UserRefreshTokenError }

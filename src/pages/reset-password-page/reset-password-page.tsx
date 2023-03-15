@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './reset-password-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
@@ -13,6 +13,7 @@ const ResetPasswordPage = () => {
   const accessToken = getCookie(CookieName.AccessToken)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const [inputValues, setInputValues] = useState<ResetPasswordRequest>({ password: '', token: '' })
   const resetPasswordProgress = useSelector(resetPasswordProgressSelector)
 
@@ -34,11 +35,14 @@ const ResetPasswordPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetPasswordProgress])
 
-  if (accessToken) {
-    return (
-      <Navigate to='/' replace />
-    )
-  }
+  useEffect(() => {
+    if (accessToken) {
+      navigate('/', { replace: true })
+    } else if (location.state?.from !== '/forgot-password') {
+      navigate('/forgot-password', { replace: true })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>

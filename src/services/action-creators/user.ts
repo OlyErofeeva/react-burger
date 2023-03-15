@@ -36,6 +36,9 @@ export const userActionCreator = {
   userForgotPasswordError: () => ({
     type: ActionType.UserForgotPasswordError,
   }),
+  userForgotPasswordClearProgress: () => ({
+    type: ActionType.UserForgotPasswordClearProgress,
+  }),
 
   userResetPasswordRequest: () => ({
     type: ActionType.UserResetPasswordRequest,
@@ -45,6 +48,9 @@ export const userActionCreator = {
   }),
   userResetPasswordError: () => ({
     type: ActionType.UserResetPasswordError,
+  }),
+  userResetPasswordClearProgress: () => ({
+    type: ActionType.UserResetPasswordClearProgress,
   }),
 
   userRefreshTokenRequest: () => ({

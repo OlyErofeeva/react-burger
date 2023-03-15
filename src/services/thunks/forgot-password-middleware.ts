@@ -11,6 +11,9 @@ export function forgotPasswordMiddleware(userData: ForgotPasswordRequest) {
       .then(res => {
         dispatch(userActionCreator.userForgotPasswordSuccess())
       })
+      .then(() => {
+        dispatch(userActionCreator.userForgotPasswordClearProgress())
+      })
       .catch(err => {
         console.log(err.message)
         dispatch(userActionCreator.userForgotPasswordError())
