@@ -59,7 +59,7 @@ const ProfilePage = () => {
     if (!user && accessToken) {
       // TODO fix ts-ignore
       // @ts-ignore
-      dispatch(getUserMiddleware(accessToken))
+      dispatch(getUserMiddleware())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
