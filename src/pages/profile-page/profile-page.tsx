@@ -28,11 +28,10 @@ const ProfilePage = () => {
   }
 
   const handleEditProfile = (e: React.SyntheticEvent, userData: UserEditRequest) => {
-    const accessToken = getCookie(CookieName.AccessToken)
     e.preventDefault()
     // TODO fix ts-ignore
     // @ts-ignore
-    dispatch(editUserMiddleware(userData, accessToken))
+    dispatch(editUserMiddleware(userData))
     setEditedData({})
   }
 
