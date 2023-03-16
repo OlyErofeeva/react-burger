@@ -1,23 +1,26 @@
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { allIngredientsSelector } from '../../services/selectors/selectors'
+import { fetchIngredientsMiddleware } from '../../services/thunks/fetch-ingredients-middleware'
 import styles from './ingredient-page.module.css'
 
 const IngredientPage = () => {
-  // TODO-3 remove hardcoded ingredient
-  const ingredient = {
-    calories: 30,
-    carbohydrates: 40,
-    fat: 20,
-    image: 'https://code.s3.yandex.net/react/code/sauce-02.png',
-    image_large: 'https://code.s3.yandex.net/react/code/sauce-02-large.png',
-    image_mobile: 'https://code.s3.yandex.net/react/code/sauce-02-mobile.png',
-    name: 'Соус Spicy-X',
-    price: 90,
-    proteins: 30,
-    type: 'sauce',
-    __v: 0,
-    _id: '60d3b41abdacab0026a733cc',
+  const dispatch = useDispatch()
+  const allIngredients = useSelector(allIngredientsSelector)
+  const { id } = useParams()
+  const ingredient = allIngredients.find(item => item._id === id)
+
+  useEffect(() => {
+    // TODO fix ts-ignore
+    // @ts-ignore
+    dispatch(fetchIngredientsMiddleware)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  if (!ingredient) {
+    return null
   }
-
-
 
   return (
     <div className={`mt-30 ${styles.ingredientPageContent}`}>
