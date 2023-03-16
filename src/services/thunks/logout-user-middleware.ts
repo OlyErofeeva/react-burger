@@ -8,11 +8,11 @@ export function logoutUserMiddleware(userData: UserLogoutRequest) {
   // @ts-ignore
   return dispatch => {
     dispatch(userActionCreator.userLogoutRequest())
+    deleteCookie(CookieName.AccessToken)
+    deleteCookie(CookieName.RefreshToken)
     logoutUser(userData)
       .then(() => {
         dispatch(userActionCreator.userLogoutSuccess())
-        deleteCookie(CookieName.AccessToken)
-        deleteCookie(CookieName.RefreshToken)
       })
       .catch(err => {
         console.log(err.message)
