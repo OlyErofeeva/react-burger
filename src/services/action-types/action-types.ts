@@ -16,6 +16,7 @@ export enum ActionType {
   UserRegisterRequest = 'USER_REGISTER_REQUEST',
   UserRegisterSuccess = 'USER_REGISTER_SUCCESS',
   UserRegisterError = 'USER_REGISTER_ERROR',
+  UserRegisterClearProgress = 'USER_REGISTER_CLEAR_PROGRESS',
 
   UserLoginRequest = 'USER_LOGIN_REQUEST',
   UserLoginSuccess = 'USER_LOGIN_SUCCESS',

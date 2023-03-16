@@ -31,6 +31,11 @@ export const userReducer = (state = initialState, action: UserAction): GlobalSta
         ...initialState,
         registrationProgress: Progress.ERROR,
       }
+    case ActionType.UserRegisterClearProgress:
+      return {
+        ...state,
+        registrationProgress: Progress.IDLE,
+      }
 
     case ActionType.UserLoginRequest:
       return {

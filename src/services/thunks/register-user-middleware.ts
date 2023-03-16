@@ -15,6 +15,9 @@ export function registerUserMiddleware(user: UserRegisterRequest) {
         setCookie(CookieName.AccessToken, accessToken, { expires: 1200 })
         setCookie(CookieName.RefreshToken, res.refreshToken)
       })
+      .then(() => {
+        dispatch(userActionCreator.userRegisterClearProgress())
+      })
       .catch(err => {
         console.log(err.message)
         dispatch(userActionCreator.userRegisterError())

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './register-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
@@ -34,11 +34,12 @@ const RegisterPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [registrationProgress])
 
-  if (accessToken) {
-    return (
-      <Navigate to='/' replace />
-    )
-  }
+  useEffect(() => {
+    if (accessToken) {
+      navigate('/', { replace: true })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>

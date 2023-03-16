@@ -127,6 +127,7 @@ export type UserAction =
   | { type: ActionType.UserRegisterRequest }
   | { type: ActionType.UserRegisterSuccess; payload: User }
   | { type: ActionType.UserRegisterError }
+  | { type: ActionType.UserRegisterClearProgress }
   | { type: ActionType.UserLoginRequest }
   | { type: ActionType.UserLoginSuccess; payload: User }
   | { type: ActionType.UserLoginError }

@@ -12,6 +12,9 @@ export const userActionCreator = {
   userRegisterError: () => ({
     type: ActionType.UserRegisterError,
   }),
+  userRegisterClearProgress: () => ({
+    type: ActionType.UserRegisterClearProgress,
+  }),
 
   userLoginRequest: () => ({
     type: ActionType.UserLoginRequest,
