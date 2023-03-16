@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes as Switch, Route } from 'react-router-dom'
 import styles from './app.module.css'
 import AppHeader from '../app-header/app-header'
 import { fetchIngredientsMiddleware } from '../../services/thunks/fetch-ingredients-middleware'
@@ -13,6 +13,7 @@ import ProfilePage from '../../pages/profile-page/profile-page'
 import MainPage from '../../pages/main-page/main-page'
 import NotFoundPage from '../../pages/not-found-page/not-found-page'
 import ProtectedRoute from '../protected-route/protected-route'
+import { Routes } from '../../pages/routes'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -28,16 +29,16 @@ const App = () => {
     <div className={styles.app}>
       <BrowserRouter>
         <AppHeader />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/reset-password" element={<ResetPasswordPage />} />
-          <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} />} />
-          <Route path="/ingredients/:id" element={<IngredientPage />} />
+        <Switch>
+          <Route path={Routes.Main} element={<MainPage />} />
+          <Route path={Routes.Login} element={<LoginPage />} />
+          <Route path={Routes.Register} element={<RegisterPage />} />
+          <Route path={Routes.ForgotPassword} element={<ForgotPasswordPage />} />
+          <Route path={Routes.ResetPassword} element={<ResetPasswordPage />} />
+          <Route path={Routes.Profile} element={<ProtectedRoute element={<ProfilePage />} />} />
+          <Route path={Routes.IngredientDetails} element={<IngredientPage />} />
           <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        </Switch>
       </BrowserRouter>
     </div>
   )

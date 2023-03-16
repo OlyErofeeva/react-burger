@@ -9,6 +9,7 @@ import { CookieName, getCookie } from '../../utils/cookie'
 import { UserEditRequest } from '../../utils/types'
 import styles from './profile-page.module.css'
 import { editUserMiddleware } from '../../services/thunks/edit-user-middleware'
+import { Routes } from '../routes'
 
 const ProfilePage = () => {
   const dispatch = useDispatch()
@@ -84,7 +85,7 @@ const ProfilePage = () => {
         <ul className={styles.tabList}>
           <li>
             <NavLink
-              to="/profile"
+              to={Routes.Profile}
               className={`pt-4 pb-4 text text_type_main-medium ${styles.tabLink} ${styles.tabLinkActive}`}
             >
               Профиль
@@ -92,7 +93,7 @@ const ProfilePage = () => {
           </li>
           <li>
             <NavLink
-              to="/orders"
+              to={Routes.Orders}
               className={`pt-4 pb-4 text text_type_main-medium text_color_inactive ${styles.tabLink}`}
             >
               История заказов
@@ -100,7 +101,7 @@ const ProfilePage = () => {
           </li>
           <li>
             <NavLink
-              to="/login"
+              to={Routes.Login}
               className={`pt-4 pb-4 text text_type_main-medium text_color_inactive ${styles.tabLink}`}
               onClick={handleLogout}
             >

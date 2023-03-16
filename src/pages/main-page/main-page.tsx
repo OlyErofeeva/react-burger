@@ -11,6 +11,7 @@ import { Ingredient, Progress } from '../../utils/types'
 import { placeOrderMiddleware } from '../../services/thunks/place-order-middleware'
 import { CookieName, getCookie } from '../../utils/cookie'
 import styles from './main-page.module.css'
+import { Routes } from '../routes'
 
 const MainPage = () => {
   const [isOrderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false)
@@ -26,7 +27,7 @@ const MainPage = () => {
       // @ts-ignore
       dispatch(placeOrderMiddleware(ingredientsIds, accessToken))
     } else {
-      navigate('/login', { state: { from: '/' } })
+      navigate(Routes.Login, { state: { from: Routes.Main } })
     }
   }
 

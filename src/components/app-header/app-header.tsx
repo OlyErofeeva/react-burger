@@ -1,23 +1,24 @@
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './app-header.module.css'
 import HeaderLink from '../header-link/header-link'
+import { Routes } from '../../pages/routes'
 
 const AppHeader = () => {
   const calcIconType = (isActive: boolean) => (isActive ? 'primary' : 'secondary')
 
   const navLinksConfig = [
     {
-      path: '/',
+      path: Routes.Main,
       caption: 'Конструктор',
       renderIcon: (isActive: boolean) => <BurgerIcon type={calcIconType(isActive)} />,
     },
     {
-      path: '/orders',
+      path: Routes.Orders,
       caption: 'Лента заказов',
       renderIcon: (isActive: boolean) => <ListIcon type={calcIconType(isActive)} />,
     },
     {
-      path: '/profile',
+      path: Routes.Profile,
       caption: 'Личный кабинет',
       renderIcon: (isActive: boolean) => <ProfileIcon type={calcIconType(isActive)} />,
     },

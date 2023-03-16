@@ -8,6 +8,7 @@ import { Progress, UserRegisterRequest } from '../../utils/types'
 import { registerUserMiddleware } from '../../services/thunks/register-user-middleware'
 import { registrationProgressSelector } from '../../services/selectors/selectors'
 import { CookieName, getCookie } from '../../utils/cookie'
+import { Routes } from '../routes'
 
 const RegisterPage = () => {
   const accessToken = getCookie(CookieName.AccessToken)
@@ -29,14 +30,14 @@ const RegisterPage = () => {
 
   useEffect(() => {
     if (registrationProgress === Progress.SUCCESS) {
-      navigate('/')
+      navigate(Routes.Main)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [registrationProgress])
 
   useEffect(() => {
     if (accessToken) {
-      navigate('/', { replace: true })
+      navigate(Routes.Main, { replace: true })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -54,7 +55,7 @@ const RegisterPage = () => {
       <div className={`mt-20 ${styles.hint}`}>
         <span className="text text_type_main-default text_color_inactive">
           Уже зарегистрированы?
-          <Link className={`ml-2 ${styles.link}`} to="/login">
+          <Link className={`ml-2 ${styles.link}`} to={Routes.Login}>
             Войти
           </Link>
         </span>

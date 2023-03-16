@@ -8,6 +8,7 @@ import { ForgotPasswordRequest, Progress } from '../../utils/types'
 import { forgotPasswordMiddleware } from '../../services/thunks/forgot-password-middleware'
 import { forgotPasswordProgressSelector } from '../../services/selectors/selectors'
 import { CookieName, getCookie } from '../../utils/cookie'
+import { Routes } from '../routes'
 
 const ForgotPasswordPage = () => {
   const accessToken = getCookie(CookieName.AccessToken)
@@ -30,14 +31,14 @@ const ForgotPasswordPage = () => {
 
   useEffect(() => {
     if (forgotPasswordProgress === Progress.SUCCESS) {
-      navigate('/reset-password', { state: { from: location.pathname } })
+      navigate(Routes.ResetPassword, { state: { from: location.pathname } })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forgotPasswordProgress])
 
   useEffect(() => {
     if (accessToken) {
-      navigate('/', { replace: true })
+      navigate(Routes.Main, { replace: true })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -60,7 +61,7 @@ const ForgotPasswordPage = () => {
       <div className={`mt-20 ${styles.hint}`}>
         <span className="text text_type_main-default text_color_inactive">
           Вспомнили пароль?
-          <Link className={`ml-2 ${styles.link}`} to="/login">
+          <Link className={`ml-2 ${styles.link}`} to={Routes.Login}>
             Войти
           </Link>
         </span>

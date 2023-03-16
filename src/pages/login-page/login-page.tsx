@@ -8,6 +8,7 @@ import { Progress, UserLoginRequest } from '../../utils/types'
 import { loginUserMiddleware } from '../../services/thunks/login-user-middleware'
 import { CookieName, getCookie } from '../../utils/cookie'
 import { loginProgressSelector } from '../../services/selectors/selectors'
+import { Routes } from '../routes'
 
 const LoginPage = () => {
   const accessToken = getCookie(CookieName.AccessToken)
@@ -31,14 +32,14 @@ const LoginPage = () => {
   useEffect(() => {
     if (loginProgress === Progress.SUCCESS) {
       const previousPage = location.state?.from
-      navigate(previousPage ? previousPage : '/')
+      navigate(previousPage ? previousPage : Routes.Main)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginProgress])
 
   useEffect(() => {
     if (accessToken) {
-      navigate('/', { replace: true })
+      navigate(Routes.Main, { replace: true })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -62,13 +63,13 @@ const LoginPage = () => {
       <div className={`mt-20 ${styles.hint}`}>
         <span className="text text_type_main-default text_color_inactive">
           Вы — новый пользователь?
-          <Link className={`ml-2 ${styles.link}`} to="/register">
+          <Link className={`ml-2 ${styles.link}`} to={Routes.Register}>
             Зарегистрироваться
           </Link>
         </span>
         <span className="text text_type_main-default text_color_inactive">
           Забыли пароль?
-          <Link className={`ml-2 ${styles.link}`} to="/forgot-password">
+          <Link className={`ml-2 ${styles.link}`} to={Routes.ForgotPassword}>
             Восстановить пароль
           </Link>
         </span>
