@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { BrowserRouter, Routes as Switch, Route } from 'react-router-dom'
+import { Routes as Switch, Route, useLocation } from 'react-router-dom'
 import styles from './app.module.css'
 import AppHeader from '../app-header/app-header'
 import { fetchIngredientsMiddleware } from '../../services/thunks/fetch-ingredients-middleware'
@@ -14,9 +14,12 @@ import MainPage from '../../pages/main-page/main-page'
 import NotFoundPage from '../../pages/not-found-page/not-found-page'
 import ProtectedRoute from '../protected-route/protected-route'
 import { Routes } from '../../pages/routes'
+import IngredientDetails from '../ingredient-details/ingredient-details'
 
 const App = () => {
   const dispatch = useDispatch()
+  const location = useLocation()
+  const modalLocation = location.state?.modalLocation
 
   useEffect(() => {
     // TODO fix ts-ignore
@@ -27,19 +30,22 @@ const App = () => {
 
   return (
     <div className={styles.app}>
-      <BrowserRouter>
-        <AppHeader />
+      <AppHeader />
+      <Switch location={modalLocation || location}>
+        <Route path={Routes.Main} element={<MainPage />} />
+        <Route path={Routes.Login} element={<LoginPage />} />
+        <Route path={Routes.Register} element={<RegisterPage />} />
+        <Route path={Routes.ForgotPassword} element={<ForgotPasswordPage />} />
+        <Route path={Routes.ResetPassword} element={<ResetPasswordPage />} />
+        <Route path={Routes.Profile} element={<ProtectedRoute element={<ProfilePage />} />} />
+        <Route path={Routes.IngredientDetails} element={<IngredientPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Switch>
+      {modalLocation && (
         <Switch>
-          <Route path={Routes.Main} element={<MainPage />} />
-          <Route path={Routes.Login} element={<LoginPage />} />
-          <Route path={Routes.Register} element={<RegisterPage />} />
-          <Route path={Routes.ForgotPassword} element={<ForgotPasswordPage />} />
-          <Route path={Routes.ResetPassword} element={<ResetPasswordPage />} />
-          <Route path={Routes.Profile} element={<ProtectedRoute element={<ProfilePage />} />} />
-          <Route path={Routes.IngredientDetails} element={<IngredientPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path={Routes.IngredientDetails} element={<IngredientDetails />} />
         </Switch>
-      </BrowserRouter>
+      )}
     </div>
   )
 }

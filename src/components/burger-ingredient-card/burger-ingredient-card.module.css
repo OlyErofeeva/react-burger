@@ -1,3 +1,8 @@
+.link {
+  text-decoration: none;
+  color: var(--text-primary-color);
+}
+
 .ingredientCard {
   position: relative;
   display: flex;

@@ -1,15 +1,28 @@
-import { Ingredient } from '../../utils/types'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 import styles from './ingredient-details.module.css'
 import Modal from '../modal/modal'
+import { activeModalIngredientSelector, allIngredientsSelector } from '../../services/selectors/selectors'
+import { activeModalIngredientActionCreator } from '../../services/action-creators'
 
-type Props = {
-  ingredient: Ingredient
-  onClose: () => void
-}
+const IngredientDetails = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { id } = useParams()
+  const allIngredients = useSelector(allIngredientsSelector)
+  const ingredient = useSelector(activeModalIngredientSelector) || allIngredients.find(item => item._id === id)
 
-const IngredientDetails: React.FC<Props> = ({ ingredient, onClose }) => {
+  const handleIngredientDetailsClose = () => {
+    dispatch(activeModalIngredientActionCreator.clear())
+    navigate(-1)
+  }
+
+  if (!ingredient) {
+    return null
+  }
+
   return (
-    <Modal onClose={onClose} title="Детали ингредиента">
+    <Modal onClose={handleIngredientDetailsClose} title="Детали ингредиента">
       <div className={styles.ingredientModalContent}>
         <img src={ingredient.image_large} alt={`изображение ингредиента ${ingredient.name}`} className={styles.image} />
         <span className="mt-4 mb-8 text text_type_main-medium">{ingredient.name}</span>
