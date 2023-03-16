@@ -30,7 +30,7 @@ const handleResponse = (res: Response) => {
   }
 
   const { status, statusText } = res
-  return res.json().then(info => Promise.reject(new Error(`${info.message} (${status} ${statusText})`)))
+  return res.json().then(info => Promise.reject(new Error(`${info.message} (status: ${status}, status text:${statusText})`)))
 }
 
 export const fetchIngredients = () => {
