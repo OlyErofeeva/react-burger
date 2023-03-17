@@ -1,22 +1,12 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { allIngredientsSelector } from '../../services/selectors/selectors'
-import { fetchIngredientsMiddleware } from '../../services/thunks/fetch-ingredients-middleware'
 import styles from './ingredient-page.module.css'
 
 const IngredientPage = () => {
-  const dispatch = useDispatch()
   const allIngredients = useSelector(allIngredientsSelector)
   const { id } = useParams()
   const ingredient = allIngredients.find(item => item._id === id)
-
-  useEffect(() => {
-    // TODO fix ts-ignore
-    // @ts-ignore
-    dispatch(fetchIngredientsMiddleware)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   if (!ingredient) {
     return null
