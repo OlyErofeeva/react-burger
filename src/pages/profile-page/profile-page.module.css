@@ -30,14 +30,3 @@
 .tabLinkActive {
   color: var(--text-primary-color);
 }
-
-.profileInfo {
-  display: flex;
-  gap: 24px;
-  flex-direction: column;
-  align-items: center;
-}
-
-.buttonsWrapper {
-  margin-left: auto;
-}

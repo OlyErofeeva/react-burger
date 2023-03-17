@@ -15,6 +15,8 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page'
 import ProtectedRoute from '../protected-route/protected-route'
 import { Routes } from '../../pages/routes'
 import IngredientDetails from '../ingredient-details/ingredient-details'
+import ProfileForm from '../profile-form/profile-form'
+import ProfileOrders from '../profile-orders/profile-orders'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -37,7 +39,10 @@ const App = () => {
         <Route path={Routes.Register} element={<RegisterPage />} />
         <Route path={Routes.ForgotPassword} element={<ForgotPasswordPage />} />
         <Route path={Routes.ResetPassword} element={<ResetPasswordPage />} />
-        <Route path={Routes.Profile} element={<ProtectedRoute element={<ProfilePage />} />} />
+        <Route path={Routes.Profile} element={<ProtectedRoute element={<ProfilePage />} />}>
+          <Route path="" element={<ProfileForm />} />
+          <Route path="orders" element={<ProfileOrders />} />
+        </Route>
         <Route path={Routes.IngredientDetails} element={<IngredientPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Switch>

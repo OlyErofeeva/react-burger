@@ -5,6 +5,7 @@ export enum Routes {
   ForgotPassword = '/forgot-password',
   ResetPassword = '/reset-password',
   Profile = '/profile',
+  ProfileOrders = '/profile/orders',
   Orders = '/orders',
   IngredientDetails = '/ingredients/:id',
 }
