@@ -24,6 +24,17 @@ const BurgerConstructorIngredient: React.FC<Props> = ({ ingredient, type, moveEl
     'ml-2': !calculateIsLocked(),
   })
 
+  const calculateIngredientName = () => {
+    switch (type) {
+      case 'top':
+        return `${ingredient.name} (верх)`
+      case 'bottom':
+        return `${ingredient.name} (низ)`
+      default:
+        return ingredient.name
+    }
+  }
+
   const handleRemoveIngredient = () => {
     dispatch(constructorActionCreator.removeIngredient(ingredient.constructorId))
   }
@@ -86,7 +97,7 @@ const BurgerConstructorIngredient: React.FC<Props> = ({ ingredient, type, moveEl
       <ConstructorElement
         type={type}
         isLocked={calculateIsLocked()}
-        text={ingredient.name}
+        text={calculateIngredientName()}
         price={ingredient.price}
         thumbnail={ingredient.image}
         extraClass={constructorElementClassName}

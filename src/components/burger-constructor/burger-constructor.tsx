@@ -79,9 +79,6 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
     [constructorIngredients],
   )
 
-  const topElement = constructorIngredients[0]
-  const bottomElement = constructorIngredients[constructorIngredients.length - 1]
-
   if (constructorIngredients.length === 0) {
     // TODO make it semantic & beautiful
     return (
@@ -90,6 +87,9 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
       </div>
     )
   }
+
+  const topElement = constructorIngredients[0]
+  const bottomElement = constructorIngredients[constructorIngredients.length - 1]
 
   return (
     <div ref={dropTargerRef} className={`pt-25 ${styles.burgerConstructor}`}>
