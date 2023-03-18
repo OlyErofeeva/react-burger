@@ -1,7 +1,7 @@
 import { placeOrder } from '../../utils/api-call'
 import { CookieName, getCookie } from '../../utils/cookie'
 import { Ingredient } from '../../utils/types'
-import { orderActionCreator } from '../action-creators'
+import { constructorActionCreator, orderActionCreator } from '../action-creators'
 import { refreshTokenMiddleware } from './refresh-token-middleware'
 
 export function placeOrderMiddleware(ingredientsIds: Ingredient['_id'][]) {
@@ -13,6 +13,7 @@ export function placeOrderMiddleware(ingredientsIds: Ingredient['_id'][]) {
     placeOrder(ingredientsIds, accessToken || '')
       .then(res => {
         dispatch(orderActionCreator.placeOrderSuccess({ name: res.name as string, number: res.order.number as number }))
+        dispatch(constructorActionCreator.setIngredients([]))
       })
       .catch(err => {
         console.log(err?.message)
