@@ -1,7 +1,8 @@
-import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import styles from './app-header.module.css'
-import HeaderLink from '../header-link/header-link'
+import { Link } from 'react-router-dom'
+import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Routes } from '../../pages/routes'
+import HeaderLink from '../header-link/header-link'
+import styles from './app-header.module.css'
 
 const AppHeader = () => {
   const calcIconType = (isActive: boolean) => (isActive ? 'primary' : 'secondary')
@@ -38,9 +39,9 @@ const AppHeader = () => {
             ))}
           </ul>
         </nav>
-        <div className={styles.logoContainer}>
+        <Link to={Routes.Main} className={styles.logoLink}>
           <Logo />
-        </div>
+        </Link>
       </div>
     </header>
   )
