@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Routes as Switch, Route, useLocation } from 'react-router-dom'
 import styles from './app.module.css'
+import { Routes } from '../../pages/routes'
 import AppHeader from '../app-header/app-header'
 import { fetchIngredientsMiddleware } from '../../services/thunks/fetch-ingredients-middleware'
 import IngredientPage from '../../pages/ingredient-page/ingredient-page'
@@ -13,10 +14,9 @@ import ProfilePage from '../../pages/profile-page/profile-page'
 import MainPage from '../../pages/main-page/main-page'
 import NotFoundPage from '../../pages/not-found-page/not-found-page'
 import ProtectedRoute from '../protected-route/protected-route'
-import { Routes } from '../../pages/routes'
-import IngredientDetails from '../ingredient-details/ingredient-details'
 import ProfileForm from '../profile-form/profile-form'
 import ProfileOrders from '../profile-orders/profile-orders'
+import IngredientModal from '../ingredient-modal/ingredient-modal'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -48,7 +48,7 @@ const App = () => {
       </Switch>
       {modalLocation && (
         <Switch>
-          <Route path={Routes.IngredientDetails} element={<IngredientDetails />} />
+          <Route path={Routes.IngredientDetails} element={<IngredientModal />} />
         </Switch>
       )}
     </div>
