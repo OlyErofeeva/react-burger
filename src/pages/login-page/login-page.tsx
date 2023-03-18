@@ -46,7 +46,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <FormLayout title="Вход">
+      <FormLayout title="Вход" onSubmit={e => handleLogin(e, inputValues)}>
         <Input
           autoFocus
           required
@@ -56,7 +56,7 @@ const LoginPage = () => {
           onChange={handleInputChange}
         />
         <PasswordInput required name="password" value={inputValues.password} onChange={handleInputChange} />
-        <Button htmlType="submit" type="primary" size="medium" onClick={e => handleLogin(e, inputValues)}>
+        <Button htmlType="submit" type="primary" size="medium">
           Войти
         </Button>
       </FormLayout>

@@ -45,7 +45,7 @@ const ForgotPasswordPage = () => {
 
   return (
     <>
-      <FormLayout title="Восстановление пароля">
+      <FormLayout title="Восстановление пароля" onSubmit={e => handleForgotPassword(e, inputValues)}>
         <Input
           autoFocus
           required
@@ -54,7 +54,7 @@ const ForgotPasswordPage = () => {
           value={inputValues.email}
           onChange={handleInputChange}
         />
-        <Button htmlType="submit" type="primary" size="medium" onClick={e => handleForgotPassword(e, inputValues)}>
+        <Button htmlType="submit" type="primary" size="medium">
           Восстановить
         </Button>
       </FormLayout>

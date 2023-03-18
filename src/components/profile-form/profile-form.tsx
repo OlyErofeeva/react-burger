@@ -68,7 +68,7 @@ const ProfileForm = () => {
   }
 
   return (
-    <form className={styles.profileInfo}>
+    <form className={styles.profileInfo} onSubmit={e => handleEditProfile(e, editedData)}>
       <Input placeholder="Имя" name="name" value={inputValues.name} onChange={handleInputChange} icon={'EditIcon'} />
       <Input
         placeholder="Логин"
@@ -83,9 +83,7 @@ const ProfileForm = () => {
           <Button htmlType="reset" type="secondary" onClick={handleCancelEditing}>
             Отмена
           </Button>
-          <Button htmlType="submit" onClick={e => handleEditProfile(e, editedData)}>
-            Сохранить
-          </Button>
+          <Button htmlType="submit">Сохранить</Button>
         </div>
       )}
     </form>

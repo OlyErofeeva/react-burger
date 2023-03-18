@@ -44,11 +44,11 @@ const RegisterPage = () => {
 
   return (
     <>
-      <FormLayout title="Регистрация">
+      <FormLayout title="Регистрация" onSubmit={e => handleRegister(e, inputValues)}>
         <Input autoFocus required name="name" placeholder="Имя" value={inputValues.name} onChange={handleInputChange} />
         <Input required name="email" placeholder="E-mail" value={inputValues.email} onChange={handleInputChange} />
         <PasswordInput required name="password" value={inputValues.password} onChange={handleInputChange} />
-        <Button htmlType="submit" type="primary" size="medium" onClick={e => handleRegister(e, inputValues)}>
+        <Button htmlType="submit" type="primary" size="medium">
           Зарегистрироваться
         </Button>
       </FormLayout>

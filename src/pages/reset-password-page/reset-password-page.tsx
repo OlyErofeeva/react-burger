@@ -47,7 +47,7 @@ const ResetPasswordPage = () => {
 
   return (
     <>
-      <FormLayout title="Восстановление пароля">
+      <FormLayout title="Восстановление пароля" onSubmit={e => handleResetPassword(e, inputValues)}>
         <PasswordInput
           autoFocus
           required
@@ -63,7 +63,7 @@ const ResetPasswordPage = () => {
           value={inputValues.token}
           onChange={handleInputChange}
         />
-        <Button htmlType="submit" type="primary" size="medium" onClick={e => handleResetPassword(e, inputValues)}>
+        <Button htmlType="submit" type="primary" size="medium">
           Сохранить
         </Button>
       </FormLayout>
