@@ -28,17 +28,20 @@ const handleResponse = (res: Response) => {
   if (res.ok) {
     return res.json()
   }
-
   const { status, statusText } = res
   return res.json().then(info => Promise.reject(new Error(`${info.message} (status: ${status}, status text:${statusText})`)))
 }
 
+const request = (url: RequestInfo | URL, options?: RequestInit) => {
+  return fetch(url, options).then(handleResponse)
+}
+
 export const fetchIngredients = () => {
-  return fetch(INGREDIENTS_URL).then(res => handleResponse(res))
+  return request(INGREDIENTS_URL)
 }
 
 export const placeOrder = (orderIngredients: Ingredient['_id'][], accessToken: string) => {
-  return fetch(ORDER_URL, {
+  return request(ORDER_URL, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -47,11 +50,11 @@ export const placeOrder = (orderIngredients: Ingredient['_id'][], accessToken: s
     body: JSON.stringify({
       ingredients: orderIngredients,
     }),
-  }).then(res => handleResponse(res))
+  })
 }
 
 export const registerUser = (user: UserRegisterRequest): Promise<UserRegisterResponse> => {
-  return fetch(REGISTER_URL, {
+  return request(REGISTER_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -61,11 +64,11 @@ export const registerUser = (user: UserRegisterRequest): Promise<UserRegisterRes
       password: user.password,
       name: user.name,
     }),
-  }).then(res => handleResponse(res))
+  })
 }
 
 export const loginUser = (user: UserLoginRequest): Promise<UserLoginResponse> => {
-  return fetch(LOGIN_URL, {
+  return request(LOGIN_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -74,11 +77,11 @@ export const loginUser = (user: UserLoginRequest): Promise<UserLoginResponse> =>
       email: user.email,
       password: user.password,
     }),
-  }).then(res => handleResponse(res))
+  })
 }
 
 export const forgotPassword = (userData: ForgotPasswordRequest) => {
-  return fetch(FORGOT_PASSWORD_URL, {
+  return request(FORGOT_PASSWORD_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -86,11 +89,11 @@ export const forgotPassword = (userData: ForgotPasswordRequest) => {
     body: JSON.stringify({
       email: userData.email,
     }),
-  }).then(res => handleResponse(res))
+  })
 }
 
 export const resetPassword = (userData: ResetPasswordRequest) => {
-  return fetch(RESET_PASSWORD_URL, {
+  return request(RESET_PASSWORD_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -99,11 +102,11 @@ export const resetPassword = (userData: ResetPasswordRequest) => {
       password: userData.password,
       token: userData.token,
     }),
-  }).then(res => handleResponse(res))
+  })
 }
 
 export const logoutUser = (userData: UserLogoutRequest) => {
-  return fetch(LOGOUT_URL, {
+  return request(LOGOUT_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -111,11 +114,11 @@ export const logoutUser = (userData: UserLogoutRequest) => {
     body: JSON.stringify({
       token: userData.token,
     }),
-  }).then(res => handleResponse(res))
+  })
 }
 
 export const refreshToken = (authData: RefreshTokenRequest) => {
-  return fetch(REFRESH_TOKEN_URL, {
+  return request(REFRESH_TOKEN_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -123,24 +126,24 @@ export const refreshToken = (authData: RefreshTokenRequest) => {
     body: JSON.stringify({
       token: authData.token,
     }),
-  }).then(res => handleResponse(res))
+  })
 }
 
 export const getUser = (accessToken: string): Promise<GetUserResponse> => {
-  return fetch(USER_PROFILE_URL, {
+  return request(USER_PROFILE_URL, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
-  }).then(res => handleResponse(res))
+  })
 }
 
 export const editUser = (user: UserEditRequest, accessToken: string): Promise<UserEditResponse> => {
-  return fetch(USER_PROFILE_URL, {
+  return request(USER_PROFILE_URL, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify(user),
-  }).then(res => handleResponse(res))
+  })
 }
