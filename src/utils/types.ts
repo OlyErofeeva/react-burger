@@ -30,6 +30,7 @@ export type GlobalState = {
   constructor: ConstructorState
   activeModalIngredient: ActiveModalIngredientState
   order: OrderState
+  user: UserState
 }
 
 export enum Progress {
@@ -60,6 +61,23 @@ export type Order = {
 export type OrderState = {
   item: Order | null
   itemAddProgress: Progress
+}
+
+export type User = {
+  name: string
+  email: string
+}
+
+export type UserState = {
+  user: User | null
+  registrationProgress: Progress
+  loginProgress: Progress
+  forgotPasswordProgress: Progress
+  resetPasswordProgress: Progress
+  refreshTokenProgress: Progress
+  logoutProgress: Progress
+  getProfileProgress: Progress
+  editProfileProgress: Progress
 }
 
 export type IngredientAction =
@@ -104,3 +122,100 @@ export type OrderAction =
   | {
       type: ActionType.PlaceOrderError
     }
+
+export type UserAction =
+  | { type: ActionType.UserRegisterRequest }
+  | { type: ActionType.UserRegisterSuccess; payload: User }
+  | { type: ActionType.UserRegisterError }
+  | { type: ActionType.UserRegisterClearProgress }
+  | { type: ActionType.UserLoginRequest }
+  | { type: ActionType.UserLoginSuccess; payload: User }
+  | { type: ActionType.UserLoginError }
+  | { type: ActionType.UserLoginClearProgress }
+  | { type: ActionType.UserForgotPasswordRequest }
+  | { type: ActionType.UserForgotPasswordSuccess }
+  | { type: ActionType.UserForgotPasswordError }
+  | { type: ActionType.UserForgotPasswordClearProgress }
+  | { type: ActionType.UserResetPasswordRequest }
+  | { type: ActionType.UserResetPasswordSuccess }
+  | { type: ActionType.UserResetPasswordError }
+  | { type: ActionType.UserResetPasswordClearProgress }
+  | { type: ActionType.UserRefreshTokenRequest }
+  | { type: ActionType.UserRefreshTokenSuccess }
+  | { type: ActionType.UserRefreshTokenError }
+  | { type: ActionType.UserLogoutRequest }
+  | { type: ActionType.UserLogoutSuccess }
+  | { type: ActionType.UserLogoutError }
+  | { type: ActionType.UserGetProfileRequest }
+  | { type: ActionType.UserGetProfileSuccess; payload: User }
+  | { type: ActionType.UserGetProfileError }
+  | { type: ActionType.UserEditProfileRequest }
+  | { type: ActionType.UserEditProfileSuccess; payload: User }
+  | { type: ActionType.UserEditProfileError }
+
+export type UserRegisterRequest = {
+  name: string
+  email: string
+  password: string
+}
+
+export type UserRegisterResponse = {
+  success: boolean
+  user: {
+    email: string
+    name: string
+  }
+  accessToken: string
+  refreshToken: string
+}
+
+export type UserLoginRequest = {
+  email: string
+  password: string
+}
+
+export type UserLoginResponse = UserRegisterResponse
+
+export type ForgotPasswordRequest = {
+  email: string
+}
+
+export type ForgotPasswordResponse = {
+  success: boolean
+  message?: string
+}
+
+export type ResetPasswordRequest = {
+  password: string
+  token: string
+}
+
+export type ResetPasswordResponse = ForgotPasswordResponse
+
+export type UserLogoutRequest = {
+  token: string
+}
+
+export type UserLogoutResponse = ForgotPasswordResponse
+
+export type RefreshTokenRequest = {
+  token: string
+}
+
+export type RefreshTokenResponse = {
+  success: boolean
+  accessToken: string
+  refreshToken: string
+}
+
+export type GetUserResponse = {
+  success: boolean
+  user: {
+    email: string
+    name: string
+  }
+}
+
+export type UserEditRequest = Partial<UserRegisterRequest>
+
+export type UserEditResponse = GetUserResponse

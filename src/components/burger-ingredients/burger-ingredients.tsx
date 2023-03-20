@@ -1,17 +1,14 @@
 import React, { UIEvent, useMemo, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styles from './burger-ingredients.module.css'
 import BurgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card'
-import IngredientDetails from '../ingredient-details/ingredient-details'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Ingredient, IngredientType, Progress } from '../../utils/types'
 import {
-  activeModalIngredientSelector,
   allIngredientsSelector,
   constructorIngredientsSelector,
   ingredientsFetchProgressSelector,
 } from '../../services/selectors/selectors'
-import { activeModalIngredientActionCreator } from '../../services/action-creators'
 
 const ingredientTypes = [
   {
@@ -29,20 +26,10 @@ const ingredientTypes = [
 ]
 
 const BurgerIngredients: React.FC = () => {
-  const dispatch = useDispatch()
   const allIngredients = useSelector(allIngredientsSelector)
   const ingredientsFetchProgress = useSelector(ingredientsFetchProgressSelector)
-  const activeModalIngredient = useSelector(activeModalIngredientSelector)
   const constructorIngredients = useSelector(constructorIngredientsSelector)
   const [activeTab, setActiveTab] = useState(IngredientType.BUN)
-
-  const handleBurgerIngredientClick = (ingredient: Ingredient) => {
-    dispatch(activeModalIngredientActionCreator.set(ingredient))
-  }
-
-  const handleIngredientDetailsClose = () => {
-    dispatch(activeModalIngredientActionCreator.clear())
-  }
 
   const handleTabClick = (itemType: IngredientType) => {
     setActiveTab(itemType)
@@ -117,7 +104,7 @@ const BurgerIngredients: React.FC = () => {
               <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
                 {(groupIngredientsByType.get(ingredientType.type) || []).map(ingredient => {
                   return (
-                    <li key={ingredient._id} onClick={() => handleBurgerIngredientClick(ingredient)}>
+                    <li key={ingredient._id}>
                       <BurgerIngredientCard
                         ingredient={ingredient}
                         counter={mapWithAddedIngredients.get(ingredient._id)}
@@ -130,9 +117,6 @@ const BurgerIngredients: React.FC = () => {
           )
         })}
       </div>
-      {activeModalIngredient && (
-        <IngredientDetails ingredient={activeModalIngredient} onClose={handleIngredientDetailsClose} />
-      )}
     </div>
   )
 }

@@ -1,9 +1,3 @@
-.ingredientModalContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .image {
   min-height: 240px;
 }

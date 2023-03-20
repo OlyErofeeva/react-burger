@@ -12,4 +12,40 @@ export enum ActionType {
   PlaceOrderRequest = 'PLACE_ORDER_REQUEST',
   PlaceOrderSuccess = 'PLACE_ORDER_SUCCESS',
   PlaceOrderError = 'PLACE_ORDER_ERROR',
+
+  UserRegisterRequest = 'USER_REGISTER_REQUEST',
+  UserRegisterSuccess = 'USER_REGISTER_SUCCESS',
+  UserRegisterError = 'USER_REGISTER_ERROR',
+  UserRegisterClearProgress = 'USER_REGISTER_CLEAR_PROGRESS',
+
+  UserLoginRequest = 'USER_LOGIN_REQUEST',
+  UserLoginSuccess = 'USER_LOGIN_SUCCESS',
+  UserLoginError = 'USER_LOGIN_ERROR',
+  UserLoginClearProgress = 'USER_LOGIN_CLEAR_PROGRESS',
+
+  UserForgotPasswordRequest = 'USER_FORGOT_PASSWORD_REQUEST',
+  UserForgotPasswordSuccess = 'USER_FORGOT_PASSWORD_SUCCESS',
+  UserForgotPasswordError = 'USER_FORGOT_PASSWORD_ERROR',
+  UserForgotPasswordClearProgress = 'USER_FORGOT_PASSWORD_CLEAR_PROGRESS',
+
+  UserResetPasswordRequest = 'USER_RESET_PASSWORD_REQUEST',
+  UserResetPasswordSuccess = 'USER_RESET_PASSWORD_SUCCESS',
+  UserResetPasswordError = 'USER_RESET_PASSWORD_ERROR',
+  UserResetPasswordClearProgress = 'USER_RESET_PASSWORD_CLEAR_PROGRESS',
+
+  UserRefreshTokenRequest = 'USER_REFRESH_TOKEN_REQUEST',
+  UserRefreshTokenSuccess = 'USER_REFRESH_TOKEN_SUCCESS',
+  UserRefreshTokenError = 'USER_REFRESH_TOKEN_ERROR',
+
+  UserLogoutRequest = 'USER_LOGOUT_REQUEST',
+  UserLogoutSuccess = 'USER_LOGOUT_SUCCESS',
+  UserLogoutError = 'USER_LOGOUT_ERROR',
+
+  UserGetProfileRequest = 'USER_GET_PROFILE_REQUEST',
+  UserGetProfileSuccess = 'USER_GET_PROFILE_SUCCESS',
+  UserGetProfileError = 'USER_GET_PROFILE_ERROR',
+
+  UserEditProfileRequest = 'USER_EDIT_PROFILE_REQUEST',
+  UserEditProfileSuccess = 'USER_EDIT_PROFILE_SUCCESS',
+  UserEditProfileError = 'USER_EDIT_PROFILE_ERROR',
 }

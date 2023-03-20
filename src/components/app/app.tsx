@@ -1,32 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { Routes as Switch, Route, useLocation } from 'react-router-dom'
 import styles from './app.module.css'
+import { Routes } from '../../pages/routes'
 import AppHeader from '../app-header/app-header'
-import BurgerIngredients from '../burger-ingredients/burger-ingredients'
-import BurgerConstructor from '../burger-constructor/burger-constructor'
-import OrderDetails from '../order-details/order-details'
-import { Ingredient, Progress } from '../../utils/types'
-import { ingredientsFetchProgressSelector } from '../../services/selectors/selectors'
 import { fetchIngredientsMiddleware } from '../../services/thunks/fetch-ingredients-middleware'
-import { placeOrderMiddleware } from '../../services/thunks/place-order-middleware'
+import IngredientPage from '../../pages/ingredient-page/ingredient-page'
+import LoginPage from '../../pages/login-page/login-page'
+import RegisterPage from '../../pages/register-page/register-page'
+import ForgotPasswordPage from '../../pages/forgot-password-page/forgot-password-page'
+import ResetPasswordPage from '../../pages/reset-password-page/reset-password-page'
+import ProfilePage from '../../pages/profile-page/profile-page'
+import MainPage from '../../pages/main-page/main-page'
+import NotFoundPage from '../../pages/not-found-page/not-found-page'
+import ProtectedRoute from '../protected-route/protected-route'
+import ProfileForm from '../profile-form/profile-form'
+import ProfileOrders from '../profile-orders/profile-orders'
+import IngredientModal from '../ingredient-modal/ingredient-modal'
 
 const App = () => {
-  const [isOrderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false)
   const dispatch = useDispatch()
-  const ingredientsFetchProgress = useSelector(ingredientsFetchProgressSelector)
-
-  const handlePlaceOrderClick = (ingredientsIds: Ingredient['_id'][]) => {
-    setOrderDetailsModalOpen(true)
-    // TODO fix ts-ignore
-    // @ts-ignore
-    dispatch(placeOrderMiddleware(ingredientsIds))
-  }
-
-  const handleOrderDetailsClose = () => {
-    setOrderDetailsModalOpen(false)
-  }
+  const location = useLocation()
+  const modalLocation = location.state?.modalLocation
 
   useEffect(() => {
     // TODO fix ts-ignore
@@ -38,16 +33,24 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
-      {/* TODO: loader & fetch error cases */}
-      {ingredientsFetchProgress === Progress.SUCCESS && (
-        <main className={styles.main}>
-          <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients />
-            <BurgerConstructor onPlaceOrderClick={handlePlaceOrderClick} />
-          </DndProvider>
-        </main>
+      <Switch location={modalLocation || location}>
+        <Route path={Routes.Main} element={<MainPage />} />
+        <Route path={Routes.Login} element={<LoginPage />} />
+        <Route path={Routes.Register} element={<RegisterPage />} />
+        <Route path={Routes.ForgotPassword} element={<ForgotPasswordPage />} />
+        <Route path={Routes.ResetPassword} element={<ResetPasswordPage />} />
+        <Route path={Routes.Profile} element={<ProtectedRoute element={<ProfilePage />} />}>
+          <Route path="" element={<ProfileForm />} />
+          <Route path="orders" element={<ProfileOrders />} />
+        </Route>
+        <Route path={Routes.IngredientDetails} element={<IngredientPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Switch>
+      {modalLocation && (
+        <Switch>
+          <Route path={Routes.IngredientDetails} element={<IngredientModal />} />
+        </Switch>
       )}
-      {isOrderDetailsModalOpen && <OrderDetails onClose={handleOrderDetailsClose} />}
     </div>
   )
 }

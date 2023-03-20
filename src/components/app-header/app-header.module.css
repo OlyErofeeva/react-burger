@@ -22,7 +22,11 @@
   list-style: none;
 }
 
-.logoContainer {
+.navItem:last-of-type {
+  margin-left: auto;
+}
+
+.logoLink {
   position: absolute;
   top: 4px;
   left: calc(50% - 290px/2);

@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import { applyMiddleware, compose, createStore } from 'redux'
 import { Provider } from 'react-redux'
@@ -20,7 +21,9 @@ const store = createStore(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
 )

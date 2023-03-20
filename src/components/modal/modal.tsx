@@ -40,8 +40,7 @@ const Modal: React.FC<Props> = ({ children, onClose, title }) => {
             <CloseIcon type="primary" />
           </button>
         </div>
-
-        {children}
+        <div className={styles.modalContent}>{children}</div>
       </div>
     </div>,
     portalElement,

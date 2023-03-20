@@ -1,0 +1,10 @@
+.pageContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  max-width: 560px;
+  border-radius: 32px;
+}
