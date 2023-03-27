@@ -1,5 +1,5 @@
-import { refreshToken } from '../../utils/api-call'
-import { CookieName, extractToken, getCookie, setCookie } from '../../utils/cookie'
+import { extractToken, refreshToken } from '../../utils/api-call'
+import { CookieName, getCookie, setCookie } from '../../utils/cookie'
 
 export function refreshTokenMiddleware(onRefreshSuccess: any, onRefreshError: any) {
   // TODO fix ts-ignore

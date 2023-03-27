@@ -1,5 +1,5 @@
-import { loginUser } from '../../utils/api-call'
-import { CookieName, extractToken, setCookie } from '../../utils/cookie'
+import { extractToken, loginUser } from '../../utils/api-call'
+import { CookieName, setCookie } from '../../utils/cookie'
 import { UserLoginRequest } from '../../utils/types'
 import { userActionCreator } from '../action-creators/user'
 

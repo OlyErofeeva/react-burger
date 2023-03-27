@@ -36,6 +36,10 @@ const request = (url: RequestInfo | URL, options?: RequestInit) => {
   return fetch(url, options).then(handleResponse)
 }
 
+export function extractToken(authToken: string) {
+  return authToken.split('Bearer ')[1]
+}
+
 export const fetchIngredients = () => {
   return request(INGREDIENTS_URL)
 }
