@@ -17,7 +17,7 @@ type Props = {
 const BurgerConstructorIngredient: React.FC<Props> = ({ ingredient, type, moveElement, index }) => {
   const calculateIsLocked = () => type === 'top' || type === 'bottom'
   const dispatch = useDispatch()
-  const ref = useRef(null)
+  const ref = useRef<HTMLLIElement>(null)
 
   const constructorElementClassName = classNames({
     'ml-8': calculateIsLocked(),
@@ -63,7 +63,6 @@ const BurgerConstructorIngredient: React.FC<Props> = ({ ingredient, type, moveEl
       if (dragIndex === hoverIndex) {
         return
       }
-      // @ts-ignore
       const hoverBoundingRect = ref.current?.getBoundingClientRect()
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
       const clientOffset = monitor.getClientOffset()
