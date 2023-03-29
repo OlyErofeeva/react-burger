@@ -83,7 +83,7 @@ const BurgerConstructorIngredient: React.FC<Props> = ({ ingredient, type, moveEl
   if (ingredient.type !== IngredientType.BUN) {
     drag(drop(ref))
   }
-  const preventDefault = (e: any) => e.preventDefault()
+  const preventDefault = (e: React.SyntheticEvent) => e.preventDefault()
 
   return (
     <li
