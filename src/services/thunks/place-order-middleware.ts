@@ -12,7 +12,7 @@ export function placeOrderMiddleware(ingredientsIds: Ingredient['_id'][]) {
     dispatch(orderActionCreator.placeOrderRequest())
     placeOrder(ingredientsIds, accessToken || '')
       .then(res => {
-        dispatch(orderActionCreator.placeOrderSuccess({ name: res.name as string, number: res.order.number as number }))
+        dispatch(orderActionCreator.placeOrderSuccess({ name: res.name, number: res.order.number }))
         dispatch(constructorActionCreator.setIngredients([]))
       })
       .catch(err => {

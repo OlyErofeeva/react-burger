@@ -1,4 +1,4 @@
-import { User } from '../../utils/types'
+import { Ingredient, Order, User } from '../../utils/types'
 
 type ResponseWithSuccess = {
   success: boolean
@@ -12,6 +12,15 @@ type ResponseWithAuthTokens = {
 type RequestWithPassword = {
   password: string
 }
+
+export type IngredientsResponse = {
+  data: Ingredient[]
+} & ResponseWithSuccess
+
+export type PlaceOrderResponse = {
+  name: Order['name']
+  order: Omit<Order, 'name'>
+} & ResponseWithSuccess
 
 export type UserRegisterRequest = User & RequestWithPassword
 
