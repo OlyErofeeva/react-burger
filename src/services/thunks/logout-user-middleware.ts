@@ -1,6 +1,6 @@
 import { logoutUser } from '../../utils/api-call'
 import { CookieName, deleteCookie } from '../../utils/cookie'
-import { UserLogoutRequest } from '../../utils/types'
+import { UserLogoutRequest } from '../types/api'
 import { userActionCreator } from '../action-creators/user'
 
 export function logoutUserMiddleware(userData: UserLogoutRequest) {

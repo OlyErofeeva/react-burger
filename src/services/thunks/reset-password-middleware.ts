@@ -1,5 +1,5 @@
 import { resetPassword } from '../../utils/api-call'
-import { ResetPasswordRequest } from '../../utils/types'
+import { ResetPasswordRequest } from '../types/api'
 import { userActionCreator } from '../action-creators/user'
 
 export function resetPasswordMiddleware(userData: ResetPasswordRequest) {

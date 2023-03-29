@@ -12,7 +12,6 @@ import {
 import {
   ForgotPasswordRequest,
   GetUserResponse,
-  Ingredient,
   RefreshTokenRequest,
   ResetPasswordRequest,
   UserEditRequest,
@@ -22,7 +21,8 @@ import {
   UserLogoutRequest,
   UserRegisterRequest,
   UserRegisterResponse,
-} from './types'
+} from '../services/types/api'
+import { Ingredient } from './types'
 
 const handleResponse = (res: Response) => {
   if (res.ok) {

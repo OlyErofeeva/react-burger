@@ -1,6 +1,6 @@
 import { editUser } from '../../utils/api-call'
 import { CookieName, getCookie } from '../../utils/cookie'
-import { UserEditRequest } from '../../utils/types'
+import { UserEditRequest } from '../types/api'
 import { userActionCreator } from '../action-creators/user'
 import { refreshTokenMiddleware } from './refresh-token-middleware'
 
