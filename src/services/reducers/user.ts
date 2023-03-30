@@ -1,5 +1,6 @@
-import { GlobalState, Progress, UserAction } from '../../utils/types'
 import { ActionType } from '../action-types/action-types'
+import { GlobalState, Progress } from '../types/common'
+import { UserAction } from '../types/user'
 
 export const initialState: GlobalState['user'] = {
   user: null,

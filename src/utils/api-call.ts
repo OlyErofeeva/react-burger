@@ -28,7 +28,7 @@ import {
   UserRegisterRequest,
   UserRegisterResponse,
 } from '../services/types/api'
-import { Ingredient } from './types'
+import { Ingredient } from '../services/types/ingredient'
 
 const handleResponse = (res: Response) => {
   if (res.ok) {

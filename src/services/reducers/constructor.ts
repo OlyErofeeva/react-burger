@@ -1,5 +1,6 @@
-import { ConstructorAction, GlobalState } from '../../utils/types'
 import { ActionType } from '../action-types/action-types'
+import { GlobalState } from '../types/common'
+import { ConstructorAction } from '../types/constructor'
 
 export const initialState: GlobalState['constructor'] = {
   items: [],

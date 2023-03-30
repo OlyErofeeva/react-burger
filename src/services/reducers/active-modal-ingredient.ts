@@ -1,5 +1,6 @@
-import { ActiveModalIngredientAction, GlobalState } from '../../utils/types'
 import { ActionType } from '../action-types/action-types'
+import { ActiveModalIngredientAction } from '../types/active-modal-ingredient'
+import { GlobalState } from '../types/common'
 
 export const initialState: GlobalState['activeModalIngredient'] = {
   item: null,

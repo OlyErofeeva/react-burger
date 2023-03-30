@@ -1,4 +1,6 @@
-import { Ingredient, Order, User } from '../../utils/types'
+import { Ingredient } from './ingredient'
+import { Order } from './order'
+import { User } from './user'
 
 type CommonResponse = {
   success: boolean

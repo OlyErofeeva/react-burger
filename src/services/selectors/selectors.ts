@@ -1,4 +1,4 @@
-import { GlobalState } from '../../utils/types'
+import { GlobalState } from '../types/common'
 
 export const allIngredientsSelector = (state: GlobalState) => state.ingredients.items
 export const ingredientsFetchProgressSelector = (state: GlobalState) => state.ingredients.listFetchProgress

@@ -1,5 +1,5 @@
-import { Order } from '../../utils/types'
 import { ActionType } from '../action-types/action-types'
+import { Order } from '../types/order'
 
 export const orderActionCreator = {
   placeOrderRequest: () => ({

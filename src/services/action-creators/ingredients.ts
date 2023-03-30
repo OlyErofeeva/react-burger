@@ -1,5 +1,5 @@
-import { Ingredient } from '../../utils/types'
 import { ActionType } from '../action-types/action-types'
+import { Ingredient } from '../types/ingredient'
 
 export const ingredientsActionCreator = {
   fetchRequest: () => ({

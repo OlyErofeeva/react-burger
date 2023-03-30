@@ -1,5 +1,5 @@
 import styles from './ingredient-details.module.css'
-import { Ingredient } from '../../utils/types'
+import { Ingredient } from '../../services/types/ingredient'
 
 type Props = {
   ingredient: Ingredient

@@ -1,6 +1,6 @@
 import { placeOrder } from '../../utils/api-call'
 import { CookieName, getCookie } from '../../utils/cookie'
-import { Ingredient } from '../../utils/types'
+import { Ingredient } from '../types/ingredient'
 import { constructorActionCreator, orderActionCreator } from '../action-creators'
 import { refreshTokenMiddleware } from './refresh-token-middleware'
 

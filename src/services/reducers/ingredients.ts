@@ -1,5 +1,6 @@
-import { GlobalState, IngredientAction, Progress } from '../../utils/types'
 import { ActionType } from '../action-types/action-types'
+import { GlobalState, Progress } from '../types/common'
+import { IngredientAction } from '../types/ingredient'
 
 export const initialState: GlobalState['ingredients'] = {
   items: [],
