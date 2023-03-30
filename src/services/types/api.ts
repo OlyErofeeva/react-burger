@@ -1,6 +1,6 @@
 import { Ingredient, Order, User } from '../../utils/types'
 
-type ResponseWithSuccess = {
+type CommonResponse = {
   success: boolean
 }
 
@@ -9,59 +9,64 @@ type ResponseWithAuthTokens = {
   refreshToken: string
 }
 
+type ResponseWithMessage = {
+  message?: string
+}
+
+type ResponseWithUser = {
+  user: User
+}
+
 type RequestWithPassword = {
   password: string
 }
 
-export type IngredientsResponse = {
+// get ingredient list
+export type IngredientsResponse = CommonResponse & {
   data: Ingredient[]
-} & ResponseWithSuccess
+}
 
-export type PlaceOrderResponse = {
+// place an order
+export type PlaceOrderResponse = CommonResponse & {
   name: Order['name']
   order: Omit<Order, 'name'>
-} & ResponseWithSuccess
+}
 
+// registration
 export type UserRegisterRequest = User & RequestWithPassword
+export type UserRegisterResponse = CommonResponse & ResponseWithAuthTokens & ResponseWithUser
 
-export type UserRegisterResponse = {
-  user: User
-} & ResponseWithAuthTokens & ResponseWithSuccess
-
-export type UserLoginRequest = {
+// login
+export type UserLoginRequest = RequestWithPassword & {
   email: User['email']
-} & RequestWithPassword
-
+}
 export type UserLoginResponse = UserRegisterResponse
 
+// forgot password
 export type ForgotPasswordRequest = {
   email: User['email']
 }
+export type ForgotPasswordResponse = CommonResponse & ResponseWithMessage
 
-export type ForgotPasswordResponse = {
-  message?: string
-} & ResponseWithSuccess
-
-export type ResetPasswordRequest = {
+// reset password
+export type ResetPasswordRequest = RequestWithPassword & {
   token: string // email code
-} & RequestWithPassword
+}
+export type ResetPasswordResponse = CommonResponse & ResponseWithMessage
 
-export type ResetPasswordResponse = ForgotPasswordResponse
-
+// logout
 export type UserLogoutRequest = {
   token: string // refreshToken
 }
+export type UserLogoutResponse = CommonResponse & ResponseWithMessage
 
-export type UserLogoutResponse = ForgotPasswordResponse
-
+// token refresh
 export type RefreshTokenRequest = UserLogoutRequest
+export type RefreshTokenResponse = CommonResponse & ResponseWithAuthTokens
 
-export type RefreshTokenResponse = ResponseWithSuccess & ResponseWithAuthTokens
+// get user info
+export type GetUserResponse = CommonResponse & ResponseWithUser
 
-export type GetUserResponse = {
-  user: User
-} & ResponseWithSuccess
-
+// edit user
 export type UserEditRequest = Partial<UserRegisterRequest>
-
 export type UserEditResponse = GetUserResponse
