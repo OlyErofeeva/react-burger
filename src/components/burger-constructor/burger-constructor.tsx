@@ -17,12 +17,12 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
   const dispatch = useDispatch()
   const constructorIngredients = useSelector(constructorIngredientsSelector)
   // TODO make use of isHover - add some styles to the drop container
-  const [{ isHover }, dropTargerRef] = useDrop<Ingredient, any, any>({
+  const [{ isHover }, dropTargerRef] = useDrop<Ingredient, void, { isHover: boolean }>({
     accept: 'ingredient',
     collect: monitor => ({
       isHover: monitor.isOver(),
     }),
-    drop(item: Ingredient) {
+    drop(item) {
       const constructorItem = {
         ...item,
         constructorId: uuid(),

@@ -48,7 +48,11 @@ const BurgerConstructorIngredient: React.FC<Props> = ({ ingredient, type, moveEl
     }),
   })
 
-  const [{ handlerId }, drop] = useDrop<{ id: ConstructorIngredient['constructorId']; index: number }, any, any>({
+  const [{ handlerId }, drop] = useDrop<
+    { id: ConstructorIngredient['constructorId']; index: number },
+    void,
+    { handlerId: string | symbol | null }
+  >({
     accept: 'component',
     collect(monitor) {
       return {
