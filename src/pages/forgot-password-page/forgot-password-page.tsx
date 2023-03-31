@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -10,18 +10,19 @@ import { forgotPasswordMiddleware } from '../../services/thunks/forgot-password-
 import { forgotPasswordProgressSelector } from '../../services/selectors/selectors'
 import { CookieName, getCookie } from '../../utils/cookie'
 import { Routes } from '../routes'
+import { useForm } from '../../services/hooks/useForm'
+
+type ForgotPasswordFormInputs = {
+  email: string
+}
 
 const ForgotPasswordPage = () => {
   const accessToken = getCookie(CookieName.AccessToken)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  const [inputValues, setInputValues] = useState<ForgotPasswordRequest>({ email: '' })
   const forgotPasswordProgress = useSelector(forgotPasswordProgressSelector)
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValues({ ...inputValues, [e.target.name]: e.target.value })
-  }
+  const { inputValues, handleInputChange } = useForm<ForgotPasswordFormInputs>({ email: '' })
 
   const handleForgotPassword = (e: React.SyntheticEvent, userData: ForgotPasswordRequest) => {
     e.preventDefault()

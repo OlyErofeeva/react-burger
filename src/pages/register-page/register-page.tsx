@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -10,17 +10,20 @@ import { registerUserMiddleware } from '../../services/thunks/register-user-midd
 import { registrationProgressSelector } from '../../services/selectors/selectors'
 import { CookieName, getCookie } from '../../utils/cookie'
 import { Routes } from '../routes'
+import { useForm } from '../../services/hooks/useForm'
+
+type RegisterFormInputs = {
+  name: string
+  email: string
+  password: string
+}
 
 const RegisterPage = () => {
   const accessToken = getCookie(CookieName.AccessToken)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [inputValues, setInputValues] = useState<UserRegisterRequest>({ name: '', email: '', password: '' })
   const registrationProgress = useSelector(registrationProgressSelector)
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValues({ ...inputValues, [e.target.name]: e.target.value })
-  }
+  const { inputValues, handleInputChange } = useForm<RegisterFormInputs>({ name: '', email: '', password: '' })
 
   const handleRegister = (e: React.SyntheticEvent, user: UserRegisterRequest) => {
     e.preventDefault()

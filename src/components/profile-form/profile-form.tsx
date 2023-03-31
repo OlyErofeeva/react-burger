@@ -7,23 +7,28 @@ import styles from './profile-form.module.css'
 import { CookieName, getCookie } from '../../utils/cookie'
 import { editUserMiddleware } from '../../services/thunks/edit-user-middleware'
 import { getUserMiddleware } from '../../services/thunks/get-user-middleware'
+import { useForm } from '../../services/hooks/useForm'
+
+type ProfileFormInputs = {
+  name: string
+  email: string
+  password: string
+}
 
 const ProfileForm = () => {
   const dispatch = useDispatch()
   const user = useSelector(userSelector)
   const [editedData, setEditedData] = useState<UserEditRequest>({})
-  const [inputValues, setInputValues] = useState({
-    name: user?.name || '',
-    email: user?.email || '',
-    password: '',
-  })
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValues({ ...inputValues, [e.target.name]: e.target.value })
+  const { inputValues, handleInputChange, setInputValues } = useForm<ProfileFormInputs>(
+    {
+      name: user?.name || '',
+      email: user?.email || '',
+      password: '',
+    },
+    e => setEditedData({ ...editedData, [e.target.name]: e.target.value }),
     // TODO consider comparing editedData with user from global state to avoid
     // sending properties that were edited, but then changed again to the previous values
-    setEditedData({ ...editedData, [e.target.name]: e.target.value })
-  }
+  )
 
   const handleEditProfile = (e: React.SyntheticEvent, userData: UserEditRequest) => {
     e.preventDefault()

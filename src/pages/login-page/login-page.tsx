@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -10,18 +10,20 @@ import { loginUserMiddleware } from '../../services/thunks/login-user-middleware
 import { CookieName, getCookie } from '../../utils/cookie'
 import { loginProgressSelector } from '../../services/selectors/selectors'
 import { Routes } from '../routes'
+import { useForm } from '../../services/hooks/useForm'
+
+type LoginFormInputs = {
+  email: string
+  password: string
+}
 
 const LoginPage = () => {
   const accessToken = getCookie(CookieName.AccessToken)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  const [inputValues, setInputValues] = useState<UserLoginRequest>({ email: '', password: '' })
   const loginProgress = useSelector(loginProgressSelector)
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValues({ ...inputValues, [e.target.name]: e.target.value })
-  }
+  const { inputValues, handleInputChange } = useForm<LoginFormInputs>({ email: '', password: '' })
 
   const handleLogin = (e: React.SyntheticEvent, user: UserLoginRequest) => {
     e.preventDefault()
