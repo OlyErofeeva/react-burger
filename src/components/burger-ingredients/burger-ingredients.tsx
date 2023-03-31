@@ -101,7 +101,7 @@ const BurgerIngredients: React.FC = () => {
         {ingredientSections.map(ingredientSection => {
           return (
             <section id={ingredientSection.type} key={ingredientSection.type}>
-              <h2 className={`text text_type_main-medium ${styles.groupTitle}`}>{ingredientSection.type}</h2>
+              <h2 className={`text text_type_main-medium ${styles.groupTitle}`}>{ingredientSection.title}</h2>
               <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
                 {(groupIngredientsByType.get(ingredientSection.type) || []).map(ingredient => {
                   return (
