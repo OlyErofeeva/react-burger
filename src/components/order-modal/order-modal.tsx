@@ -1,8 +1,8 @@
-import { useSelector } from "react-redux"
-import { orderProgressSelector } from "../../services/selectors/selectors"
-import { Progress } from "../../utils/types"
-import Modal from "../modal/modal"
-import OrderDetails from "../order-details/order-details"
+import { useSelector } from 'react-redux'
+import { orderProgressSelector } from '../../services/selectors/selectors'
+import { Progress } from '../../services/types/common'
+import Modal from '../modal/modal'
+import OrderDetails from '../order-details/order-details'
 
 type Props = {
   onClose: () => void
@@ -19,7 +19,7 @@ const OrderModal: React.FC<Props> = ({ onClose }) => {
   if (orderProgress === Progress.ERROR) {
     return <div>{`Что-то пошло не так... :( Попробуйте снова.`}</div>
   }
-  
+
   return (
     <Modal onClose={onClose}>
       <OrderDetails />

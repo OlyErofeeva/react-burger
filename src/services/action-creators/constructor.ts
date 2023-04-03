@@ -1,5 +1,5 @@
-import { ConstructorIngredient } from '../../utils/types'
 import { ActionType } from '../action-types/action-types'
+import { ConstructorIngredient } from '../types/constructor'
 
 export const constructorActionCreator = {
   setIngredients: (payload: ConstructorIngredient[]) => ({

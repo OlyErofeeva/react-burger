@@ -1,26 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './forgot-password-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
-import { ForgotPasswordRequest, Progress } from '../../utils/types'
+import { Progress } from '../../services/types/common'
+import { ForgotPasswordRequest } from '../../services/types/api'
 import { forgotPasswordMiddleware } from '../../services/thunks/forgot-password-middleware'
 import { forgotPasswordProgressSelector } from '../../services/selectors/selectors'
 import { CookieName, getCookie } from '../../utils/cookie'
 import { Routes } from '../routes'
+import { useForm } from '../../services/hooks/useForm'
+
+type ForgotPasswordFormInputs = {
+  email: string
+}
 
 const ForgotPasswordPage = () => {
   const accessToken = getCookie(CookieName.AccessToken)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  const [inputValues, setInputValues] = useState<ForgotPasswordRequest>({ email: '' })
   const forgotPasswordProgress = useSelector(forgotPasswordProgressSelector)
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValues({ ...inputValues, [e.target.name]: e.target.value })
-  }
+  const { inputValues, handleInputChange } = useForm<ForgotPasswordFormInputs>({ email: '' })
 
   const handleForgotPassword = (e: React.SyntheticEvent, userData: ForgotPasswordRequest) => {
     e.preventDefault()

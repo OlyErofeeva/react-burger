@@ -3,14 +3,15 @@ import { useSelector } from 'react-redux'
 import styles from './burger-ingredients.module.css'
 import BurgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Ingredient, IngredientType, Progress } from '../../utils/types'
+import { Ingredient, IngredientType } from '../../services/types/ingredient'
+import { Progress } from '../../services/types/common'
 import {
   allIngredientsSelector,
   constructorIngredientsSelector,
   ingredientsFetchProgressSelector,
 } from '../../services/selectors/selectors'
 
-const ingredientTypes = [
+const ingredientSections = [
   {
     type: IngredientType.BUN,
     title: 'Булки',
@@ -79,16 +80,16 @@ const BurgerIngredients: React.FC = () => {
     <div className={styles.burgerIngredients}>
       <h1 className={`text text_type_main-large pt-10 pb-5 ${styles.mainTitle}`}>Соберите бургер</h1>
       <ul className={`mb-10 ${styles.tabList}`}>
-        {ingredientTypes.map(ingredientType => {
+        {ingredientSections.map(ingredientSection => {
           return (
-            <li key={ingredientType.type}>
-              <a href={`#${ingredientType.type}`} className={styles.anchorTab}>
+            <li key={ingredientSection.type}>
+              <a href={`#${ingredientSection.type}`} className={styles.anchorTab}>
                 <Tab
-                  value={ingredientType.type}
-                  active={activeTab === ingredientType.type}
-                  onClick={() => handleTabClick(ingredientType.type)}
+                  value={ingredientSection.type}
+                  active={activeTab === ingredientSection.type}
+                  onClick={() => handleTabClick(ingredientSection.type)}
                 >
-                  {ingredientType.title}
+                  {ingredientSection.title}
                 </Tab>
               </a>
             </li>
@@ -97,12 +98,12 @@ const BurgerIngredients: React.FC = () => {
       </ul>
 
       <div className={styles.allIngredients} onScroll={handleScroll}>
-        {ingredientTypes.map(ingredientType => {
+        {ingredientSections.map(ingredientSection => {
           return (
-            <section id={ingredientType.type} key={ingredientType.type}>
-              <h2 className={`text text_type_main-medium ${styles.groupTitle}`}>{ingredientType.title}</h2>
+            <section id={ingredientSection.type} key={ingredientSection.type}>
+              <h2 className={`text text_type_main-medium ${styles.groupTitle}`}>{ingredientSection.title}</h2>
               <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
-                {(groupIngredientsByType.get(ingredientType.type) || []).map(ingredient => {
+                {(groupIngredientsByType.get(ingredientSection.type) || []).map(ingredient => {
                   return (
                     <li key={ingredient._id}>
                       <BurgerIngredientCard

@@ -1,5 +1,5 @@
 import { forgotPassword } from '../../utils/api-call'
-import { ForgotPasswordRequest } from '../../utils/types'
+import { ForgotPasswordRequest } from '../types/api'
 import { userActionCreator } from '../action-creators/user'
 
 export function forgotPasswordMiddleware(userData: ForgotPasswordRequest) {

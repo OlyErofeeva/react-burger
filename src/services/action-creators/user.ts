@@ -1,5 +1,5 @@
-import { User } from '../../utils/types'
 import { ActionType } from '../action-types/action-types'
+import { User } from '../types/user'
 
 export const userActionCreator = {
   userRegisterRequest: () => ({

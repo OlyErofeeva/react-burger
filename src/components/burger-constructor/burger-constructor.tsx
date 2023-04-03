@@ -6,8 +6,7 @@ import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-co
 import styles from './burger-constructor.module.css'
 import BurgerConstructorIngredient from '../burger-constructor-ingredient/burger-constructor-ingredient'
 import { constructorIngredientsSelector } from '../../services/selectors/selectors'
-import { Ingredient } from '../../utils/types'
-import { IngredientType } from '../../utils/types'
+import { Ingredient, IngredientType } from '../../services/types/ingredient'
 import { constructorActionCreator } from '../../services/action-creators'
 
 type Props = {
@@ -18,12 +17,12 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
   const dispatch = useDispatch()
   const constructorIngredients = useSelector(constructorIngredientsSelector)
   // TODO make use of isHover - add some styles to the drop container
-  const [{ isHover }, dropTargerRef] = useDrop<Ingredient, any, any>({
+  const [{ isHover }, dropTargerRef] = useDrop<Ingredient, void, { isHover: boolean }>({
     accept: 'ingredient',
     collect: monitor => ({
       isHover: monitor.isOver(),
     }),
-    drop(item: Ingredient) {
+    drop(item) {
       const constructorItem = {
         ...item,
         constructorId: uuid(),

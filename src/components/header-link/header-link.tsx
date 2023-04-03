@@ -4,7 +4,7 @@ import styles from './header-link.module.css'
 type Props = {
   caption: string
   path: string
-  children: (isActive: boolean) => React.ReactElement
+  children: (isActive: boolean) => React.ReactNode
 }
 
 const HeaderLink: React.FC<Props> = ({ caption, children, path }) => {

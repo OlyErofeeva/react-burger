@@ -6,7 +6,7 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from '../modal-overlay/modal-overlay'
 
 type Props = {
-  children: JSX.Element
+  children: React.ReactNode
   onClose: () => void
   title?: string
 }

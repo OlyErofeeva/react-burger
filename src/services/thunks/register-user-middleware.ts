@@ -1,6 +1,6 @@
-import { registerUser } from '../../utils/api-call'
-import { CookieName, extractToken, setCookie } from '../../utils/cookie'
-import { UserRegisterRequest } from '../../utils/types'
+import { extractToken, registerUser } from '../../utils/api-call'
+import { CookieName, setCookie } from '../../utils/cookie'
+import { UserRegisterRequest } from '../types/api'
 import { userActionCreator } from '../action-creators/user'
 
 export function registerUserMiddleware(user: UserRegisterRequest) {

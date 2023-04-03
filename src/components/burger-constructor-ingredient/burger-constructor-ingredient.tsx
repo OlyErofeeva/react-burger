@@ -4,7 +4,8 @@ import classNames from 'classnames'
 import { useDrag, useDrop } from 'react-dnd'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-constructor-ingredient.module.css'
-import { ConstructorIngredient, IngredientType } from '../../utils/types'
+import { ConstructorIngredient } from '../../services/types/constructor'
+import { IngredientType } from '../../services/types/ingredient'
 import { constructorActionCreator } from '../../services/action-creators'
 
 type Props = {
@@ -17,7 +18,7 @@ type Props = {
 const BurgerConstructorIngredient: React.FC<Props> = ({ ingredient, type, moveElement, index }) => {
   const calculateIsLocked = () => type === 'top' || type === 'bottom'
   const dispatch = useDispatch()
-  const ref = useRef(null)
+  const ref = useRef<HTMLLIElement>(null)
 
   const constructorElementClassName = classNames({
     'ml-8': calculateIsLocked(),
@@ -47,7 +48,11 @@ const BurgerConstructorIngredient: React.FC<Props> = ({ ingredient, type, moveEl
     }),
   })
 
-  const [{ handlerId }, drop] = useDrop<{ id: ConstructorIngredient['constructorId']; index: number }, any, any>({
+  const [{ handlerId }, drop] = useDrop<
+    { id: ConstructorIngredient['constructorId']; index: number },
+    void,
+    { handlerId: string | symbol | null }
+  >({
     accept: 'component',
     collect(monitor) {
       return {
@@ -63,7 +68,6 @@ const BurgerConstructorIngredient: React.FC<Props> = ({ ingredient, type, moveEl
       if (dragIndex === hoverIndex) {
         return
       }
-      // @ts-ignore
       const hoverBoundingRect = ref.current?.getBoundingClientRect()
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
       const clientOffset = monitor.getClientOffset()
@@ -83,7 +87,7 @@ const BurgerConstructorIngredient: React.FC<Props> = ({ ingredient, type, moveEl
   if (ingredient.type !== IngredientType.BUN) {
     drag(drop(ref))
   }
-  const preventDefault = (e: any) => e.preventDefault()
+  const preventDefault = (e: React.SyntheticEvent) => e.preventDefault()
 
   return (
     <li

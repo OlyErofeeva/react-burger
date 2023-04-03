@@ -1,6 +1,6 @@
-import { loginUser } from '../../utils/api-call'
-import { CookieName, extractToken, setCookie } from '../../utils/cookie'
-import { UserLoginRequest } from '../../utils/types'
+import { extractToken, loginUser } from '../../utils/api-call'
+import { CookieName, setCookie } from '../../utils/cookie'
+import { UserLoginRequest } from '../types/api'
 import { userActionCreator } from '../action-creators/user'
 
 export function loginUserMiddleware(user: UserLoginRequest) {

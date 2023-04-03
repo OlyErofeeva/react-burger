@@ -1,5 +1,6 @@
-import { GlobalState, OrderAction, Progress } from '../../utils/types'
 import { ActionType } from '../action-types/action-types'
+import { GlobalState, Progress } from '../types/common'
+import { OrderAction } from '../types/order'
 
 export const initialState: GlobalState['order'] = {
   item: null,

@@ -11,18 +11,24 @@ import {
 } from '../configs/api-settings'
 import {
   ForgotPasswordRequest,
+  ForgotPasswordResponse,
   GetUserResponse,
-  Ingredient,
+  IngredientsResponse,
+  PlaceOrderResponse,
   RefreshTokenRequest,
+  RefreshTokenResponse,
   ResetPasswordRequest,
+  ResetPasswordResponse,
   UserEditRequest,
   UserEditResponse,
   UserLoginRequest,
   UserLoginResponse,
   UserLogoutRequest,
+  UserLogoutResponse,
   UserRegisterRequest,
   UserRegisterResponse,
-} from './types'
+} from '../services/types/api'
+import { Ingredient } from '../services/types/ingredient'
 
 const handleResponse = (res: Response) => {
   if (res.ok) {
@@ -36,11 +42,15 @@ const request = (url: RequestInfo | URL, options?: RequestInit) => {
   return fetch(url, options).then(handleResponse)
 }
 
-export const fetchIngredients = () => {
+export function extractToken(authToken: string) {
+  return authToken.split('Bearer ')[1]
+}
+
+export const fetchIngredients = (): Promise<IngredientsResponse> => {
   return request(INGREDIENTS_URL)
 }
 
-export const placeOrder = (orderIngredients: Ingredient['_id'][], accessToken: string) => {
+export const placeOrder = (orderIngredients: Ingredient['_id'][], accessToken: string): Promise<PlaceOrderResponse> => {
   return request(ORDER_URL, {
     method: 'POST',
     headers: {
@@ -80,7 +90,7 @@ export const loginUser = (user: UserLoginRequest): Promise<UserLoginResponse> =>
   })
 }
 
-export const forgotPassword = (userData: ForgotPasswordRequest) => {
+export const forgotPassword = (userData: ForgotPasswordRequest): Promise<ForgotPasswordResponse> => {
   return request(FORGOT_PASSWORD_URL, {
     method: 'POST',
     headers: {
@@ -92,7 +102,7 @@ export const forgotPassword = (userData: ForgotPasswordRequest) => {
   })
 }
 
-export const resetPassword = (userData: ResetPasswordRequest) => {
+export const resetPassword = (userData: ResetPasswordRequest): Promise<ResetPasswordResponse> => {
   return request(RESET_PASSWORD_URL, {
     method: 'POST',
     headers: {
@@ -105,7 +115,7 @@ export const resetPassword = (userData: ResetPasswordRequest) => {
   })
 }
 
-export const logoutUser = (userData: UserLogoutRequest) => {
+export const logoutUser = (userData: UserLogoutRequest): Promise<UserLogoutResponse> => {
   return request(LOGOUT_URL, {
     method: 'POST',
     headers: {
@@ -117,7 +127,7 @@ export const logoutUser = (userData: UserLogoutRequest) => {
   })
 }
 
-export const refreshToken = (authData: RefreshTokenRequest) => {
+export const refreshToken = (authData: RefreshTokenRequest): Promise<RefreshTokenResponse> => {
   return request(REFRESH_TOKEN_URL, {
     method: 'POST',
     headers: {

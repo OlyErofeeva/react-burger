@@ -1,10 +1,10 @@
-import React, { SyntheticEvent } from 'react'
+import React from 'react'
 import styles from './form-layout.module.css'
 
 type Props = {
-  children: React.ReactElement[]
+  children: React.ReactNode
   title: string
-  onSubmit: (() => void) | ((e: SyntheticEvent) => void)
+  onSubmit: (() => void) | ((e: React.SyntheticEvent) => void)
 }
 
 const FormLayout: React.FC<Props> = ({ children, title, onSubmit }) => {

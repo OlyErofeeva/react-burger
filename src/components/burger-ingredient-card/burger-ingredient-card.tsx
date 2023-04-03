@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredient-card.module.css'
-import { Ingredient } from '../../utils/types'
+import { Ingredient } from '../../services/types/ingredient'
 import { activeModalIngredientActionCreator } from '../../services/action-creators'
 
 type Props = {

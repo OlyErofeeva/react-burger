@@ -1,26 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './reset-password-page.module.css'
 import FormLayout from '../../components/form-layout/form-layout'
-import { Progress, ResetPasswordRequest } from '../../utils/types'
+import { Progress } from '../../services/types/common'
+import { ResetPasswordRequest } from '../../services/types/api'
 import { resetPasswordMiddleware } from '../../services/thunks/reset-password-middleware'
 import { resetPasswordProgressSelector } from '../../services/selectors/selectors'
 import { CookieName, getCookie } from '../../utils/cookie'
 import { Routes } from '../routes'
+import { useForm } from '../../services/hooks/useForm'
+
+type ResetPasswordFormInputs = {
+  password: string
+  token: string
+}
 
 const ResetPasswordPage = () => {
   const accessToken = getCookie(CookieName.AccessToken)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  const [inputValues, setInputValues] = useState<ResetPasswordRequest>({ password: '', token: '' })
   const resetPasswordProgress = useSelector(resetPasswordProgressSelector)
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValues({ ...inputValues, [e.target.name]: e.target.value })
-  }
+  const { inputValues, handleInputChange } = useForm<ResetPasswordFormInputs>({ password: '', token: '' })
 
   const handleResetPassword = (e: React.SyntheticEvent, userData: ResetPasswordRequest) => {
     e.preventDefault()
