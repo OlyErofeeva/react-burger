@@ -1,22 +1,21 @@
-import { ActionType } from '../action-types/action-types'
-import { ActiveModalIngredientAction } from '../types/active-modal-ingredient'
-import { GlobalState } from '../types/common'
+import { ActiveModalIngredientActionType } from '../action-types/action-types'
+import { ActiveModalIngredientAction, ActiveModalIngredientState } from '../types/active-modal-ingredient'
 
-export const initialState: GlobalState['activeModalIngredient'] = {
+export const initialState: ActiveModalIngredientState = {
   item: null,
 }
 
 export const activeModalIngredientReducer = (
   state = initialState,
   action: ActiveModalIngredientAction,
-): GlobalState['activeModalIngredient'] => {
+): ActiveModalIngredientState => {
   switch (action.type) {
-    case ActionType.SetActiveModalIngredient:
+    case ActiveModalIngredientActionType.SetIngredient:
       return {
         ...state,
         item: action.payload,
       }
-    case ActionType.ClearActiveModalIngredient:
+    case ActiveModalIngredientActionType.ClearIngredient:
       return {
         ...state,
         item: null,

@@ -1,4 +1,4 @@
-import { ActionType } from '../action-types/action-types'
+import { IngredientsActionType } from '../action-types/action-types'
 import { Progress } from './common'
 
 export enum IngredientType {
@@ -27,14 +27,20 @@ export type IngredientState = {
   listFetchProgress: Progress
 }
 
+export type IngredientsFetchRequestAction = {
+  readonly type: IngredientsActionType.FetchRequest
+}
+
+export type IngredientsFetchSuccessAction = {
+  readonly type: IngredientsActionType.FetchSuccess
+  readonly payload: Ingredient[]
+}
+
+export type IngredientsFetchErrorAction = {
+  readonly type: IngredientsActionType.FetchError
+}
+
 export type IngredientAction =
-  | {
-      type: ActionType.IngredientsFetchRequest
-    }
-  | {
-      type: ActionType.IngredientsFetchSuccess
-      payload: Ingredient[]
-    }
-  | {
-      type: ActionType.IngredientsFetchError
-    }
+  | IngredientsFetchRequestAction
+  | IngredientsFetchSuccessAction
+  | IngredientsFetchErrorAction

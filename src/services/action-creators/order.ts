@@ -1,15 +1,15 @@
-import { ActionType } from '../action-types/action-types'
-import { Order } from '../types/order'
+import { OrderActionType } from '../action-types/action-types'
+import { Order, PlaceOrderErrorAction, PlaceOrderRequestAction, PlaceOrderSuccessAction } from '../types/order'
 
 export const orderActionCreator = {
-  placeOrderRequest: () => ({
-    type: ActionType.PlaceOrderRequest,
+  placeOrderRequest: (): PlaceOrderRequestAction => ({
+    type: OrderActionType.PlaceRequest,
   }),
-  placeOrderSuccess: (payload: Order) => ({
-    type: ActionType.PlaceOrderSuccess,
+  placeOrderSuccess: (payload: Order): PlaceOrderSuccessAction => ({
+    type: OrderActionType.PlaceSuccess,
     payload: payload,
   }),
-  placeOrderError: () => ({
-    type: ActionType.PlaceOrderError,
+  placeOrderError: (): PlaceOrderErrorAction => ({
+    type: OrderActionType.PlaceError,
   }),
 }

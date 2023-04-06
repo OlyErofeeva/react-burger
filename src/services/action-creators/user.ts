@@ -1,100 +1,130 @@
-import { ActionType } from '../action-types/action-types'
-import { User } from '../types/user'
+import { UserActionType } from '../action-types/action-types'
+import {
+  User,
+  UserEditProfileErrorAction,
+  UserEditProfileRequestAction,
+  UserEditProfileSuccessAction,
+  UserForgotPasswordClearProgressAction,
+  UserForgotPasswordErrorAction,
+  UserForgotPasswordRequestAction,
+  UserForgotPasswordSuccessAction,
+  UserGetProfileErrorAction,
+  UserGetProfileRequestAction,
+  UserGetProfileSuccessAction,
+  UserLoginClearProgressAction,
+  UserLoginErrorAction,
+  UserLoginRequestAction,
+  UserLoginSuccessAction,
+  UserLogoutErrorAction,
+  UserLogoutRequestAction,
+  UserLogoutSuccessAction,
+  UserRefreshTokenErrorAction,
+  UserRefreshTokenRequestAction,
+  UserRefreshTokenSuccessAction,
+  UserRegisterClearProgressAction,
+  UserRegisterErrorAction,
+  UserRegisterRequestAction,
+  UserRegisterSuccessAction,
+  UserResetPasswordClearProgressAction,
+  UserResetPasswordErrorAction,
+  UserResetPasswordRequestAction,
+  UserResetPasswordSuccessAction,
+} from '../types/user'
 
 export const userActionCreator = {
-  userRegisterRequest: () => ({
-    type: ActionType.UserRegisterRequest,
+  userRegisterRequest: (): UserRegisterRequestAction => ({
+    type: UserActionType.RegisterRequest,
   }),
-  userRegisterSuccess: (payload: User) => ({
-    type: ActionType.UserRegisterSuccess,
+  userRegisterSuccess: (payload: User): UserRegisterSuccessAction => ({
+    type: UserActionType.RegisterSuccess,
     payload: payload,
   }),
-  userRegisterError: () => ({
-    type: ActionType.UserRegisterError,
+  userRegisterError: (): UserRegisterErrorAction => ({
+    type: UserActionType.RegisterError,
   }),
-  userRegisterClearProgress: () => ({
-    type: ActionType.UserRegisterClearProgress,
+  userRegisterClearProgress: (): UserRegisterClearProgressAction => ({
+    type: UserActionType.RegisterClearProgress,
   }),
 
-  userLoginRequest: () => ({
-    type: ActionType.UserLoginRequest,
+  userLoginRequest: (): UserLoginRequestAction => ({
+    type: UserActionType.LoginRequest,
   }),
-  userLoginSuccess: (payload: User) => ({
-    type: ActionType.UserLoginSuccess,
+  userLoginSuccess: (payload: User): UserLoginSuccessAction => ({
+    type: UserActionType.LoginSuccess,
     payload: payload,
   }),
-  userLoginError: () => ({
-    type: ActionType.UserLoginError,
+  userLoginError: (): UserLoginErrorAction => ({
+    type: UserActionType.LoginError,
   }),
-  userLoginClearProgress: () => ({
-    type: ActionType.UserLoginClearProgress,
-  }),
-
-  userForgotPasswordRequest: () => ({
-    type: ActionType.UserForgotPasswordRequest,
-  }),
-  userForgotPasswordSuccess: () => ({
-    type: ActionType.UserForgotPasswordSuccess,
-  }),
-  userForgotPasswordError: () => ({
-    type: ActionType.UserForgotPasswordError,
-  }),
-  userForgotPasswordClearProgress: () => ({
-    type: ActionType.UserForgotPasswordClearProgress,
+  userLoginClearProgress: (): UserLoginClearProgressAction => ({
+    type: UserActionType.LoginClearProgress,
   }),
 
-  userResetPasswordRequest: () => ({
-    type: ActionType.UserResetPasswordRequest,
+  userForgotPasswordRequest: (): UserForgotPasswordRequestAction => ({
+    type: UserActionType.ForgotPasswordRequest,
   }),
-  userResetPasswordSuccess: () => ({
-    type: ActionType.UserResetPasswordSuccess,
+  userForgotPasswordSuccess: (): UserForgotPasswordSuccessAction => ({
+    type: UserActionType.ForgotPasswordSuccess,
   }),
-  userResetPasswordError: () => ({
-    type: ActionType.UserResetPasswordError,
+  userForgotPasswordError: (): UserForgotPasswordErrorAction => ({
+    type: UserActionType.ForgotPasswordError,
   }),
-  userResetPasswordClearProgress: () => ({
-    type: ActionType.UserResetPasswordClearProgress,
-  }),
-
-  userRefreshTokenRequest: () => ({
-    type: ActionType.UserRefreshTokenRequest,
-  }),
-  userRefreshTokenSuccess: () => ({
-    type: ActionType.UserRefreshTokenSuccess,
-  }),
-  userRefreshTokenError: () => ({
-    type: ActionType.UserRefreshTokenError,
+  userForgotPasswordClearProgress: (): UserForgotPasswordClearProgressAction => ({
+    type: UserActionType.ForgotPasswordClearProgress,
   }),
 
-  userLogoutRequest: () => ({
-    type: ActionType.UserLogoutRequest,
+  userResetPasswordRequest: (): UserResetPasswordRequestAction => ({
+    type: UserActionType.ResetPasswordRequest,
   }),
-  userLogoutSuccess: () => ({
-    type: ActionType.UserLogoutSuccess,
+  userResetPasswordSuccess: (): UserResetPasswordSuccessAction => ({
+    type: UserActionType.ResetPasswordSuccess,
   }),
-  userLogoutError: () => ({
-    type: ActionType.UserLogoutError,
+  userResetPasswordError: (): UserResetPasswordErrorAction => ({
+    type: UserActionType.ResetPasswordError,
+  }),
+  userResetPasswordClearProgress: (): UserResetPasswordClearProgressAction => ({
+    type: UserActionType.ResetPasswordClearProgress,
   }),
 
-  userGetProfileRequest: () => ({
-    type: ActionType.UserGetProfileRequest,
+  userRefreshTokenRequest: (): UserRefreshTokenRequestAction => ({
+    type: UserActionType.RefreshTokenRequest,
   }),
-  userGetProfileSuccess: (payload: User) => ({
-    type: ActionType.UserGetProfileSuccess,
+  userRefreshTokenSuccess: (): UserRefreshTokenSuccessAction => ({
+    type: UserActionType.RefreshTokenSuccess,
+  }),
+  userRefreshTokenError: (): UserRefreshTokenErrorAction => ({
+    type: UserActionType.RefreshTokenError,
+  }),
+
+  userLogoutRequest: (): UserLogoutRequestAction => ({
+    type: UserActionType.LogoutRequest,
+  }),
+  userLogoutSuccess: (): UserLogoutSuccessAction => ({
+    type: UserActionType.LogoutSuccess,
+  }),
+  userLogoutError: (): UserLogoutErrorAction => ({
+    type: UserActionType.LogoutError,
+  }),
+
+  userGetProfileRequest: (): UserGetProfileRequestAction => ({
+    type: UserActionType.GetProfileRequest,
+  }),
+  userGetProfileSuccess: (payload: User): UserGetProfileSuccessAction => ({
+    type: UserActionType.GetProfileSuccess,
     payload: payload,
   }),
-  userGetProfileError: () => ({
-    type: ActionType.UserGetProfileError,
+  userGetProfileError: (): UserGetProfileErrorAction => ({
+    type: UserActionType.GetProfileError,
   }),
 
-  userEditProfileRequest: () => ({
-    type: ActionType.UserEditProfileRequest,
+  userEditProfileRequest: (): UserEditProfileRequestAction => ({
+    type: UserActionType.EditProfileRequest,
   }),
-  userEditProfileSuccess: (payload: User) => ({
-    type: ActionType.UserEditProfileSuccess,
+  userEditProfileSuccess: (payload: User): UserEditProfileSuccessAction => ({
+    type: UserActionType.EditProfileSuccess,
     payload: payload,
   }),
-  userEditProfileError: () => ({
-    type: ActionType.UserEditProfileError,
+  userEditProfileError: (): UserEditProfileErrorAction => ({
+    type: UserActionType.EditProfileError,
   }),
 }

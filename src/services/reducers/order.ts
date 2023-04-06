@@ -1,26 +1,26 @@
-import { ActionType } from '../action-types/action-types'
-import { GlobalState, Progress } from '../types/common'
-import { OrderAction } from '../types/order'
+import { OrderActionType } from '../action-types/action-types'
+import { Progress } from '../types/common'
+import { OrderAction, OrderState } from '../types/order'
 
-export const initialState: GlobalState['order'] = {
+export const initialState: OrderState = {
   item: null,
   itemAddProgress: Progress.IDLE,
 }
 
-export const orderReducer = (state = initialState, action: OrderAction): GlobalState['order'] => {
+export const orderReducer = (state = initialState, action: OrderAction): OrderState => {
   switch (action.type) {
-    case ActionType.PlaceOrderRequest:
+    case OrderActionType.PlaceRequest:
       return {
         ...state,
         itemAddProgress: Progress.WORK,
       }
-    case ActionType.PlaceOrderSuccess:
+    case OrderActionType.PlaceSuccess:
       return {
         ...state,
         item: action.payload,
         itemAddProgress: Progress.SUCCESS,
       }
-    case ActionType.PlaceOrderError:
+    case OrderActionType.PlaceError:
       return {
         ...initialState,
         itemAddProgress: Progress.ERROR,

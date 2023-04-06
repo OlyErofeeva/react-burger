@@ -1,4 +1,4 @@
-import { combineReducers, Reducer } from 'redux'
+import { combineReducers } from 'redux'
 import { GlobalState } from '../types/common'
 import {
   activeModalIngredientReducer,
@@ -17,7 +17,7 @@ export const initialState: GlobalState = {
   user: UserInitialState,
 }
 
-export const rootReducer: Reducer = combineReducers({
+export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   constructor: constructorReducer,
   activeModalIngredient: activeModalIngredientReducer,
