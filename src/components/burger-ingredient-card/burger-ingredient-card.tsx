@@ -1,11 +1,11 @@
 import React from 'react'
 import { useDrag } from 'react-dnd'
-import { useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredient-card.module.css'
 import { Ingredient } from '../../services/types/ingredient'
 import { activeModalIngredientActionCreator } from '../../services/action-creators'
+import { useDispatch } from '../../services/hooks/useDispatch'
 
 type Props = {
   ingredient: Ingredient

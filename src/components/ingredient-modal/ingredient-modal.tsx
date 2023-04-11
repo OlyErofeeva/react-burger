@@ -1,9 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { activeModalIngredientActionCreator } from '../../services/action-creators'
 import { activeModalIngredientSelector, allIngredientsSelector } from '../../services/selectors/selectors'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import Modal from '../modal/modal'
+import { useSelector } from '../../services/hooks/useSelector'
+import { useDispatch } from '../../services/hooks/useDispatch'
 
 const IngredientModal = () => {
   const dispatch = useDispatch()

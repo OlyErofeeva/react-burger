@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor'
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients'
@@ -13,6 +12,8 @@ import { Progress } from '../../services/types/common'
 import { Ingredient } from '../../services/types/ingredient'
 import { Routes } from '../routes'
 import styles from './main-page.module.css'
+import { useSelector } from '../../services/hooks/useSelector'
+import { useDispatch } from '../../services/hooks/useDispatch'
 
 const MainPage = () => {
   const [isOrderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false)
@@ -24,9 +25,7 @@ const MainPage = () => {
     const accessToken = getCookie(CookieName.AccessToken)
     if (accessToken) {
       setOrderDetailsModalOpen(true)
-      // TODO fix ts-ignore
-      // @ts-ignore
-      dispatch(placeOrderMiddleware(ingredientsIds, accessToken))
+      dispatch(placeOrderMiddleware(ingredientsIds))
     } else {
       navigate(Routes.Login, { state: { from: Routes.Main } })
     }

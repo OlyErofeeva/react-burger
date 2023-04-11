@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './reset-password-page.module.css'
@@ -11,6 +10,8 @@ import { resetPasswordProgressSelector } from '../../services/selectors/selector
 import { CookieName, getCookie } from '../../utils/cookie'
 import { Routes } from '../routes'
 import { useForm } from '../../services/hooks/useForm'
+import { useSelector } from '../../services/hooks/useSelector'
+import { useDispatch } from '../../services/hooks/useDispatch'
 
 type ResetPasswordFormInputs = {
   password: string
@@ -27,8 +28,6 @@ const ResetPasswordPage = () => {
 
   const handleResetPassword = (e: React.SyntheticEvent, userData: ResetPasswordRequest) => {
     e.preventDefault()
-    // TODO fix ts-ignore
-    // @ts-ignore
     dispatch(resetPasswordMiddleware(userData))
   }
 

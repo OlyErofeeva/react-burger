@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../services/hooks/useSelector'
 import { orderSelector } from '../../services/selectors/selectors'
 import OrderSuccessIcon from '../order-success-icon/order-success-icon'
 import styles from './order-details.module.css'

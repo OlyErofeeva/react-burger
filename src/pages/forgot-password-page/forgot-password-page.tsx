@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './forgot-password-page.module.css'
@@ -11,6 +10,8 @@ import { forgotPasswordProgressSelector } from '../../services/selectors/selecto
 import { CookieName, getCookie } from '../../utils/cookie'
 import { Routes } from '../routes'
 import { useForm } from '../../services/hooks/useForm'
+import { useSelector } from '../../services/hooks/useSelector'
+import { useDispatch } from '../../services/hooks/useDispatch'
 
 type ForgotPasswordFormInputs = {
   email: string
@@ -26,8 +27,6 @@ const ForgotPasswordPage = () => {
 
   const handleForgotPassword = (e: React.SyntheticEvent, userData: ForgotPasswordRequest) => {
     e.preventDefault()
-    // TODO fix ts-ignore
-    // @ts-ignore
     dispatch(forgotPasswordMiddleware(userData))
   }
 

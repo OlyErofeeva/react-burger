@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { v4 as uuid } from 'uuid'
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -8,6 +7,8 @@ import BurgerConstructorIngredient from '../burger-constructor-ingredient/burger
 import { constructorIngredientsSelector } from '../../services/selectors/selectors'
 import { Ingredient, IngredientType } from '../../services/types/ingredient'
 import { constructorActionCreator } from '../../services/action-creators'
+import { useSelector } from '../../services/hooks/useSelector'
+import { useDispatch } from '../../services/hooks/useDispatch'
 
 type Props = {
   onPlaceOrderClick: (ingredientsIds: Ingredient['_id'][]) => void

@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { Routes as Switch, Route, useLocation } from 'react-router-dom'
 import styles from './app.module.css'
 import { Routes } from '../../pages/routes'
@@ -17,6 +16,7 @@ import ProtectedRoute from '../protected-route/protected-route'
 import ProfileForm from '../profile-form/profile-form'
 import ProfileOrders from '../profile-orders/profile-orders'
 import IngredientModal from '../ingredient-modal/ingredient-modal'
+import { useDispatch } from '../../services/hooks/useDispatch'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -24,8 +24,6 @@ const App = () => {
   const modalLocation = location.state?.modalLocation
 
   useEffect(() => {
-    // TODO fix ts-ignore
-    // @ts-ignore
     dispatch(fetchIngredientsMiddleware)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

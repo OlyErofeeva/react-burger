@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../services/hooks/useSelector'
 import { orderProgressSelector } from '../../services/selectors/selectors'
 import { Progress } from '../../services/types/common'
 import Modal from '../modal/modal'
