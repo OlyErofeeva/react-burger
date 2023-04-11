@@ -1,12 +1,11 @@
 import { getUser } from '../../utils/api-call'
 import { CookieName, getCookie } from '../../utils/cookie'
 import { userActionCreator } from '../action-creators/user'
+import { AppDispatch, AppThunkAction } from '../types/common'
 import { refreshTokenMiddleware } from './refresh-token-middleware'
 
-export function getUserMiddleware() {
-  // TODO fix ts-ignore
-  // @ts-ignore
-  return dispatch => {
+export function getUserMiddleware(): AppThunkAction {
+  return (dispatch: AppDispatch) => {
     const accessToken = getCookie(CookieName.AccessToken)
     dispatch(userActionCreator.userGetProfileRequest())
     getUser(accessToken || '')

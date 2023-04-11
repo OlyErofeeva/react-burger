@@ -3,11 +3,10 @@ import { CookieName, getCookie } from '../../utils/cookie'
 import { Ingredient } from '../types/ingredient'
 import { constructorActionCreator, orderActionCreator } from '../action-creators'
 import { refreshTokenMiddleware } from './refresh-token-middleware'
+import { AppDispatch, AppThunkAction } from '../types/common'
 
-export function placeOrderMiddleware(ingredientsIds: Ingredient['_id'][]) {
-  // TODO fix ts-ignore
-  // @ts-ignore
-  return dispatch => {
+export function placeOrderMiddleware(ingredientsIds: Ingredient['_id'][]): AppThunkAction {
+  return (dispatch: AppDispatch) => {
     const accessToken = getCookie(CookieName.AccessToken)
     dispatch(orderActionCreator.placeOrderRequest())
     placeOrder(ingredientsIds, accessToken || '')
