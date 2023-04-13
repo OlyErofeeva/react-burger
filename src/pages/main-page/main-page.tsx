@@ -38,6 +38,7 @@ const MainPage = () => {
   return (
     <>
       {/* TODO: loader & fetch error cases */}
+      {/* TODO: use CommonPage component */}
       {ingredientsFetchProgress === Progress.SUCCESS && (
         <main className={styles.main}>
           <DndProvider backend={HTML5Backend}>
