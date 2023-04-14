@@ -1,8 +1,17 @@
-// import styles from './profile-orders.module.css'
+import OrderCard from '../order-card/order-card'
+import styles from './profile-orders.module.css'
+
+const dummyOrders = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 const ProfileOrders = () => {
   return (
-    <span className="text text_type_main-default text_color_inactive">Sorry, this section is under construction</span>
+    <ul className={styles.orderList}>
+      {dummyOrders.map(order => (
+        <li>
+          <OrderCard status="Выполнен" />
+        </li>
+      ))}
+    </ul>
   )
 }
 

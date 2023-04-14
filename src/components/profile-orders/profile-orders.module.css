@@ -1,0 +1,24 @@
+.orderList {
+  width: 100%;
+  max-height: calc(100vh - 248px);
+  margin: 0;
+  padding: 0 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  list-style: none;
+  overflow-y: overlay;
+  scroll-behavior: smooth;
+}
+
+.orderList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.orderList::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.orderList::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}

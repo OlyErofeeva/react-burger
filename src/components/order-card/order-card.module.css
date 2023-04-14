@@ -1,5 +1,4 @@
 .cardContainer {
-  max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -12,6 +11,11 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.status {
+  text-align: left;
+  color: #0cc;
 }
 
 .footer {

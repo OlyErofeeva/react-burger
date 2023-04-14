@@ -10,14 +10,22 @@ const dummyOrderData = {
   price: 480,
 }
 
-const OrderCard = () => {
+type Props = {
+  status?: string
+}
+
+const OrderCard: React.FC<Props> = ({ status }) => {
   return (
     <div className={`p-6 ${styles.cardContainer}`}>
       <div className={styles.header}>
         <span className="text text_type_digits-default">{`#${dummyOrderData.number}`}</span>
         <FormattedDate date={dummyOrderData.date} className="text text_type_main-default text_color_inactive" />
       </div>
-      <h2 className="text text_type_main-medium">{dummyOrderData.title}</h2>
+      <div>
+        <h2 className="text text_type_main-medium">{dummyOrderData.title}</h2>
+        {/* TODO-5 color of status text */}
+        {!!status && <p className={`mt-2 text text_type_main-default ${styles.status}`}>{status}</p>}
+      </div>
       <div className={styles.footer}>
         <IngredientsPreview />
         <div className={styles.priceContainer}>
