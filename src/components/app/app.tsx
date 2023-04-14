@@ -17,6 +17,7 @@ import ProfileForm from '../profile-form/profile-form'
 import ProfileOrders from '../profile-orders/profile-orders'
 import IngredientModal from '../ingredient-modal/ingredient-modal'
 import { useDispatch } from '../../services/hooks/useDispatch'
+import FeedPage from '../../pages/feed-page/feed-page'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -38,9 +39,10 @@ const App = () => {
         <Route path={Routes.ForgotPassword} element={<ForgotPasswordPage />} />
         <Route path={Routes.ResetPassword} element={<ResetPasswordPage />} />
         <Route path={Routes.Profile} element={<ProtectedRoute element={<ProfilePage />} />}>
-          <Route path="" element={<ProfileForm />} />
-          <Route path="orders" element={<ProfileOrders />} />
+          <Route path={Routes.Profile} element={<ProfileForm />} />
+          <Route path={Routes.ProfileOrders} element={<ProfileOrders />} />
         </Route>
+        <Route path={Routes.Feed} element={<FeedPage />} />
         <Route path={Routes.IngredientDetails} element={<IngredientPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Switch>
