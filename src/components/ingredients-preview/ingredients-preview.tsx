@@ -1,5 +1,6 @@
 import { useSelector } from '../../services/hooks/useSelector'
 import { allIngredientsSelector } from '../../services/selectors/selectors'
+import IngredientIcon from '../ingredient-icon/ingredient-icon'
 import styles from './ingredients-preview.module.css'
 
 const IngredientsPreview = () => {
@@ -19,19 +20,13 @@ const IngredientsPreview = () => {
         .map((ingredient, index) => {
           return (
             <li className={styles.ingredientListItem} key={index}>
-              <div className={styles.imageContainer}>
-                <img
-                  src={ingredient.image_mobile}
-                  alt={ingredient.name}
-                  title={ingredient.name}
-                  className={styles.image}
-                />
+              <IngredientIcon ingredient={ingredient}>
                 {index === 0 && dummyIngredients.length > previewLimit && (
                   <div className={styles.ingredientOverlay}>
                     <span className="text text_type_main-default">{`+${dummyIngredients.length - previewLimit}`}</span>
                   </div>
                 )}
-              </div>
+              </IngredientIcon>
             </li>
           )
         })}
