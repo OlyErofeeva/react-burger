@@ -8,7 +8,7 @@ type Props = {
 const OrderInfoPage: React.FC<Props> = ({ orderNumber }) => {
   return (
     <div className={`mt-30 ${styles.pageContent}`}>
-      <p className="mb-10 text text_type_digits-default">#{orderNumber}</p>
+      <p className="mb-5 text text_type_digits-default">#{orderNumber}</p>
       <OrderInfo />
     </div>
   )

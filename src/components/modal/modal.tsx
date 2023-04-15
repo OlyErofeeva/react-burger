@@ -8,10 +8,10 @@ import ModalOverlay from '../modal-overlay/modal-overlay'
 type Props = {
   children: React.ReactNode
   onClose: () => void
-  title?: string
+  titleElement?: React.ReactNode
 }
 
-const Modal: React.FC<Props> = ({ children, onClose, title }) => {
+const Modal: React.FC<Props> = ({ children, onClose, titleElement }) => {
   const portalElement = document.getElementById('modal-portal')
 
   const closeModalOnEsc = (event: KeyboardEvent) => {
@@ -33,9 +33,9 @@ const Modal: React.FC<Props> = ({ children, onClose, title }) => {
   return ReactDOM.createPortal(
     <div className={styles.portalWrapper}>
       <ModalOverlay onClick={onClose} />
-      <div className={`pt-10 pb-15 pl-10 pr-10 ${styles.modal}`}>
+      <div className={`p-10 ${styles.modal}`}>
         <div className={styles.modalHeader}>
-          <h2 className="text text_type_main-large">{title}</h2>
+          {titleElement}
           <button className={styles.closeButton} onClick={onClose}>
             <CloseIcon type="primary" />
           </button>

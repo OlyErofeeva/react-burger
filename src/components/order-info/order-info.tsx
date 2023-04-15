@@ -9,7 +9,7 @@ const OrderInfo = () => {
   const dummyIngredients = useSelector(allIngredientsSelector)
   return (
     <div className={styles.content}>
-      <h2 className="text text_type_main-medium">Black Hole Singularity острый бургер</h2>
+      <h2 className="pt-5 text text_type_main-medium">Black Hole Singularity острый бургер</h2>
       <p className={`mt-2 text text_type_main-default ${styles.status}`}>Выполнен</p>
       <p className="mt-15 text text_type_main-medium">Состав:</p>
       <ul className={styles.ingredientList}>

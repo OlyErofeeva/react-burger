@@ -21,13 +21,13 @@
 .modalHeader {
   min-height: 64px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
 .closeButton {
   background: none;
   border: none;
+  margin-left: auto;
   padding: 0;
   line-height: 0;
 }

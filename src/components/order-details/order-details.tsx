@@ -14,7 +14,7 @@ const OrderDetails = () => {
         <OrderSuccessIcon />
       </div>
       <p className="mb-2 text text_type_main-default">Ваш заказ начали готовить</p>
-      <p className="mb-15 text text_type_main-default text_color_inactive">
+      <p className="mb-20 text text_type_main-default text_color_inactive">
         Дождитесь готовности на орбитальной станции
       </p>
     </>
