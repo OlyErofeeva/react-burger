@@ -1,29 +1,26 @@
-import { useSelector } from '../../services/hooks/useSelector'
-import { allIngredientsSelector } from '../../services/selectors/selectors'
+import { Ingredient } from '../../services/types/ingredient'
 import IngredientIcon from '../ingredient-icon/ingredient-icon'
 import styles from './ingredients-preview.module.css'
 
-const IngredientsPreview = () => {
-  // TODO-5 remove dummy data
-  const dummyIngredients = useSelector(allIngredientsSelector)
-  const previewLimit = 6
+type Props = {
+  ingredients: Ingredient[]
+}
 
-  if (!dummyIngredients) {
-    return null
-  }
+const IngredientsPreview: React.FC<Props> = ({ ingredients }) => {
+  const previewLimit = 6
 
   return (
     <ul className={styles.ingredientList}>
-      {dummyIngredients
+      {ingredients
         .slice(0, previewLimit)
         .reverse()
         .map((ingredient, index) => {
           return (
             <li className={styles.ingredientListItem} key={index}>
               <IngredientIcon ingredient={ingredient}>
-                {index === 0 && dummyIngredients.length > previewLimit && (
+                {index === 0 && ingredients.length > previewLimit && (
                   <div className={styles.ingredientOverlay}>
-                    <span className="text text_type_main-default">{`+${dummyIngredients.length - previewLimit}`}</span>
+                    <span className="text text_type_main-default">{`+${ingredients.length - previewLimit}`}</span>
                   </div>
                 )}
               </IngredientIcon>

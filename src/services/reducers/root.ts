@@ -7,6 +7,7 @@ import { constructorReducer, initialState as ConstructorInitialState } from './c
 import { ingredientsReducer, initialState as IngredientInitialState } from './ingredients'
 import { orderReducer, initialState as OrderInitialState } from './order'
 import { userReducer, initialState as UserInitialState } from './user'
+import { wsFeedReducer } from './ws-feed'
 
 export const initialState = {
   ingredients: IngredientInitialState,
@@ -22,4 +23,5 @@ export const rootReducer = combineReducers({
   activeModalIngredient: activeModalIngredientReducer,
   order: orderReducer,
   user: userReducer,
+  wsFeed: wsFeedReducer,
 })

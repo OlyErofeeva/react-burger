@@ -5,6 +5,7 @@ import { ConstructorAction, ConstructorState } from './constructor'
 import { IngredientAction, IngredientState } from './ingredient'
 import { OrderAction, OrderState } from './order'
 import { UserAction, UserState } from './user'
+import { WSFeedAction, WSFeedState } from './ws-feed'
 
 export enum Progress {
   IDLE = 'IDLE',
@@ -19,9 +20,16 @@ export type GlobalState = {
   activeModalIngredient: ActiveModalIngredientState
   order: OrderState
   user: UserState
+  wsFeed: WSFeedState
 }
 
-type ApplicationActions = ActiveModalIngredientAction | ConstructorAction | IngredientAction | OrderAction | UserAction
+export type ApplicationActions =
+  | ActiveModalIngredientAction
+  | ConstructorAction
+  | IngredientAction
+  | OrderAction
+  | UserAction
+  | WSFeedAction
 
 export type AppThunkAction<ReturnType = void> = ThunkAction<ReturnType, Action, GlobalState, ApplicationActions>
 export type AppDispatch = ThunkDispatch<Action, GlobalState, ApplicationActions>
