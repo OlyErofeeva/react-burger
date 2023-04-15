@@ -18,6 +18,8 @@ import ProfileOrders from '../profile-orders/profile-orders'
 import IngredientModal from '../ingredient-modal/ingredient-modal'
 import { useDispatch } from '../../services/hooks/useDispatch'
 import FeedPage from '../../pages/feed-page/feed-page'
+import OrderInfoPage from '../../pages/order-info-page/order-info-page'
+import OrderInfoModal from '../order-info-modal/order-info-modal'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -43,12 +45,14 @@ const App = () => {
           <Route path={Routes.ProfileOrders} element={<ProfileOrders />} />
         </Route>
         <Route path={Routes.Feed} element={<FeedPage />} />
+        <Route path={Routes.FeedOrderDetails} element={<OrderInfoPage />} />
         <Route path={Routes.IngredientDetails} element={<IngredientPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Switch>
       {modalLocation && (
         <Switch>
           <Route path={Routes.IngredientDetails} element={<IngredientModal />} />
+          <Route path={Routes.FeedOrderDetails} element={<OrderInfoModal />} />
         </Switch>
       )}
     </div>

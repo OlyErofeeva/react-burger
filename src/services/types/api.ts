@@ -85,8 +85,8 @@ export type FeedOrder = {
   name: string
   number: number
   status: OrderStatus
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
 }
 
 export type FeedResponse = CommonResponse & {
