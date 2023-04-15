@@ -38,6 +38,7 @@ const BurgerIngredientCard: React.FC<Props> = ({ ingredient, counter }) => {
       >
         <img className="pl-4 pr-4" src={ingredient.image} alt={`изображение ингредиента ${ingredient.name}`} />
         <div className={styles.priceContainer}>
+          {/* TODO: use Price component */}
           <span className="text text_type_digits-default">{ingredient.price}</span>
           <CurrencyIcon type="primary" />
         </div>

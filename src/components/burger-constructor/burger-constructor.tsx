@@ -118,6 +118,7 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
       </ul>
 
       <div className={`mt-10 ${styles.constructorTotal}`}>
+        {/* TODO: use Price component */}
         <span className="mr-2 text text_type_digits-medium">{calcTotal}</span>
         <CurrencyIcon type="primary" />
         <Button

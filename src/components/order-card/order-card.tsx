@@ -29,6 +29,7 @@ const OrderCard: React.FC<Props> = ({ status }) => {
       <div className={styles.footer}>
         <IngredientsPreview />
         <div className={styles.priceContainer}>
+          {/* TODO: use Price component */}
           <span className="text text_type_digits-default">{dummyOrderData.price}</span>
           <CurrencyIcon type="primary" />
         </div>
