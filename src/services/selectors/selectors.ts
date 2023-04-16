@@ -15,3 +15,4 @@ export const editProfileProgressSelector = (state: GlobalState) => state.user.ed
 export const feedOrdersSelector = (state: GlobalState) => state.wsFeed.feed?.orders
 export const feedTotalSelector = (state: GlobalState) => state.wsFeed.feed?.total
 export const feedTotalTodaySelector = (state: GlobalState) => state.wsFeed.feed?.totalToday
+export const profileOrdersSelector = (state: GlobalState) => state.wsProfileOrders.items

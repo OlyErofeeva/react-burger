@@ -7,6 +7,7 @@ import { useSelector } from '../../services/hooks/useSelector'
 import { allIngredientsSelector } from '../../services/selectors/selectors'
 import { Ingredient } from '../../services/types/ingredient'
 import Price from '../price/price'
+import { translateOrderStatus } from '../../utils/translate-order-status'
 
 type Props = {
   order: FeedOrder
@@ -26,7 +27,7 @@ const OrderCard: React.FC<Props> = ({ order, showStatus = false }) => {
   const distinctIngredients = [...new Set(ingredients)]
 
   return (
-    <Link to={`/feed/${order._id}`} state={{ modalLocation: location }} className={styles.link}>
+    <Link to={order._id} state={{ modalLocation: location }} className={styles.link}>
       <article className={`p-6 ${styles.cardContainer}`}>
         <div className={styles.header}>
           <span className="text text_type_digits-default">{`#${order.number}`}</span>
@@ -34,8 +35,7 @@ const OrderCard: React.FC<Props> = ({ order, showStatus = false }) => {
         </div>
         <div>
           <h2 className="text text_type_main-medium">{order.name}</h2>
-          {/* TODO-5 color of status text */}
-          {showStatus && <p className={`mt-2 text text_type_main-default ${styles.status}`}>{order.status}</p>}
+          {showStatus && <p className={`mt-2 text text_type_main-default ${styles.status}`}>{translateOrderStatus(order.status)}</p>}
         </div>
         <div className={styles.footer}>
           <IngredientsPreview ingredients={distinctIngredients} />

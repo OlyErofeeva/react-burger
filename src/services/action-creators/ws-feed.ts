@@ -11,8 +11,9 @@ import {
 } from '../types/ws-feed'
 
 export const wsFeedActionCreator = {
-  connectionStart: (): ConnectionStartWSFeedAction => ({
+  connectionStart: (payload: string): ConnectionStartWSFeedAction => ({
     type: WSFeedActionType.ConnectionStart,
+    payload: payload,
   }),
   connectionSuccess: (): ConnectionSuccessWSFeedAction => ({
     type: WSFeedActionType.ConnectionSuccess,

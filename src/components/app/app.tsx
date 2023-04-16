@@ -44,8 +44,12 @@ const App = () => {
           <Route path={Routes.Profile} element={<ProfileForm />} />
           <Route path={Routes.ProfileOrders} element={<ProfileOrders />} />
         </Route>
+        <Route
+          path={Routes.ProfileOrderDetails}
+          element={<ProtectedRoute element={<OrderInfoPage context="profileOrders" />} />}
+        />
         <Route path={Routes.Feed} element={<FeedPage />} />
-        <Route path={Routes.FeedOrderDetails} element={<OrderInfoPage />} />
+        <Route path={Routes.FeedOrderDetails} element={<OrderInfoPage context="feed" />} />
         <Route path={Routes.IngredientDetails} element={<IngredientPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Switch>
@@ -53,6 +57,7 @@ const App = () => {
         <Switch>
           <Route path={Routes.IngredientDetails} element={<IngredientModal />} />
           <Route path={Routes.FeedOrderDetails} element={<OrderInfoModal />} />
+          <Route path={Routes.ProfileOrderDetails} element={<ProtectedRoute element={<OrderInfoModal />} />} />
         </Switch>
       )}
     </div>

@@ -1,42 +1,50 @@
 import { Middleware, MiddlewareAPI } from 'redux'
-import { WSFeedActionType } from '../action-types/ws-action-types'
+import { WSFeedActionType, WSProfileOrdersActionType } from '../action-types/ws-action-types'
 import { AppDispatch, ApplicationActions, GlobalState } from '../types/common'
-import { wsFeedActionCreator } from '../action-creators/ws-feed'
-import { FeedResponse } from '../types/api'
+import { FeedResponse, ProfileOrdersResponse } from '../types/api'
 
-export const wsMiddleware = (wsUrl: string): Middleware => {
+export type WSActionTypes = {
+  connect: WSFeedActionType.ConnectionStart | WSProfileOrdersActionType.ConnectionStart
+  disconnect: WSFeedActionType.Disconnect | WSProfileOrdersActionType.Disconnect
+  wsConnectionSuccess: WSFeedActionType.ConnectionSuccess | WSProfileOrdersActionType.ConnectionSuccess
+  wsConnectionError: WSFeedActionType.ConnectionError | WSProfileOrdersActionType.ConnectionError
+  wsConnectionClosed: WSFeedActionType.ConnectionClosed | WSProfileOrdersActionType.ConnectionClosed
+  wsGetMessage: WSFeedActionType.GetMessage | WSProfileOrdersActionType.GetMessage
+}
+
+export const wsMiddleware = (wsActionTypes: WSActionTypes): Middleware => {
   return (store: MiddlewareAPI<AppDispatch, GlobalState>) => {
     let socket: WebSocket | null = null
 
     return next => (action: ApplicationActions) => {
       const { dispatch } = store
 
-      if (action.type === WSFeedActionType.ConnectionStart) {
-        socket = new WebSocket(wsUrl)
+      if (action.type === wsActionTypes.connect) {
+        socket = new WebSocket(action.payload)
       }
 
-      if (socket && action.type === WSFeedActionType.Disconnect) {
+      if (socket && action.type === wsActionTypes.disconnect) {
         socket.close()
         socket = null
       }
 
       if (socket) {
         socket.onopen = event => {
-          dispatch(wsFeedActionCreator.connectionSuccess())
+          dispatch({ type: wsActionTypes.wsConnectionSuccess })
         }
 
         socket.onerror = event => {
-          dispatch(wsFeedActionCreator.connectionError(event))
+          dispatch({ type: wsActionTypes.wsConnectionError, payload: event })
         }
 
         socket.onmessage = (event: MessageEvent) => {
           const { data } = event
-          const parsedData: FeedResponse = JSON.parse(data)
-          dispatch(wsFeedActionCreator.getMessage(parsedData))
+          const parsedData: FeedResponse | ProfileOrdersResponse = JSON.parse(data)
+          dispatch({ type: wsActionTypes.wsGetMessage, payload: parsedData })
         }
 
         socket.onclose = event => {
-          dispatch(wsFeedActionCreator.connectionClosed())
+          dispatch({ type: wsActionTypes.wsConnectionClosed })
         }
       }
 

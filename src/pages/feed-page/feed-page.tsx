@@ -7,6 +7,7 @@ import { wsFeedActionCreator } from '../../services/action-creators/ws-feed'
 import { useSelector } from '../../services/hooks/useSelector'
 import { feedOrdersSelector, feedTotalSelector, feedTotalTodaySelector } from '../../services/selectors/selectors'
 import { OrderStatus } from '../../services/types/api'
+import { FEED_URL } from '../../configs/ws-settings'
 
 const FeedPage = () => {
   const dispatch = useDispatch()
@@ -17,7 +18,7 @@ const FeedPage = () => {
   const ordersPending = orders?.filter(order => order.status === OrderStatus.Pending) || []
 
   useEffect(() => {
-    dispatch(wsFeedActionCreator.connectionStart())
+    dispatch(wsFeedActionCreator.connectionStart(FEED_URL))
     return () => {
       dispatch(wsFeedActionCreator.disconnect())
     }

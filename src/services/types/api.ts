@@ -23,6 +23,12 @@ type RequestWithPassword = {
   password: string
 }
 
+type WebSocketMessage = CommonResponse & {
+  orders: FeedOrder[]
+  total: number
+  totalToday: number
+}
+
 // get ingredient list
 export type IngredientsResponse = CommonResponse & {
   data: Ingredient[]
@@ -89,8 +95,8 @@ export type FeedOrder = {
   updatedAt: string
 }
 
-export type FeedResponse = CommonResponse & {
-  orders: FeedOrder[]
-  total: number
-  totalToday: number
-}
+// web socket: feed
+export type FeedResponse = WebSocketMessage
+
+// web socket: profile orders
+export type ProfileOrdersResponse = WebSocketMessage

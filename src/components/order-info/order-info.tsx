@@ -7,6 +7,7 @@ import IngredientIcon from '../ingredient-icon/ingredient-icon'
 import Price from '../price/price'
 import styles from './order-info.module.css'
 import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
+import { translateOrderStatus } from '../../utils/translate-order-status'
 
 type Props = {
   order: FeedOrder
@@ -37,7 +38,7 @@ const OrderInfo: React.FC<Props> = ({ order }) => {
   return (
     <div className={styles.content}>
       <h2 className="pt-5 text text_type_main-medium">{order.name}</h2>
-      <p className={`mt-2 text text_type_main-default ${styles.status}`}>{order.status}</p>
+      <p className={`mt-2 text text_type_main-default ${styles.status}`}>{translateOrderStatus(order.status)}</p>
       <p className="mt-15 text text_type_main-medium">Состав:</p>
       <ul className={styles.ingredientList}>
         {distinctIngredients.map(ingredient => (

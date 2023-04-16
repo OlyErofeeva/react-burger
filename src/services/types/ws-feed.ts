@@ -9,6 +9,7 @@ export type WSFeedState = {
 
 export type ConnectionStartWSFeedAction = {
   readonly type: WSFeedActionType.ConnectionStart
+  readonly payload: string
 }
 
 export type ConnectionSuccessWSFeedAction = {
