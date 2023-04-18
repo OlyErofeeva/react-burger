@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { Routes as Switch, Route, useLocation } from 'react-router-dom'
 import styles from './app.module.css'
 import { Routes } from '../../pages/routes'
@@ -17,6 +16,10 @@ import ProtectedRoute from '../protected-route/protected-route'
 import ProfileForm from '../profile-form/profile-form'
 import ProfileOrders from '../profile-orders/profile-orders'
 import IngredientModal from '../ingredient-modal/ingredient-modal'
+import { useDispatch } from '../../services/hooks/useDispatch'
+import FeedPage from '../../pages/feed-page/feed-page'
+import OrderInfoPage from '../../pages/order-info-page/order-info-page'
+import OrderInfoModal from '../order-info-modal/order-info-modal'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -24,8 +27,6 @@ const App = () => {
   const modalLocation = location.state?.modalLocation
 
   useEffect(() => {
-    // TODO fix ts-ignore
-    // @ts-ignore
     dispatch(fetchIngredientsMiddleware)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -40,15 +41,23 @@ const App = () => {
         <Route path={Routes.ForgotPassword} element={<ForgotPasswordPage />} />
         <Route path={Routes.ResetPassword} element={<ResetPasswordPage />} />
         <Route path={Routes.Profile} element={<ProtectedRoute element={<ProfilePage />} />}>
-          <Route path="" element={<ProfileForm />} />
-          <Route path="orders" element={<ProfileOrders />} />
+          <Route path={Routes.Profile} element={<ProfileForm />} />
+          <Route path={Routes.ProfileOrders} element={<ProfileOrders />} />
         </Route>
+        <Route
+          path={Routes.ProfileOrderDetails}
+          element={<ProtectedRoute element={<OrderInfoPage context="profileOrders" />} />}
+        />
+        <Route path={Routes.Feed} element={<FeedPage />} />
+        <Route path={Routes.FeedOrderDetails} element={<OrderInfoPage context="feed" />} />
         <Route path={Routes.IngredientDetails} element={<IngredientPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Switch>
       {modalLocation && (
         <Switch>
           <Route path={Routes.IngredientDetails} element={<IngredientModal />} />
+          <Route path={Routes.FeedOrderDetails} element={<OrderInfoModal />} />
+          <Route path={Routes.ProfileOrderDetails} element={<ProtectedRoute element={<OrderInfoModal />} />} />
         </Switch>
       )}
     </div>

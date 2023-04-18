@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components'
 import { userSelector } from '../../services/selectors/selectors'
 import { UserEditRequest } from '../../services/types/api'
@@ -8,6 +7,8 @@ import { CookieName, getCookie } from '../../utils/cookie'
 import { editUserMiddleware } from '../../services/thunks/edit-user-middleware'
 import { getUserMiddleware } from '../../services/thunks/get-user-middleware'
 import { useForm } from '../../services/hooks/useForm'
+import { useSelector } from '../../services/hooks/useSelector'
+import { useDispatch } from '../../services/hooks/useDispatch'
 
 type ProfileFormInputs = {
   name: string
@@ -32,8 +33,6 @@ const ProfileForm = () => {
 
   const handleEditProfile = (e: React.SyntheticEvent, userData: UserEditRequest) => {
     e.preventDefault()
-    // TODO fix ts-ignore
-    // @ts-ignore
     dispatch(editUserMiddleware(userData))
     setEditedData({})
   }
@@ -50,8 +49,6 @@ const ProfileForm = () => {
   useEffect(() => {
     const accessToken = getCookie(CookieName.AccessToken)
     if (!user && accessToken) {
-      // TODO fix ts-ignore
-      // @ts-ignore
       dispatch(getUserMiddleware())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

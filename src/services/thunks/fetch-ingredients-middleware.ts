@@ -1,9 +1,8 @@
 import { fetchIngredients } from '../../utils/api-call'
 import { ingredientsActionCreator } from '../action-creators'
+import { AppDispatch } from '../types/common'
 
-// TODO fix ts-ignore
-// @ts-ignore
-export const fetchIngredientsMiddleware = dispatch => {
+export const fetchIngredientsMiddleware = (dispatch: AppDispatch) => {
   dispatch(ingredientsActionCreator.fetchRequest())
   fetchIngredients()
     .then(res => {

@@ -1,0 +1,44 @@
+.content {
+  width: 100%;
+  text-align: left;
+}
+
+.status {
+  color: #0cc;
+}
+
+.ingredientList {
+  max-height: 320px;
+  margin: 24px 0 40px;
+  padding: 0 24px 0 0;
+  list-style: none;
+  overflow-y: overlay;
+}
+
+.ingredientList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ingredientList::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.ingredientList::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.ingredient {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+}
+
+.price {
+  margin-left: auto;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}

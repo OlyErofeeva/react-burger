@@ -14,7 +14,7 @@ const AppHeader = () => {
       renderIcon: (isActive: boolean) => <BurgerIcon type={calcIconType(isActive)} />,
     },
     {
-      path: Routes.Orders,
+      path: Routes.Feed,
       caption: 'Лента заказов',
       renderIcon: (isActive: boolean) => <ListIcon type={calcIconType(isActive)} />,
     },

@@ -1,4 +1,4 @@
-import { ActionType } from '../action-types/action-types'
+import { OrderActionType } from '../action-types/action-types'
 import { Progress } from './common'
 
 export type Order = {
@@ -11,14 +11,17 @@ export type OrderState = {
   itemAddProgress: Progress
 }
 
-export type OrderAction =
-  | {
-      type: ActionType.PlaceOrderRequest
-    }
-  | {
-      type: ActionType.PlaceOrderSuccess
-      payload: Order
-    }
-  | {
-      type: ActionType.PlaceOrderError
-    }
+export type PlaceOrderRequestAction = {
+  readonly type: OrderActionType.PlaceRequest
+}
+
+export type PlaceOrderSuccessAction = {
+  readonly type: OrderActionType.PlaceSuccess
+  readonly payload: Order
+}
+
+export type PlaceOrderErrorAction = {
+  readonly type: OrderActionType.PlaceError
+}
+
+export type OrderAction = PlaceOrderRequestAction | PlaceOrderSuccessAction | PlaceOrderErrorAction

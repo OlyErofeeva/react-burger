@@ -1,10 +1,9 @@
 import { extractToken, refreshToken } from '../../utils/api-call'
 import { CookieName, getCookie, setCookie } from '../../utils/cookie'
+import { AppDispatch, AppThunkAction } from '../types/common'
 
-export function refreshTokenMiddleware(onRefreshSuccess: any, onRefreshError: any) {
-  // TODO fix ts-ignore
-  // @ts-ignore
-  return dispatch => {
+export function refreshTokenMiddleware(onRefreshSuccess: any, onRefreshError: any): AppThunkAction {
+  return (dispatch: AppDispatch) => {
     const token = getCookie(CookieName.RefreshToken)
     if (token) {
       refreshToken({ token })

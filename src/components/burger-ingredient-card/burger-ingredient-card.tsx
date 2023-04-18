@@ -1,11 +1,11 @@
 import React from 'react'
 import { useDrag } from 'react-dnd'
-import { useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredient-card.module.css'
 import { Ingredient } from '../../services/types/ingredient'
 import { activeModalIngredientActionCreator } from '../../services/action-creators'
+import { useDispatch } from '../../services/hooks/useDispatch'
 
 type Props = {
   ingredient: Ingredient
@@ -38,6 +38,7 @@ const BurgerIngredientCard: React.FC<Props> = ({ ingredient, counter }) => {
       >
         <img className="pl-4 pr-4" src={ingredient.image} alt={`изображение ингредиента ${ingredient.name}`} />
         <div className={styles.priceContainer}>
+          {/* TODO: use Price component */}
           <span className="text text_type_digits-default">{ingredient.price}</span>
           <CurrencyIcon type="primary" />
         </div>

@@ -3,11 +3,10 @@ import { CookieName, getCookie } from '../../utils/cookie'
 import { UserEditRequest } from '../types/api'
 import { userActionCreator } from '../action-creators/user'
 import { refreshTokenMiddleware } from './refresh-token-middleware'
+import { AppDispatch, AppThunkAction } from '../types/common'
 
-export function editUserMiddleware(user: UserEditRequest) {
-  // TODO fix ts-ignore
-  // @ts-ignore
-  return dispatch => {
+export function editUserMiddleware(user: UserEditRequest): AppThunkAction {
+  return (dispatch: AppDispatch) => {
     const accessToken = getCookie(CookieName.AccessToken)
     dispatch(userActionCreator.userEditProfileRequest())
     editUser(user, accessToken || '')

@@ -23,6 +23,12 @@ type RequestWithPassword = {
   password: string
 }
 
+type WebSocketMessage = CommonResponse & {
+  orders: FeedOrder[]
+  total: number
+  totalToday: number
+}
+
 // get ingredient list
 export type IngredientsResponse = CommonResponse & {
   data: Ingredient[]
@@ -72,3 +78,25 @@ export type GetUserResponse = CommonResponse & ResponseWithUser
 // edit user
 export type UserEditRequest = Partial<UserRegisterRequest>
 export type UserEditResponse = GetUserResponse
+
+export enum OrderStatus {
+  Created = 'created',
+  Pending = 'pending',
+  Done = 'done',
+}
+
+export type FeedOrder = {
+  _id: string
+  ingredients: Ingredient['_id'][]
+  name: string
+  number: number
+  status: OrderStatus
+  createdAt: string
+  updatedAt: string
+}
+
+// web socket: feed
+export type FeedResponse = WebSocketMessage
+
+// web socket: profile orders
+export type ProfileOrdersResponse = WebSocketMessage

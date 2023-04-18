@@ -1,15 +1,20 @@
-import { ActionType } from '../action-types/action-types'
-import { Ingredient } from '../types/ingredient'
+import { IngredientsActionType } from '../action-types/action-types'
+import {
+  Ingredient,
+  IngredientsFetchErrorAction,
+  IngredientsFetchRequestAction,
+  IngredientsFetchSuccessAction,
+} from '../types/ingredient'
 
 export const ingredientsActionCreator = {
-  fetchRequest: () => ({
-    type: ActionType.IngredientsFetchRequest,
+  fetchRequest: (): IngredientsFetchRequestAction => ({
+    type: IngredientsActionType.FetchRequest,
   }),
-  fetchSuccess: (payload: Ingredient[]) => ({
-    type: ActionType.IngredientsFetchSuccess,
+  fetchSuccess: (payload: Ingredient[]): IngredientsFetchSuccessAction => ({
+    type: IngredientsActionType.FetchSuccess,
     payload: payload,
   }),
-  fetchError: () => ({
-    type: ActionType.IngredientsFetchError,
+  fetchError: (): IngredientsFetchErrorAction => ({
+    type: IngredientsActionType.FetchError,
   }),
 }

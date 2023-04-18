@@ -10,7 +10,7 @@ const IngredientDetails: React.FC<Props> = ({ ingredient }) => {
     <>
       <img src={ingredient.image_large} alt={`изображение ингредиента ${ingredient.name}`} className={styles.image} />
       <span className="mt-4 mb-8 text text_type_main-medium">{ingredient.name}</span>
-      <div className={styles.nutrientsTable}>
+      <div className={`mb-5 ${styles.nutrientsTable}`}>
         <span className="text text_type_main-default text_color_inactive">Калории, ккал</span>
         <span className="text text_type_main-default text_color_inactive">Белки, г</span>
         <span className="text text_type_main-default text_color_inactive">Жиры, г</span>

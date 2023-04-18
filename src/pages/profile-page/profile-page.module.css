@@ -1,6 +1,6 @@
 .pageContent {
   display: flex;
-  max-width: 1280px;
+  max-width: 1240px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -8,6 +8,7 @@
 .sidebarContainer {
   width: 320px;
   text-align: left;
+  flex-shrink: 0;
 }
 
 .tabList {

@@ -1,5 +1,4 @@
 import React, { useRef } from 'react'
-import { useDispatch } from 'react-redux'
 import classNames from 'classnames'
 import { useDrag, useDrop } from 'react-dnd'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -7,6 +6,7 @@ import styles from './burger-constructor-ingredient.module.css'
 import { ConstructorIngredient } from '../../services/types/constructor'
 import { IngredientType } from '../../services/types/ingredient'
 import { constructorActionCreator } from '../../services/action-creators'
+import { useDispatch } from '../../services/hooks/useDispatch'
 
 type Props = {
   ingredient: ConstructorIngredient

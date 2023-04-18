@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../services/hooks/useSelector'
 import { orderSelector } from '../../services/selectors/selectors'
 import OrderSuccessIcon from '../order-success-icon/order-success-icon'
 import styles from './order-details.module.css'
@@ -14,7 +14,7 @@ const OrderDetails = () => {
         <OrderSuccessIcon />
       </div>
       <p className="mb-2 text text_type_main-default">Ваш заказ начали готовить</p>
-      <p className="mb-15 text text_type_main-default text_color_inactive">
+      <p className="mb-20 text text_type_main-default text_color_inactive">
         Дождитесь готовности на орбитальной станции
       </p>
     </>

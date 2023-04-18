@@ -1,13 +1,17 @@
-import { ActionType } from '../action-types/action-types'
-import { ConstructorIngredient } from '../types/constructor'
+import { ConstructorActionType } from '../action-types/action-types'
+import {
+  ConstructorIngredient,
+  RemoveConstructorIngredientAction,
+  SetConstructorIngredientsAction,
+} from '../types/constructor'
 
 export const constructorActionCreator = {
-  setIngredients: (payload: ConstructorIngredient[]) => ({
-    type: ActionType.SetConstructorIngredients,
+  setIngredients: (payload: ConstructorIngredient[]): SetConstructorIngredientsAction => ({
+    type: ConstructorActionType.SetIngredients,
     payload: payload,
   }),
-  removeIngredient: (payload: ConstructorIngredient['constructorId']) => ({
-    type: ActionType.RemoveConstructorIngredient,
+  removeIngredient: (payload: ConstructorIngredient['constructorId']): RemoveConstructorIngredientAction => ({
+    type: ConstructorActionType.RemoveIngredient,
     payload: payload,
   }),
 }

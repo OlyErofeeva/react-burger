@@ -1,8 +1,6 @@
 import React, { UIEvent, useMemo, useState } from 'react'
-import { useSelector } from 'react-redux'
-import styles from './burger-ingredients.module.css'
-import BurgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
+import BurgerIngredientCard from '../burger-ingredient-card/burger-ingredient-card'
 import { Ingredient, IngredientType } from '../../services/types/ingredient'
 import { Progress } from '../../services/types/common'
 import {
@@ -10,6 +8,8 @@ import {
   constructorIngredientsSelector,
   ingredientsFetchProgressSelector,
 } from '../../services/selectors/selectors'
+import { useSelector } from '../../services/hooks/useSelector'
+import styles from './burger-ingredients.module.css'
 
 const ingredientSections = [
   {

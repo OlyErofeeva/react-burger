@@ -1,8 +1,8 @@
-import { ActionType } from '../action-types/action-types'
-import { GlobalState, Progress } from '../types/common'
-import { UserAction } from '../types/user'
+import { UserActionType } from '../action-types/action-types'
+import { Progress } from '../types/common'
+import { UserAction, UserState } from '../types/user'
 
-export const initialState: GlobalState['user'] = {
+export const initialState: UserState = {
   user: null,
   registrationProgress: Progress.IDLE,
   loginProgress: Progress.IDLE,
@@ -14,156 +14,156 @@ export const initialState: GlobalState['user'] = {
   editProfileProgress: Progress.IDLE,
 }
 
-export const userReducer = (state = initialState, action: UserAction): GlobalState['user'] => {
+export const userReducer = (state = initialState, action: UserAction): UserState => {
   switch (action.type) {
-    case ActionType.UserRegisterRequest:
+    case UserActionType.RegisterRequest:
       return {
         ...state,
         registrationProgress: Progress.WORK,
       }
-    case ActionType.UserRegisterSuccess:
+    case UserActionType.RegisterSuccess:
       return {
         ...state,
         user: action.payload,
         registrationProgress: Progress.SUCCESS,
       }
-    case ActionType.UserRegisterError:
+    case UserActionType.RegisterError:
       return {
         ...initialState,
         registrationProgress: Progress.ERROR,
       }
-    case ActionType.UserRegisterClearProgress:
+    case UserActionType.RegisterClearProgress:
       return {
         ...state,
         registrationProgress: Progress.IDLE,
       }
 
-    case ActionType.UserLoginRequest:
+    case UserActionType.LoginRequest:
       return {
         ...state,
         loginProgress: Progress.WORK,
       }
-    case ActionType.UserLoginSuccess:
+    case UserActionType.LoginSuccess:
       return {
         ...state,
         user: action.payload,
         loginProgress: Progress.SUCCESS,
       }
-    case ActionType.UserLoginError:
+    case UserActionType.LoginError:
       return {
         ...initialState,
         loginProgress: Progress.ERROR,
       }
-    case ActionType.UserLoginClearProgress:
+    case UserActionType.LoginClearProgress:
       return {
         ...state,
         loginProgress: Progress.IDLE,
       }
 
-    case ActionType.UserForgotPasswordRequest:
+    case UserActionType.ForgotPasswordRequest:
       return {
         ...state,
         forgotPasswordProgress: Progress.WORK,
       }
-    case ActionType.UserForgotPasswordSuccess:
+    case UserActionType.ForgotPasswordSuccess:
       return {
         ...state,
         forgotPasswordProgress: Progress.SUCCESS,
       }
-    case ActionType.UserForgotPasswordError:
+    case UserActionType.ForgotPasswordError:
       return {
         ...initialState,
         forgotPasswordProgress: Progress.ERROR,
       }
-    case ActionType.UserForgotPasswordClearProgress:
+    case UserActionType.ForgotPasswordClearProgress:
       return {
         ...state,
         forgotPasswordProgress: Progress.IDLE,
       }
 
-    case ActionType.UserResetPasswordRequest:
+    case UserActionType.ResetPasswordRequest:
       return {
         ...state,
         resetPasswordProgress: Progress.WORK,
       }
-    case ActionType.UserResetPasswordSuccess:
+    case UserActionType.ResetPasswordSuccess:
       return {
         ...state,
         resetPasswordProgress: Progress.SUCCESS,
       }
-    case ActionType.UserResetPasswordError:
+    case UserActionType.ResetPasswordError:
       return {
         ...initialState,
         resetPasswordProgress: Progress.ERROR,
       }
-    case ActionType.UserResetPasswordClearProgress:
+    case UserActionType.ResetPasswordClearProgress:
       return {
         ...state,
         resetPasswordProgress: Progress.IDLE,
       }
 
-    case ActionType.UserRefreshTokenRequest:
+    case UserActionType.RefreshTokenRequest:
       return {
         ...state,
         refreshTokenProgress: Progress.WORK,
       }
-    case ActionType.UserRefreshTokenSuccess:
+    case UserActionType.RefreshTokenSuccess:
       return {
         ...state,
         refreshTokenProgress: Progress.SUCCESS,
       }
-    case ActionType.UserRefreshTokenError:
+    case UserActionType.RefreshTokenError:
       return {
         ...initialState,
         refreshTokenProgress: Progress.ERROR,
       }
 
-    case ActionType.UserLogoutRequest:
+    case UserActionType.LogoutRequest:
       return {
         ...state,
         logoutProgress: Progress.WORK,
       }
-    case ActionType.UserLogoutSuccess:
+    case UserActionType.LogoutSuccess:
       return {
         ...state,
         user: null,
         logoutProgress: Progress.SUCCESS,
       }
-    case ActionType.UserLogoutError:
+    case UserActionType.LogoutError:
       return {
         ...state,
         logoutProgress: Progress.ERROR,
       }
 
-    case ActionType.UserGetProfileRequest:
+    case UserActionType.GetProfileRequest:
       return {
         ...state,
         getProfileProgress: Progress.WORK,
       }
-    case ActionType.UserGetProfileSuccess:
+    case UserActionType.GetProfileSuccess:
       return {
         ...state,
         user: action.payload,
         getProfileProgress: Progress.SUCCESS,
       }
-    case ActionType.UserGetProfileError:
+    case UserActionType.GetProfileError:
       return {
         ...state,
         getProfileProgress: Progress.ERROR,
       }
 
-    case ActionType.UserEditProfileRequest:
+    case UserActionType.EditProfileRequest:
       return {
         ...state,
         getProfileProgress: Progress.WORK,
       }
-    case ActionType.UserEditProfileSuccess:
+    case UserActionType.EditProfileSuccess:
       return {
         ...state,
         user: action.payload,
         getProfileProgress: Progress.SUCCESS,
       }
-    case ActionType.UserEditProfileError:
+    case UserActionType.EditProfileError:
       return {
         ...state,
         getProfileProgress: Progress.ERROR,

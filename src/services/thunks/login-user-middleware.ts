@@ -2,11 +2,10 @@ import { extractToken, loginUser } from '../../utils/api-call'
 import { CookieName, setCookie } from '../../utils/cookie'
 import { UserLoginRequest } from '../types/api'
 import { userActionCreator } from '../action-creators/user'
+import { AppDispatch, AppThunkAction } from '../types/common'
 
-export function loginUserMiddleware(user: UserLoginRequest) {
-  // TODO fix ts-ignore
-  // @ts-ignore
-  return dispatch => {
+export function loginUserMiddleware(user: UserLoginRequest): AppThunkAction {
+  return (dispatch: AppDispatch) => {
     dispatch(userActionCreator.userLoginRequest())
     loginUser(user)
       .then(res => {

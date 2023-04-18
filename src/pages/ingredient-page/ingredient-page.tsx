@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import IngredientDetails from '../../components/ingredient-details/ingredient-details'
 import { allIngredientsSelector } from '../../services/selectors/selectors'
 import styles from './ingredient-page.module.css'
+import { useSelector } from '../../services/hooks/useSelector'
 
 const IngredientPage = () => {
   const allIngredients = useSelector(allIngredientsSelector)
