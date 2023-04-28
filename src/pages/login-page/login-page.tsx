@@ -56,9 +56,16 @@ const LoginPage = () => {
           placeholder="E-mail"
           value={inputValues.email}
           onChange={handleInputChange}
+          data-test-id="email-input"
         />
-        <PasswordInput required name="password" value={inputValues.password} onChange={handleInputChange} />
-        <Button htmlType="submit" type="primary" size="medium">
+        <PasswordInput
+          required
+          name="password"
+          value={inputValues.password}
+          onChange={handleInputChange}
+          data-test-id="password-input"
+        />
+        <Button htmlType="submit" type="primary" size="medium" data-test-id="login-button">
           Войти
         </Button>
       </FormLayout>

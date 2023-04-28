@@ -100,7 +100,7 @@ const BurgerIngredients: React.FC = () => {
       <div className={styles.allIngredients} onScroll={handleScroll}>
         {ingredientSections.map(ingredientSection => {
           return (
-            <section id={ingredientSection.type} key={ingredientSection.type}>
+            <section id={ingredientSection.type} key={ingredientSection.type} data-test-id={`${ingredientSection.type}-section`}>
               <h2 className={`text text_type_main-medium ${styles.groupTitle}`}>{ingredientSection.title}</h2>
               <ul className={`pt-6 pb-10 pl-4 pr-4 ${styles.ingredientGroupedList}`}>
                 {(groupIngredientsByType.get(ingredientSection.type) || []).map(ingredient => {

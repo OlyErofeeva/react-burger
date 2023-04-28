@@ -35,6 +35,7 @@ const BurgerIngredientCard: React.FC<Props> = ({ ingredient, counter }) => {
         className={styles.ingredientCard}
         style={{ opacity }}
         onClick={() => handleClick(ingredient)}
+        data-test-id="ingredient"
       >
         <img className="pl-4 pr-4" src={ingredient.image} alt={`изображение ингредиента ${ingredient.name}`} />
         <div className={styles.priceContainer}>
