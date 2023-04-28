@@ -2,7 +2,7 @@ import { ORDER_URL } from '../../../src/configs/api-settings'
 
 describe('user can place an order', function () {
   before(function () {
-    cy.visit('http://localhost:3000/login')
+    cy.visit('http://localhost:3000/react-burger/login')
   })
 
   it('should create a burger and place an order', function () {

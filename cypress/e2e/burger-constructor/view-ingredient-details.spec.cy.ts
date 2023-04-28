@@ -1,6 +1,6 @@
 describe('user can view ingredient details in a modal', function () {
   before(function () {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3000/react-burger')
   })
 
   it('should open & close the modal with ingredient details', function () {

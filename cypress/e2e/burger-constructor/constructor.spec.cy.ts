@@ -1,6 +1,6 @@
 describe('user can make a custom burger', function () {
   before(function () {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3000/react-burger')
   })
 
   it('should drag all types of ingredients to the burger constructor', function () {
