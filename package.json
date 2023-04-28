@@ -1,5 +1,6 @@
 {
   "name": "react-burger",
+  "homepage": "https://olyerofeeva.github.io/react-burger",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -31,6 +32,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -57,6 +60,7 @@
     "cypress": "^12.11.0",
     "fetch-mock": "^9.11.0",
     "react-test-renderer": "^18.2.0",
-    "redux-mock-store": "^1.5.4"
+    "redux-mock-store": "^1.5.4",
+    "gh-pages": "^5.0.0"
   }
 }
