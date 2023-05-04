@@ -8,7 +8,9 @@ const OrderDetails = () => {
 
   return (
     <>
-      <span className={`mt-4 text text_type_digits-large ${styles.orderId}`}>{order?.number}</span>
+      <span className={`mt-4 text text_type_digits-large ${styles.orderId}`} data-test-id="order-number">
+        {order?.number}
+      </span>
       <span className="mt-8 text text_type_main-medium">идентификатор заказа</span>
       <div className={`mt-15 mb-15 ${styles.successIconContainer}`}>
         <OrderSuccessIcon />

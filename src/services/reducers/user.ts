@@ -155,18 +155,18 @@ export const userReducer = (state = initialState, action: UserAction): UserState
     case UserActionType.EditProfileRequest:
       return {
         ...state,
-        getProfileProgress: Progress.WORK,
+        editProfileProgress: Progress.WORK,
       }
     case UserActionType.EditProfileSuccess:
       return {
         ...state,
         user: action.payload,
-        getProfileProgress: Progress.SUCCESS,
+        editProfileProgress: Progress.SUCCESS,
       }
     case UserActionType.EditProfileError:
       return {
         ...state,
-        getProfileProgress: Progress.ERROR,
+        editProfileProgress: Progress.ERROR,
       }
     default:
       return state

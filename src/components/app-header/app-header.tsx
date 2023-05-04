@@ -12,16 +12,19 @@ const AppHeader = () => {
       path: Routes.Main,
       caption: 'Конструктор',
       renderIcon: (isActive: boolean) => <BurgerIcon type={calcIconType(isActive)} />,
+      testId: 'constructor-tab'
     },
     {
       path: Routes.Feed,
       caption: 'Лента заказов',
       renderIcon: (isActive: boolean) => <ListIcon type={calcIconType(isActive)} />,
+      testId: 'feed-tab'
     },
     {
       path: Routes.Profile,
       caption: 'Личный кабинет',
       renderIcon: (isActive: boolean) => <ProfileIcon type={calcIconType(isActive)} />,
+      testId: 'profile-tab'
     },
   ]
 
@@ -31,7 +34,7 @@ const AppHeader = () => {
         <nav className={styles.navContainer}>
           <ul className={styles.navList}>
             {navLinksConfig.map((link, index) => (
-              <li key={index} className={styles.navItem}>
+              <li key={index} className={styles.navItem} data-test-id={link.testId}>
                 <HeaderLink path={link.path} caption={link.caption}>
                   {link.renderIcon}
                 </HeaderLink>

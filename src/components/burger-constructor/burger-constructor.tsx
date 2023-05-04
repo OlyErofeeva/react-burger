@@ -82,7 +82,7 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
   if (constructorIngredients.length === 0) {
     // TODO make it semantic & beautiful
     return (
-      <div ref={dropTargerRef} className={`pt-25 ${styles.burgerConstructor}`}>
+      <div ref={dropTargerRef} className={`pt-25 ${styles.burgerConstructor}`} data-test-id="constructor-container">
         Перетащите сюда ингредиенты. Начните с выбора булки
       </div>
     )
@@ -92,7 +92,7 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
   const bottomElement = constructorIngredients[constructorIngredients.length - 1]
 
   return (
-    <div ref={dropTargerRef} className={`pt-25 ${styles.burgerConstructor}`}>
+    <div ref={dropTargerRef} className={`pt-25 ${styles.burgerConstructor}`} data-test-id="constructor-container">
       <ul className={styles.addedIngredients}>
         <BurgerConstructorIngredient key={topElement.constructorId} ingredient={topElement} type={'top'} index={0} />
 
@@ -127,6 +127,7 @@ const BurgerConstructor: React.FC<Props> = ({ onPlaceOrderClick }) => {
           type="primary"
           size="large"
           extraClass="ml-10"
+          data-test-id="order-button"
         >
           Оформить заказ
         </Button>

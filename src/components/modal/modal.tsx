@@ -36,7 +36,7 @@ const Modal: React.FC<Props> = ({ children, onClose, titleElement }) => {
       <div className={`p-10 ${styles.modal}`}>
         <div className={styles.modalHeader}>
           {titleElement}
-          <button className={styles.closeButton} onClick={onClose}>
+          <button className={styles.closeButton} onClick={onClose} data-test-id="modal-close-button">
             <CloseIcon type="primary" />
           </button>
         </div>
