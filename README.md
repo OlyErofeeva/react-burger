@@ -1,4 +1,8 @@
-## Here is what the project looks like
+## The project is available via the link below
+
+https://olyerofeeva.github.io/react-burger/
+
+## What the project looks like
 ### 🍔 Burger customisation view:
 <img width="1276" alt="01_Burger_constructor" src="https://github.com/user-attachments/assets/3ccc8e70-ef9b-4875-a883-7796b88a5fa0" />
 
@@ -30,9 +34,7 @@
 <img width="1275" alt="10_Page_not_found" src="https://github.com/user-attachments/assets/ca8d4d5b-c9b1-4f81-b6a4-c2b9bc4808be" />
 
 
-## The project is available via the link below
 
-https://olyerofeeva.github.io/react-burger/
 
 ## Available scripts
 - Install packages `npm i`
