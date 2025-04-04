@@ -1,7 +1,3 @@
-## The project is available via the link below
-
-https://olyerofeeva.github.io/react-burger/
-
 ## What the project looks like
 ### 🍔 Burger customisation view:
 <img width="1276" alt="01_Burger_constructor" src="https://github.com/user-attachments/assets/3ccc8e70-ef9b-4875-a883-7796b88a5fa0" />
